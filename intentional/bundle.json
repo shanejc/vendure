@@ -1,0 +1,24 @@
+{
+  "evidence": [],
+  "language": {
+    "name": "New domain",
+    "operations": [],
+    "types": {},
+    "version": 1
+  },
+  "program": {
+    "decisions": [],
+    "functions": [],
+    "machines": [],
+    "name": "Select an extraction candidate",
+    "version": 1
+  },
+  "projection": {
+    "version": 1,
+    "views": []
+  },
+  "scenarios": [],
+  "unresolved": [
+    "Select a source file and extraction boundary."
+  ]
+}

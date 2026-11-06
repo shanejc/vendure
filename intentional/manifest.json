@@ -1,0 +1,15 @@
+{
+  "artifactHash": "47da30d8fd19125202d4cc6c8a5aa94260e91992c51f9da9199621be00567c00",
+  "boundaries": [],
+  "compiler": "0.5.0",
+  "generation": null,
+  "identityFormatVersion": 0,
+  "integration": null,
+  "revision": 1,
+  "scenarioFormatVersion": 1,
+  "scenarioHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "sourceCommit": "f97b18759178bd22cbd88062edcff6c308652342",
+  "sourceMapVersion": 2,
+  "version": 1,
+  "workspaceId": "d1bafb05-17fb-4679-92b8-2952c500443a"
+}
