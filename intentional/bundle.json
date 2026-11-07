@@ -1,0 +1,24 @@
+{
+  "evidence": [],
+  "language": {
+    "name": "Checkpoint recovery test",
+    "operations": [],
+    "types": {},
+    "version": 1
+  },
+  "program": {
+    "decisions": [],
+    "functions": [],
+    "machines": [],
+    "name": "First checkpoint, recover a lost reply",
+    "version": 1
+  },
+  "projection": {
+    "version": 1,
+    "views": []
+  },
+  "scenarios": [],
+  "unresolved": [
+    "Dedicated operational fixture; no Vendure behavior has been extracted or changed."
+  ]
+}
