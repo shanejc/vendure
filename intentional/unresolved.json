@@ -1,3 +1,5 @@
 [
-  "Select a source file and extraction boundary."
+  "Recovered behavior uses the supported pure TypeScript subset. Review domain vocabulary, types and acceptance scenarios before generation.",
+  "Collection inputs must be domain lists; reflection and prototype properties are unsupported.",
+  "The recovered transition graph does not declare an initial state; none has been invented."
 ]

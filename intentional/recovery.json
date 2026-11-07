@@ -1,0 +1,359 @@
+{
+  "bindings": [
+    {
+      "id": "binding_graph_8f054d6116ba",
+      "kind": "graph",
+      "params": [],
+      "retained": [
+        "retained_773315f47809b6",
+        "retained_b0a77e381a52cf",
+        "retained_f8ab79f584b78a"
+      ],
+      "sourceFileHash": "d6ad9310ff0c8bbfd0d2458ce6d6b0d91d9d8d60d7938a508e55888d6e71f3ef",
+      "sourceId": "source_graph_8f054d6116ba",
+      "target": "graph_8f054d6116ba"
+    },
+    {
+      "id": "binding_source_7329167ead1d",
+      "kind": "function",
+      "params": [
+        "order",
+        "state"
+      ],
+      "retained": [],
+      "sourceFileHash": "fe2e93914dddc3c39c6ffff97de099926b744b73f25cc3a2ecc3a43399572158",
+      "sourceId": "source_7329167ead1d",
+      "target": "totalCoveredByPayments"
+    },
+    {
+      "id": "binding_source_43272d162c71",
+      "kind": "function",
+      "params": [
+        "order",
+        "state"
+      ],
+      "retained": [],
+      "sourceFileHash": "fe2e93914dddc3c39c6ffff97de099926b744b73f25cc3a2ecc3a43399572158",
+      "sourceId": "source_43272d162c71",
+      "target": "orderTotalIsCovered"
+    },
+    {
+      "id": "binding_guard_efca37b24d2e",
+      "kind": "guard",
+      "params": [
+        "options",
+        "toState",
+        "order"
+      ],
+      "retained": [
+        "retained_c13288317c9d86",
+        "retained_7cd193405c719c",
+        "retained_409e239e0ca036",
+        "retained_3b75b5cb41f0d6",
+        "retained_fa770733fd8327",
+        "retained_4f1acf904e28cf"
+      ],
+      "sourceFileHash": "d6ad9310ff0c8bbfd0d2458ce6d6b0d91d9d8d60d7938a508e55888d6e71f3ef",
+      "sourceId": "source_guard_efca37b24d2e",
+      "target": "guard_efca37b24d2e"
+    }
+  ],
+  "retained": [
+    {
+      "end": 263,
+      "hash": "6137ec5fce64e07353f8f6d80514d61aaed6db86ef13f4b17fa8af665df31a4c",
+      "id": "retained_773315f47809b6",
+      "label": "init remains original code except explicitly selected regions",
+      "operationIds": {
+        "import": "retained_call_4722d721f97670e483",
+        "import('../../event-bus/index.js').then": "retained_call_2f7afbcd8c60bef8d5",
+        "import('../../service/index.js').then": "retained_call_0ca4571547d10570c6",
+        "import('../config.service.js').then": "retained_call_8655f1251a641c97f3",
+        "injector.get": "retained_call_3b44bb094c06649b64"
+      },
+      "operations": [
+        "import('../config.service.js').then",
+        "import",
+        "import('../../event-bus/index.js').then",
+        "import('../../service/index.js').then",
+        "injector.get"
+      ],
+      "path": "packages/core/src/config/order/default-order-process.ts",
+      "position": "hook",
+      "start": 239
+    },
+    {
+      "end": 455,
+      "hash": "8e561d4f8603f640994a14d462219eee4bc5fb93d3bde3d21aa3dfc51ef6222e",
+      "id": "retained_b0a77e381a52cf",
+      "label": "onTransitionStart remains original code except explicitly selected regions",
+      "operationIds": {
+        "connection .getRepository": "retained_call_be3e93717841ddca14",
+        "connection .getRepository(ctx, OrderModification) .find": "retained_call_f7547322ab251a2e6f",
+        "connection .getRepository(ctx, ProductVariant) .createQueryBuilder": "retained_call_2c4c4d8ee957b06b0b",
+        "connection .getRepository(ctx, ProductVariant) .createQueryBuilder('variant') .leftJoin": "retained_call_51a41ed794c6870d85",
+        "connection .getRepository(ctx, ProductVariant) .createQueryBuilder('variant') .leftJoin('variant.product', 'product') .where": "retained_call_7c4890a6fb36510a1e",
+        "connection .getRepository(ctx, ProductVariant) .createQueryBuilder('variant') .leftJoin('variant.product', 'product') .where('variant.deletedAt IS NULL') .andWhere": "retained_call_3d5449dc1bdcaa0e57",
+        "connection .getRepository(ctx, ProductVariant) .createQueryBuilder('variant') .leftJoin('variant.product', 'product') .where('variant.deletedAt IS NULL') .andWhere('product.deletedAt IS NULL') .andWhere": "retained_call_03c95d3378757d50e9",
+        "connection.getRepository": "retained_call_e3012d8cbf6c9f5112",
+        "connection.getRepository(ctx, Payment).find": "retained_call_90a611f13d27172e81",
+        "ctx.translate": "retained_call_5a664c5011040f7712",
+        "eligibleIds.some": "retained_call_00e3e3670295ab927e",
+        "eligibleMethods.map": "retained_call_eb2d4572cbae9cfc43",
+        "findOrderWithFulfillments": "retained_call_36b10cc9c9675ffa24",
+        "idsAreEqual": "retained_call_605eb28ed58c475789",
+        "modifications.every": "retained_call_ca7dc9ccb826b5cb8c",
+        "modifications.some": "retained_call_04a6239aaa97aa6c4b",
+        "order.lines.map": "retained_call_65acf69fc2f1ea7225",
+        "order.payments.find": "retained_call_82afe051bfacfb28d2",
+        "order.shippingLines.some": "retained_call_3a5bdcc718790ba0d1",
+        "orderItemsAreDelivered": "retained_call_5be2ddab489f397076",
+        "orderItemsArePartiallyDelivered": "retained_call_d3338bdf6291c8494a",
+        "orderItemsArePartiallyShipped": "retained_call_c588b578cb138dd1a9",
+        "orderItemsAreShipped": "retained_call_4e968c3c399a06fd72",
+        "orderLinesAreAllCancelled": "retained_call_57b10fd5f73ce2aa4d",
+        "orderService.applyPriceAdjustments": "retained_call_abb7bf2add6938b73e",
+        "orderService.getEligibleShippingMethods": "retained_call_38dec67a7ff16dba04",
+        "orderTotalIsCovered": "retained_call_b5b2b7ed99d8c3e214",
+        "productVariantService.getSaleableStockLevel": "retained_call_cce5a47d18d31ad0f0",
+        "qb.getMany": "retained_call_b7033a45e250dfdde5",
+        "stockAllocationStrategy.shouldAllocateStock": "retained_call_a547bcdbb77cc1da3f",
+        "stockLevelService.lockStockLevelsForVariants": "retained_call_628fcb83e5905df45a",
+        "totalCoveredByPayments": "retained_call_fdd0847029f48f9b00",
+        "unique": "retained_call_e5dd5358939a75f507",
+        "variantsWithInsufficientSaleableStock .map": "retained_call_4d8c47aef18dc37ba9",
+        "variantsWithInsufficientSaleableStock .map(v => v.name) .join": "retained_call_6f2b27417a8c585129",
+        "variantsWithInsufficientSaleableStock.push": "retained_call_8d628c6dd6de678384"
+      },
+      "operations": [
+        "connection .getRepository(ctx, OrderModification) .find",
+        "connection .getRepository",
+        "modifications.every",
+        "modifications.some",
+        "connection.getRepository(ctx, Payment).find",
+        "connection.getRepository",
+        "totalCoveredByPayments",
+        "unique",
+        "order.lines.map",
+        "connection .getRepository(ctx, ProductVariant) .createQueryBuilder('variant') .leftJoin('variant.product', 'product') .where('variant.deletedAt IS NULL') .andWhere('product.deletedAt IS NULL') .andWhere",
+        "connection .getRepository(ctx, ProductVariant) .createQueryBuilder('variant') .leftJoin('variant.product', 'product') .where('variant.deletedAt IS NULL') .andWhere",
+        "connection .getRepository(ctx, ProductVariant) .createQueryBuilder('variant') .leftJoin('variant.product', 'product') .where",
+        "connection .getRepository(ctx, ProductVariant) .createQueryBuilder('variant') .leftJoin",
+        "connection .getRepository(ctx, ProductVariant) .createQueryBuilder",
+        "qb.getMany",
+        "orderService.applyPriceAdjustments",
+        "orderService.getEligibleShippingMethods",
+        "eligibleMethods.map",
+        "order.shippingLines.some",
+        "eligibleIds.some",
+        "idsAreEqual",
+        "stockAllocationStrategy.shouldAllocateStock",
+        "stockLevelService.lockStockLevelsForVariants",
+        "productVariantService.getSaleableStockLevel",
+        "variantsWithInsufficientSaleableStock.push",
+        "ctx.translate",
+        "variantsWithInsufficientSaleableStock .map(v => v.name) .join",
+        "variantsWithInsufficientSaleableStock .map",
+        "order.payments.find",
+        "orderTotalIsCovered",
+        "orderLinesAreAllCancelled",
+        "findOrderWithFulfillments",
+        "orderItemsArePartiallyShipped",
+        "orderItemsAreShipped",
+        "orderItemsArePartiallyDelivered",
+        "orderItemsAreDelivered"
+      ],
+      "path": "packages/core/src/config/order/default-order-process.ts",
+      "position": "hook",
+      "start": 265
+    },
+    {
+      "end": 507,
+      "hash": "7cef52b3936f24c095b030eda2e47dc6e3c5032d0874795801e0023c9ab2be83",
+      "id": "retained_f8ab79f584b78a",
+      "label": "onTransitionEnd remains original code except explicitly selected regions",
+      "operationIds": {
+        "Promise.all": "retained_call_59381414fdfab8080b",
+        "connection .getRepository": "retained_call_e83eeef773bc982ff2",
+        "connection .getRepository(ctx, OrderLine) .update": "retained_call_95bd84e35046aec1df",
+        "eventBus.publish": "retained_call_1760ec638ee8248444",
+        "historyService.createHistoryEntryForOrder": "retained_call_e407ff60e99b3f6c70",
+        "order.lines.map": "retained_call_995aa3b26f908c2a31",
+        "orderPlacedStrategy.shouldSetAsPlaced": "retained_call_949685f90ef9c62ad4",
+        "orderSplitter.createSellerOrders": "retained_call_0d6f86c2a7c03dc0a2",
+        "stockAllocationStrategy.shouldAllocateStock": "retained_call_84da5fd45545399e6c",
+        "stockMovementService.createAllocationsForOrder": "retained_call_f23290cf27d5406982"
+      },
+      "operations": [
+        "orderPlacedStrategy.shouldSetAsPlaced",
+        "Promise.all",
+        "order.lines.map",
+        "connection .getRepository(ctx, OrderLine) .update",
+        "connection .getRepository",
+        "eventBus.publish",
+        "orderSplitter.createSellerOrders",
+        "stockAllocationStrategy.shouldAllocateStock",
+        "stockMovementService.createAllocationsForOrder",
+        "historyService.createHistoryEntryForOrder"
+      ],
+      "path": "packages/core/src/config/order/default-order-process.ts",
+      "position": "hook",
+      "start": 456
+    },
+    {
+      "end": 282,
+      "hash": "01558c8120c916943845c4be7da79eeb518fa8126a2e2ac1b7e2dd5bb02a623e",
+      "id": "retained_c13288317c9d86",
+      "label": "Surrounding statement 1 remains original code",
+      "operationIds": {
+        "connection .getRepository": "retained_call_64affa09e97b434cdf",
+        "connection .getRepository(ctx, OrderModification) .find": "retained_call_72b4ec8556c2f9c134",
+        "modifications.every": "retained_call_b840944b64443bc994",
+        "modifications.some": "retained_call_4b5171f45c9febb275"
+      },
+      "operations": [
+        "connection .getRepository(ctx, OrderModification) .find",
+        "connection .getRepository",
+        "modifications.every",
+        "modifications.some"
+      ],
+      "path": "packages/core/src/config/order/default-order-process.ts",
+      "position": "before",
+      "start": 266
+    },
+    {
+      "end": 301,
+      "hash": "5c4ed159c3a5b28e789a4b8931c86fbdd82257cad24f41e58c48a03d7109adb7",
+      "id": "retained_7cd193405c719c",
+      "label": "Surrounding statement 2 remains original code",
+      "operationIds": {
+        "connection.getRepository": "retained_call_d2ba08cd39f8fee5b1",
+        "connection.getRepository(ctx, Payment).find": "retained_call_901a5ecb6609e9ae8c",
+        "totalCoveredByPayments": "retained_call_b8b3f6688c7a15aa7b"
+      },
+      "operations": [
+        "connection.getRepository(ctx, Payment).find",
+        "connection.getRepository",
+        "totalCoveredByPayments"
+      ],
+      "path": "packages/core/src/config/order/default-order-process.ts",
+      "position": "before",
+      "start": 283
+    },
+    {
+      "end": 320,
+      "hash": "e7dbd89a237ab694ba64f3b5de28cbe15d335f21c7fae3b966363c6485eedaea",
+      "id": "retained_409e239e0ca036",
+      "label": "Surrounding statement 3 remains original code",
+      "operationIds": {
+        "connection .getRepository": "retained_call_f3f464fa0940569334",
+        "connection .getRepository(ctx, ProductVariant) .createQueryBuilder": "retained_call_c581e183e4d9f2cbb6",
+        "connection .getRepository(ctx, ProductVariant) .createQueryBuilder('variant') .leftJoin": "retained_call_fb2265719f1a03a902",
+        "connection .getRepository(ctx, ProductVariant) .createQueryBuilder('variant') .leftJoin('variant.product', 'product') .where": "retained_call_0ea579b93b688ac60e",
+        "connection .getRepository(ctx, ProductVariant) .createQueryBuilder('variant') .leftJoin('variant.product', 'product') .where('variant.deletedAt IS NULL') .andWhere": "retained_call_84885b1255c491e5ff",
+        "connection .getRepository(ctx, ProductVariant) .createQueryBuilder('variant') .leftJoin('variant.product', 'product') .where('variant.deletedAt IS NULL') .andWhere('product.deletedAt IS NULL') .andWhere": "retained_call_5683b8a4674e6a2633",
+        "order.lines.map": "retained_call_320eadd05d7ec826df",
+        "qb.getMany": "retained_call_1a7ef591280ea545e5",
+        "unique": "retained_call_c1215ca4fbd1842d6b"
+      },
+      "operations": [
+        "unique",
+        "order.lines.map",
+        "connection .getRepository(ctx, ProductVariant) .createQueryBuilder('variant') .leftJoin('variant.product', 'product') .where('variant.deletedAt IS NULL') .andWhere('product.deletedAt IS NULL') .andWhere",
+        "connection .getRepository(ctx, ProductVariant) .createQueryBuilder('variant') .leftJoin('variant.product', 'product') .where('variant.deletedAt IS NULL') .andWhere",
+        "connection .getRepository(ctx, ProductVariant) .createQueryBuilder('variant') .leftJoin('variant.product', 'product') .where",
+        "connection .getRepository(ctx, ProductVariant) .createQueryBuilder('variant') .leftJoin",
+        "connection .getRepository(ctx, ProductVariant) .createQueryBuilder",
+        "connection .getRepository",
+        "qb.getMany"
+      ],
+      "path": "packages/core/src/config/order/default-order-process.ts",
+      "position": "before",
+      "start": 302
+    },
+    {
+      "end": 406,
+      "hash": "730ea8fb8fc43022e7468d9edbd6bbd5294ec821d20c7fce793784497cd8cc40",
+      "id": "retained_3b75b5cb41f0d6",
+      "label": "Surrounding statement 4 remains original code",
+      "operationIds": {
+        "ctx.translate": "retained_call_627728dc7045a54894",
+        "eligibleIds.some": "retained_call_80aee3d06a2cba2d1d",
+        "eligibleMethods.map": "retained_call_aa561025b743536ef2",
+        "idsAreEqual": "retained_call_3b4378150c2e1527c8",
+        "order.lines.map": "retained_call_988e72bd81e75a1bfb",
+        "order.shippingLines.some": "retained_call_368874b73a39d4f2c6",
+        "orderService.applyPriceAdjustments": "retained_call_7ca56df082cb69e5ae",
+        "orderService.getEligibleShippingMethods": "retained_call_a549a5e8feb34cc629",
+        "productVariantService.getSaleableStockLevel": "retained_call_37665e08adefd38983",
+        "stockAllocationStrategy.shouldAllocateStock": "retained_call_17efcfed6d7bf54a1f",
+        "stockLevelService.lockStockLevelsForVariants": "retained_call_67ca8bec97140b96d9",
+        "variantsWithInsufficientSaleableStock .map": "retained_call_1de5e0cb0dedbdf517",
+        "variantsWithInsufficientSaleableStock .map(v => v.name) .join": "retained_call_4cf0e39a177f10ea60",
+        "variantsWithInsufficientSaleableStock.push": "retained_call_2c3ed90d5d2ec23518"
+      },
+      "operations": [
+        "orderService.applyPriceAdjustments",
+        "orderService.getEligibleShippingMethods",
+        "eligibleMethods.map",
+        "order.shippingLines.some",
+        "eligibleIds.some",
+        "idsAreEqual",
+        "stockAllocationStrategy.shouldAllocateStock",
+        "stockLevelService.lockStockLevelsForVariants",
+        "order.lines.map",
+        "productVariantService.getSaleableStockLevel",
+        "variantsWithInsufficientSaleableStock.push",
+        "ctx.translate",
+        "variantsWithInsufficientSaleableStock .map(v => v.name) .join",
+        "variantsWithInsufficientSaleableStock .map"
+      ],
+      "path": "packages/core/src/config/order/default-order-process.ts",
+      "position": "before",
+      "start": 321
+    },
+    {
+      "end": 428,
+      "hash": "f68135c805f550dc3c3f2a3e91968585ffdd07e8fa4d4daf8644fd72cc8fe8a4",
+      "id": "retained_fa770733fd8327",
+      "label": "Surrounding statement 6 remains original code",
+      "operationIds": {
+        "orderLinesAreAllCancelled": "retained_call_f91c03e2bc10225bf4"
+      },
+      "operations": [
+        "orderLinesAreAllCancelled"
+      ],
+      "path": "packages/core/src/config/order/default-order-process.ts",
+      "position": "after",
+      "start": 418
+    },
+    {
+      "end": 454,
+      "hash": "a3e2297a3dc2fe14e038a85ae04c841bfa610e07aa8e109dc43eb27b4097bcd3",
+      "id": "retained_4f1acf904e28cf",
+      "label": "Surrounding statement 7 remains original code",
+      "operationIds": {
+        "findOrderWithFulfillments": "retained_call_1624ebd4d64c1ce7c2",
+        "orderItemsAreDelivered": "retained_call_1d4bcab158e9068448",
+        "orderItemsArePartiallyDelivered": "retained_call_ae9023e8da16e9300e",
+        "orderItemsArePartiallyShipped": "retained_call_92d8e13e123c7ddf98",
+        "orderItemsAreShipped": "retained_call_e6107430811484e114"
+      },
+      "operations": [
+        "findOrderWithFulfillments",
+        "orderItemsArePartiallyShipped",
+        "orderItemsAreShipped",
+        "orderItemsArePartiallyDelivered",
+        "orderItemsAreDelivered"
+      ],
+      "path": "packages/core/src/config/order/default-order-process.ts",
+      "position": "after",
+      "start": 429
+    }
+  ],
+  "source": {
+    "commit": "f97b18759178bd22cbd88062edcff6c308652342",
+    "repository": "shanejc/vendure"
+  },
+  "version": 1
+}

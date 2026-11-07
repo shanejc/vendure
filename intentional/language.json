@@ -1,6 +1,144 @@
 {
-  "name": "New domain",
-  "operations": [],
+  "name": "Recovered domain operations",
+  "operations": [
+    {
+      "body": {
+        "args": [
+          {
+            "args": [
+              {
+                "id": "operation_c3e562fb80_summate_body_0_0",
+                "op": "get",
+                "origin": {
+                  "end": 149,
+                  "modelHash": "3dab036122a814e65c43c31d64fd7ca9af877184685f199cd3e226cf8972833a",
+                  "precision": "syntax",
+                  "sourceId": "source_c3e562fb80eb",
+                  "start": 144
+                },
+                "path": "items"
+              },
+              {
+                "args": [],
+                "id": "operation_c3e562fb80_summate_body_0_1",
+                "op": "array",
+                "origin": {
+                  "end": 155,
+                  "modelHash": "66aaf5e81caf9193483e49a88b3490495d5a6cf40f5509117f74bb40a7072087",
+                  "precision": "syntax",
+                  "sourceId": "source_c3e562fb80eb",
+                  "start": 153
+                }
+              }
+            ],
+            "id": "operation_c3e562fb80_summate_body_0",
+            "op": "or",
+            "origin": {
+              "end": 155,
+              "modelHash": "a44e3683e3b70792550bf0c97f3b5ad8f87d4c2f104cde81afc26a6e13db2a9f",
+              "precision": "syntax",
+              "sourceId": "source_c3e562fb80eb",
+              "start": 144
+            }
+          },
+          {
+            "id": "operation_c3e562fb80_summate_body_1",
+            "op": "literal",
+            "origin": {
+              "end": 215,
+              "modelHash": "a5115ed9a9e0242fa7869a41d7111f745bdbda0fa6335b5aa625181a963d2029",
+              "precision": "syntax",
+              "sourceId": "source_c3e562fb80eb",
+              "start": 214
+            },
+            "value": 0
+          },
+          {
+            "args": [
+              {
+                "id": "operation_c3e562fb80_summate_body_2_0",
+                "op": "get",
+                "origin": {
+                  "end": 179,
+                  "modelHash": "8c68f202c520f05aa434000713e374ca4e9ae22620901f9050115048b8f728bd",
+                  "precision": "syntax",
+                  "sourceId": "source_c3e562fb80eb",
+                  "start": 176
+                },
+                "path": "sum"
+              },
+              {
+                "args": [
+                  {
+                    "id": "operation_c3e562fb80_summate_body_2_1_0",
+                    "op": "get",
+                    "origin": {
+                      "end": 184,
+                      "modelHash": "19e2b044e138a32432785197ba45a54702c157aad489b20020bde1e7c6716644",
+                      "precision": "syntax",
+                      "sourceId": "source_c3e562fb80eb",
+                      "start": 183
+                    },
+                    "path": "i"
+                  },
+                  {
+                    "id": "operation_c3e562fb80_summate_body_2_1_1",
+                    "op": "get",
+                    "origin": {
+                      "end": 189,
+                      "modelHash": "7b73c865d345549fe7c4a8966f4ab18acec956b0b31855958e682d46661111b9",
+                      "precision": "syntax",
+                      "sourceId": "source_c3e562fb80eb",
+                      "start": 185
+                    },
+                    "path": "prop"
+                  }
+                ],
+                "id": "operation_c3e562fb80_summate_body_2_1",
+                "op": "at",
+                "origin": {
+                  "end": 190,
+                  "modelHash": "5b05a38e074dd316a0febcac8ce192c014addffa01fda6b23ad369a947371c42",
+                  "precision": "syntax",
+                  "sourceId": "source_c3e562fb80eb",
+                  "start": 183
+                }
+              }
+            ],
+            "id": "operation_c3e562fb80_summate_body_2",
+            "op": "add",
+            "origin": {
+              "end": 212,
+              "modelHash": "39376cc1e4ec0c909cd40c6ac06b5e0f820926e72c9b0f9d1c1c59b716592995",
+              "precision": "syntax",
+              "sourceId": "source_c3e562fb80eb",
+              "start": 176
+            }
+          }
+        ],
+        "diagnostic": "(items || []).reduce",
+        "id": "operation_c3e562fb80_summate_body",
+        "mode": "reduce",
+        "name": "i",
+        "op": "fold",
+        "origin": {
+          "end": 216,
+          "modelHash": "75d71ec8d2b6b60de4a3976c82eef8047f30bc1113747cf9fe542023f3fddc99",
+          "precision": "syntax",
+          "sourceId": "source_c3e562fb80eb",
+          "start": 143
+        },
+        "path": "sum"
+      },
+      "id": "operation_c3e562fb80_summate",
+      "name": "operation_c3e562fb80_summate",
+      "params": [
+        "items",
+        "prop"
+      ],
+      "sourceId": "source_c3e562fb80eb"
+    }
+  ],
   "types": {},
   "version": 1
 }

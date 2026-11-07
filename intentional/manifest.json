@@ -1,11 +1,36 @@
 {
-  "artifactHash": "47da30d8fd19125202d4cc6c8a5aa94260e91992c51f9da9199621be00567c00",
-  "boundaries": [],
+  "artifactHash": "398594838fba97489ca146d2c1037d728d56a1bfff704d70a66b4e1c769b845a",
+  "boundaries": [
+    {
+      "id": "binding_graph_8f054d6116ba",
+      "kind": "graph",
+      "sourceId": "source_graph_8f054d6116ba",
+      "target": "graph_8f054d6116ba"
+    },
+    {
+      "id": "binding_source_7329167ead1d",
+      "kind": "function",
+      "sourceId": "source_7329167ead1d",
+      "target": "totalCoveredByPayments"
+    },
+    {
+      "id": "binding_source_43272d162c71",
+      "kind": "function",
+      "sourceId": "source_43272d162c71",
+      "target": "orderTotalIsCovered"
+    },
+    {
+      "id": "binding_guard_efca37b24d2e",
+      "kind": "guard",
+      "sourceId": "source_guard_efca37b24d2e",
+      "target": "guard_efca37b24d2e"
+    }
+  ],
   "compiler": "0.5.0",
   "generation": null,
-  "identityFormatVersion": 0,
+  "identityFormatVersion": 1,
   "integration": null,
-  "revision": 3,
+  "revision": 4,
   "scenarioFormatVersion": 1,
   "scenarioHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
   "sourceCommit": "f97b18759178bd22cbd88062edcff6c308652342",

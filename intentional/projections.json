@@ -1,4 +1,25 @@
 {
   "version": 1,
-  "views": []
+  "views": [
+    {
+      "kind": "form",
+      "target": "totalCoveredByPayments",
+      "title": "totalCoveredByPayments"
+    },
+    {
+      "kind": "form",
+      "target": "orderTotalIsCovered",
+      "title": "orderTotalIsCovered"
+    },
+    {
+      "kind": "state",
+      "target": "graph_8f054d6116ba",
+      "title": "Recovered transition graph"
+    },
+    {
+      "kind": "table",
+      "target": "guard_efca37b24d2e",
+      "title": "Ordered guard outcome"
+    }
+  ]
 }

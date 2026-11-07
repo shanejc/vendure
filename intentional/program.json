@@ -1,7 +1,2800 @@
 {
-  "decisions": [],
-  "functions": [],
-  "machines": [],
-  "name": "Select an extraction candidate",
+  "decisions": [
+    {
+      "id": "guard_efca37b24d2e",
+      "otherwise": {
+        "args": [
+          {
+            "id": "guard_efca37b24d2e_otherwise_0",
+            "op": "literal",
+            "origin": {
+              "end": 652,
+              "precision": "boundary",
+              "sourceId": "source_guard_efca37b24d2e",
+              "start": 0
+            },
+            "value": "continue"
+          }
+        ],
+        "fields": [
+          "kind"
+        ],
+        "id": "guard_efca37b24d2e_otherwise",
+        "op": "record",
+        "origin": {
+          "end": 652,
+          "precision": "boundary",
+          "sourceId": "source_guard_efca37b24d2e",
+          "start": 0
+        }
+      },
+      "params": [
+        "options",
+        "toState",
+        "order"
+      ],
+      "rules": [
+        {
+          "id": "guard_efca37b24d2e_enabled",
+          "result": {
+            "args": [
+              {
+                "args": [
+                  {
+                    "id": "guard_efca37b24d2e_enabled_result_0_0",
+                    "op": "get",
+                    "origin": {
+                      "end": 76,
+                      "modelHash": "b41a3e9f67bce2724b7657a4232a57e99e58f3f8ebe122c575e5689255023655",
+                      "precision": "syntax",
+                      "sourceId": "source_guard_efca37b24d2e",
+                      "start": 69
+                    },
+                    "path": "toState"
+                  },
+                  {
+                    "id": "guard_efca37b24d2e_enabled_result_0_1",
+                    "op": "literal",
+                    "origin": {
+                      "end": 100,
+                      "modelHash": "6cbf89adc7d068ecd831cc456a55a4ddb8f23597343c1b9a570d67f87b7736b7",
+                      "precision": "syntax",
+                      "sourceId": "source_guard_efca37b24d2e",
+                      "start": 81
+                    },
+                    "value": "PaymentAuthorized"
+                  }
+                ],
+                "id": "guard_efca37b24d2e_enabled_result_0",
+                "op": "eq",
+                "origin": {
+                  "end": 100,
+                  "modelHash": "63bd574cd89fd99b0c0390e986ded233fbdc47d13385a97c2df28f24650cf04a",
+                  "precision": "syntax",
+                  "sourceId": "source_guard_efca37b24d2e",
+                  "start": 69
+                }
+              },
+              {
+                "args": [
+                  {
+                    "args": [
+                      {
+                        "args": [
+                          {
+                            "args": [
+                              {
+                                "args": [
+                                  {
+                                    "id": "guard_efca37b24d2e_enabled_result_1_0_0_0_0_0",
+                                    "op": "get",
+                                    "origin": {
+                                      "end": 162,
+                                      "modelHash": "37badddb6d924b97a7a6b0b5850f5681f9cecd48c5ff180fb60c824032a317a4",
+                                      "precision": "syntax",
+                                      "sourceId": "source_guard_efca37b24d2e",
+                                      "start": 157
+                                    },
+                                    "path": "order"
+                                  },
+                                  {
+                                    "id": "guard_efca37b24d2e_enabled_result_1_0_0_0_0_1",
+                                    "op": "literal",
+                                    "origin": {
+                                      "end": 171,
+                                      "modelHash": "682d7c03b576c53e5e5f12c71947f87c8ded2d45a92da2dcd547f3448fa09c78",
+                                      "precision": "lowering",
+                                      "sourceId": "source_guard_efca37b24d2e",
+                                      "start": 157
+                                    },
+                                    "value": "payments"
+                                  }
+                                ],
+                                "id": "guard_efca37b24d2e_enabled_result_1_0_0_0_0",
+                                "op": "at",
+                                "origin": {
+                                  "end": 171,
+                                  "modelHash": "9946f4dd431c63933037d64e687b714f63eccf337a9a2f404d0a1ccd265491db",
+                                  "precision": "syntax",
+                                  "sourceId": "source_guard_efca37b24d2e",
+                                  "start": 157
+                                }
+                              },
+                              {
+                                "args": [
+                                  {
+                                    "args": [
+                                      {
+                                        "id": "guard_efca37b24d2e_enabled_result_1_0_0_0_1_0_0",
+                                        "op": "get",
+                                        "origin": {
+                                          "end": 183,
+                                          "modelHash": "15664a1c29272254aa376cd0adfe4fcfcdda8ad6e5e39f423286d372bbf7ed87",
+                                          "precision": "syntax",
+                                          "sourceId": "source_guard_efca37b24d2e",
+                                          "start": 182
+                                        },
+                                        "path": "p"
+                                      },
+                                      {
+                                        "id": "guard_efca37b24d2e_enabled_result_1_0_0_0_1_0_1",
+                                        "op": "literal",
+                                        "origin": {
+                                          "end": 189,
+                                          "modelHash": "8b58415fc7a1facbc211906b057b9da5562f36573703d08d8d9d50b461f686f8",
+                                          "precision": "lowering",
+                                          "sourceId": "source_guard_efca37b24d2e",
+                                          "start": 182
+                                        },
+                                        "value": "state"
+                                      }
+                                    ],
+                                    "id": "guard_efca37b24d2e_enabled_result_1_0_0_0_1_0",
+                                    "op": "at",
+                                    "origin": {
+                                      "end": 189,
+                                      "modelHash": "76639bca376cc0f9ccd4c0357e755ad890ba9cf5341cbbda1d3247fec0bbf4b5",
+                                      "precision": "syntax",
+                                      "sourceId": "source_guard_efca37b24d2e",
+                                      "start": 182
+                                    }
+                                  },
+                                  {
+                                    "id": "guard_efca37b24d2e_enabled_result_1_0_0_0_1_1",
+                                    "op": "literal",
+                                    "origin": {
+                                      "end": 206,
+                                      "modelHash": "556fce9c4eff8045c4cb6c9734beb79280cf50311e0a98952de44017b6caae22",
+                                      "precision": "syntax",
+                                      "sourceId": "source_guard_efca37b24d2e",
+                                      "start": 194
+                                    },
+                                    "value": "Authorized"
+                                  }
+                                ],
+                                "id": "guard_efca37b24d2e_enabled_result_1_0_0_0_1",
+                                "op": "eq",
+                                "origin": {
+                                  "end": 206,
+                                  "modelHash": "0c52d07baa78ee755e926d30403787b6921019f1fb19d79569a3a13e9459116b",
+                                  "precision": "syntax",
+                                  "sourceId": "source_guard_efca37b24d2e",
+                                  "start": 182
+                                }
+                              }
+                            ],
+                            "diagnostic": "order.payments.find",
+                            "id": "guard_efca37b24d2e_enabled_result_1_0_0_0",
+                            "name": "p",
+                            "op": "find",
+                            "origin": {
+                              "end": 207,
+                              "modelHash": "23350f2ad78a76d2f717e8f5a07b22334565dd62a20ef17de3340111a3bd2f8b",
+                              "precision": "syntax",
+                              "sourceId": "source_guard_efca37b24d2e",
+                              "start": 157
+                            }
+                          }
+                        ],
+                        "id": "guard_efca37b24d2e_enabled_result_1_0_0",
+                        "op": "not",
+                        "origin": {
+                          "end": 207,
+                          "modelHash": "3f3a553c637a4708f4d6861d0361db43c98975e31fd1160b53c93a800bd1256e",
+                          "precision": "syntax",
+                          "sourceId": "source_guard_efca37b24d2e",
+                          "start": 156
+                        }
+                      }
+                    ],
+                    "id": "guard_efca37b24d2e_enabled_result_1_0",
+                    "op": "not",
+                    "origin": {
+                      "end": 207,
+                      "modelHash": "007ac71d40aac557815e1a679c6dbf4162d87325b8a3d54f7097d9d278c326b0",
+                      "precision": "syntax",
+                      "sourceId": "source_guard_efca37b24d2e",
+                      "start": 155
+                    }
+                  },
+                  {
+                    "args": [
+                      {
+                        "args": [
+                          {
+                            "args": [
+                              {
+                                "args": [
+                                  {
+                                    "id": "guard_efca37b24d2e_enabled_result_1_1_0_0_0_0",
+                                    "op": "get",
+                                    "origin": {
+                                      "end": 259,
+                                      "modelHash": "37badddb6d924b97a7a6b0b5850f5681f9cecd48c5ff180fb60c824032a317a4",
+                                      "precision": "syntax",
+                                      "sourceId": "source_guard_efca37b24d2e",
+                                      "start": 254
+                                    },
+                                    "path": "order"
+                                  },
+                                  {
+                                    "args": [
+                                      {
+                                        "id": "guard_efca37b24d2e_enabled_result_1_1_0_0_0_1_0",
+                                        "op": "literal",
+                                        "origin": {
+                                          "end": 274,
+                                          "modelHash": "556fce9c4eff8045c4cb6c9734beb79280cf50311e0a98952de44017b6caae22",
+                                          "precision": "syntax",
+                                          "sourceId": "source_guard_efca37b24d2e",
+                                          "start": 262
+                                        },
+                                        "value": "Authorized"
+                                      },
+                                      {
+                                        "id": "guard_efca37b24d2e_enabled_result_1_1_0_0_0_1_1",
+                                        "op": "literal",
+                                        "origin": {
+                                          "end": 285,
+                                          "modelHash": "19bacfae8c22a109de7daea8859b65209c6b612365b7df2498a37d872a8c5422",
+                                          "precision": "syntax",
+                                          "sourceId": "source_guard_efca37b24d2e",
+                                          "start": 276
+                                        },
+                                        "value": "Settled"
+                                      }
+                                    ],
+                                    "id": "guard_efca37b24d2e_enabled_result_1_1_0_0_0_1",
+                                    "op": "array",
+                                    "origin": {
+                                      "end": 286,
+                                      "modelHash": "179fd0fdb422e2c0c8b5c2979d6850ae09fbf66defcc097bc0c9178485faeace",
+                                      "precision": "syntax",
+                                      "sourceId": "source_guard_efca37b24d2e",
+                                      "start": 261
+                                    }
+                                  }
+                                ],
+                                "id": "guard_efca37b24d2e_enabled_result_1_1_0_0_0",
+                                "name": "orderTotalIsCovered",
+                                "op": "call",
+                                "origin": {
+                                  "end": 287,
+                                  "modelHash": "0016374300cc338bbc8cd3b7cda56f5faa0965dc63d4649face911361ac96f5b",
+                                  "precision": "syntax",
+                                  "sourceId": "source_guard_efca37b24d2e",
+                                  "start": 234
+                                }
+                              }
+                            ],
+                            "id": "guard_efca37b24d2e_enabled_result_1_1_0_0",
+                            "op": "not",
+                            "origin": {
+                              "end": 287,
+                              "modelHash": "3b4626063d22f28b2210b1dbc88a06e2408e991d3bb84c224b728791dff92dee",
+                              "precision": "syntax",
+                              "sourceId": "source_guard_efca37b24d2e",
+                              "start": 233
+                            }
+                          },
+                          {
+                            "args": [
+                              {
+                                "id": "guard_efca37b24d2e_enabled_result_1_1_0_1_0",
+                                "op": "get",
+                                "origin": {
+                                  "end": 314,
+                                  "modelHash": "a7371bcd0028d53bbd8980583b6bc084b19c821c8203d892a270642e013ff648",
+                                  "precision": "syntax",
+                                  "sourceId": "source_guard_efca37b24d2e",
+                                  "start": 292
+                                },
+                                "path": "hasAnAuthorizedPayment"
+                              }
+                            ],
+                            "id": "guard_efca37b24d2e_enabled_result_1_1_0_1",
+                            "op": "not",
+                            "origin": {
+                              "end": 314,
+                              "modelHash": "cb1967fa4122cf1b60747a655ed11e1c9e36e9e939577d2d0e832d1599d41cd5",
+                              "precision": "syntax",
+                              "sourceId": "source_guard_efca37b24d2e",
+                              "start": 291
+                            }
+                          }
+                        ],
+                        "id": "guard_efca37b24d2e_enabled_result_1_1_0",
+                        "op": "or",
+                        "origin": {
+                          "end": 314,
+                          "modelHash": "8f588a69dde421386997b4f7d4a7ae76be3868c35411d847e19cfcdd85ee2bc5",
+                          "precision": "syntax",
+                          "sourceId": "source_guard_efca37b24d2e",
+                          "start": 233
+                        }
+                      },
+                      {
+                        "args": [
+                          {
+                            "id": "guard_efca37b24d2e_enabled_result_1_1_1_0",
+                            "op": "literal",
+                            "origin": {
+                              "end": 405,
+                              "modelHash": "343e175f2a13a6cff369e0094789e1c6325a2f32e1fd19329546b07422116cb6",
+                              "precision": "lowering",
+                              "sourceId": "source_guard_efca37b24d2e",
+                              "start": 342
+                            },
+                            "value": "return"
+                          },
+                          {
+                            "id": "guard_efca37b24d2e_enabled_result_1_1_1_1",
+                            "op": "literal",
+                            "origin": {
+                              "end": 404,
+                              "modelHash": "4150863d1833c14c35f33b657be83ea54a7eea1298ae293c97191c0487051a4c",
+                              "precision": "syntax",
+                              "sourceId": "source_guard_efca37b24d2e",
+                              "start": 349
+                            },
+                            "value": "message.cannot-transition-without-authorized-payments"
+                          }
+                        ],
+                        "fields": [
+                          "kind",
+                          "value"
+                        ],
+                        "id": "guard_efca37b24d2e_enabled_result_1_1_1",
+                        "op": "record",
+                        "origin": {
+                          "end": 405,
+                          "modelHash": "2092a504235a8e84f82646db550a995c1c966443a5b94d4ed26d918d4187fed6",
+                          "precision": "lowering",
+                          "sourceId": "source_guard_efca37b24d2e",
+                          "start": 342
+                        }
+                      },
+                      {
+                        "args": [
+                          {
+                            "args": [
+                              {
+                                "args": [
+                                  {
+                                    "id": "guard_efca37b24d2e_enabled_result_1_1_2_0_0_0",
+                                    "op": "get",
+                                    "origin": {
+                                      "end": 473,
+                                      "modelHash": "b41a3e9f67bce2724b7657a4232a57e99e58f3f8ebe122c575e5689255023655",
+                                      "precision": "syntax",
+                                      "sourceId": "source_guard_efca37b24d2e",
+                                      "start": 466
+                                    },
+                                    "path": "toState"
+                                  },
+                                  {
+                                    "id": "guard_efca37b24d2e_enabled_result_1_1_2_0_0_1",
+                                    "op": "literal",
+                                    "origin": {
+                                      "end": 494,
+                                      "modelHash": "0757ac58d9142ef61386738fe07da6dbd28907ea580fb9ffcccb4987780f4c02",
+                                      "precision": "syntax",
+                                      "sourceId": "source_guard_efca37b24d2e",
+                                      "start": 478
+                                    },
+                                    "value": "PaymentSettled"
+                                  }
+                                ],
+                                "id": "guard_efca37b24d2e_enabled_result_1_1_2_0_0",
+                                "op": "eq",
+                                "origin": {
+                                  "end": 494,
+                                  "modelHash": "05bebd13865beaf4da380012e6867ae4b26e88ee0a535b93c0cefa463fffd222",
+                                  "precision": "syntax",
+                                  "sourceId": "source_guard_efca37b24d2e",
+                                  "start": 466
+                                }
+                              },
+                              {
+                                "args": [
+                                  {
+                                    "args": [
+                                      {
+                                        "id": "guard_efca37b24d2e_enabled_result_1_1_2_0_1_0_0",
+                                        "op": "get",
+                                        "origin": {
+                                          "end": 524,
+                                          "modelHash": "37badddb6d924b97a7a6b0b5850f5681f9cecd48c5ff180fb60c824032a317a4",
+                                          "precision": "syntax",
+                                          "sourceId": "source_guard_efca37b24d2e",
+                                          "start": 519
+                                        },
+                                        "path": "order"
+                                      },
+                                      {
+                                        "id": "guard_efca37b24d2e_enabled_result_1_1_2_0_1_0_1",
+                                        "op": "literal",
+                                        "origin": {
+                                          "end": 535,
+                                          "modelHash": "19bacfae8c22a109de7daea8859b65209c6b612365b7df2498a37d872a8c5422",
+                                          "precision": "syntax",
+                                          "sourceId": "source_guard_efca37b24d2e",
+                                          "start": 526
+                                        },
+                                        "value": "Settled"
+                                      }
+                                    ],
+                                    "id": "guard_efca37b24d2e_enabled_result_1_1_2_0_1_0",
+                                    "name": "orderTotalIsCovered",
+                                    "op": "call",
+                                    "origin": {
+                                      "end": 536,
+                                      "modelHash": "ce41f5de519c227465481c22676cc5365645f2e22929e4d75734dc43c833a280",
+                                      "precision": "syntax",
+                                      "sourceId": "source_guard_efca37b24d2e",
+                                      "start": 499
+                                    }
+                                  }
+                                ],
+                                "id": "guard_efca37b24d2e_enabled_result_1_1_2_0_1",
+                                "op": "not",
+                                "origin": {
+                                  "end": 536,
+                                  "modelHash": "dcf59146eefa3b1c6d69c705c24db5db40baf8fe6981f050938a4dbc12d57e9d",
+                                  "precision": "syntax",
+                                  "sourceId": "source_guard_efca37b24d2e",
+                                  "start": 498
+                                }
+                              }
+                            ],
+                            "id": "guard_efca37b24d2e_enabled_result_1_1_2_0",
+                            "op": "and",
+                            "origin": {
+                              "end": 536,
+                              "modelHash": "873119bff0c992e8c3aca8dff735d4aea878946b941d3c2969223be73af63525",
+                              "precision": "syntax",
+                              "sourceId": "source_guard_efca37b24d2e",
+                              "start": 466
+                            }
+                          },
+                          {
+                            "args": [
+                              {
+                                "id": "guard_efca37b24d2e_enabled_result_1_1_2_1_0",
+                                "op": "literal",
+                                "origin": {
+                                  "end": 620,
+                                  "modelHash": "343e175f2a13a6cff369e0094789e1c6325a2f32e1fd19329546b07422116cb6",
+                                  "precision": "lowering",
+                                  "sourceId": "source_guard_efca37b24d2e",
+                                  "start": 560
+                                },
+                                "value": "return"
+                              },
+                              {
+                                "id": "guard_efca37b24d2e_enabled_result_1_1_2_1_1",
+                                "op": "literal",
+                                "origin": {
+                                  "end": 619,
+                                  "modelHash": "c3cc88433b273ff75c5ab883e3d0a5c709d8e96cbcda9b2966500e6c0925bd11",
+                                  "precision": "syntax",
+                                  "sourceId": "source_guard_efca37b24d2e",
+                                  "start": 567
+                                },
+                                "value": "message.cannot-transition-without-settled-payments"
+                              }
+                            ],
+                            "fields": [
+                              "kind",
+                              "value"
+                            ],
+                            "id": "guard_efca37b24d2e_enabled_result_1_1_2_1",
+                            "op": "record",
+                            "origin": {
+                              "end": 620,
+                              "modelHash": "60202be23e6697eb7a103a6a0f8b59d69e762cf2ef8f8a894dbe97943c52fc9a",
+                              "precision": "lowering",
+                              "sourceId": "source_guard_efca37b24d2e",
+                              "start": 560
+                            }
+                          },
+                          {
+                            "args": [
+                              {
+                                "id": "guard_efca37b24d2e_enabled_result_1_1_2_2_0",
+                                "op": "literal",
+                                "origin": {
+                                  "end": 638,
+                                  "modelHash": "6855044bf0c9bce7aba005effcc3e98f872811de41f1fc5edc6ae4d30ca74e6d",
+                                  "precision": "lowering",
+                                  "sourceId": "source_guard_efca37b24d2e",
+                                  "start": 462
+                                },
+                                "value": "continue"
+                              }
+                            ],
+                            "fields": [
+                              "kind"
+                            ],
+                            "id": "guard_efca37b24d2e_enabled_result_1_1_2_2",
+                            "op": "record",
+                            "origin": {
+                              "end": 638,
+                              "modelHash": "48d211d71bbb1a34ea4b330e9f6ab717092b3bcb404b8a9e7d2e64bff98f1bbf",
+                              "precision": "lowering",
+                              "sourceId": "source_guard_efca37b24d2e",
+                              "start": 462
+                            }
+                          }
+                        ],
+                        "id": "guard_efca37b24d2e_enabled_result_1_1_2",
+                        "op": "if",
+                        "origin": {
+                          "end": 638,
+                          "modelHash": "dce61cf26f3c81858e9b81cb70fb9f35e2e91c58b60d5defd079fb80ce57c6aa",
+                          "precision": "lowering",
+                          "sourceId": "source_guard_efca37b24d2e",
+                          "start": 462
+                        }
+                      }
+                    ],
+                    "id": "guard_efca37b24d2e_enabled_result_1_1",
+                    "op": "if",
+                    "origin": {
+                      "end": 427,
+                      "modelHash": "25fc176b9ca668de060378460df7995d0c717f70a9bb92d04a1c1ba982bc0470",
+                      "precision": "lowering",
+                      "sourceId": "source_guard_efca37b24d2e",
+                      "start": 229
+                    }
+                  }
+                ],
+                "id": "guard_efca37b24d2e_enabled_result_1",
+                "name": "hasAnAuthorizedPayment",
+                "op": "let",
+                "origin": {
+                  "end": 427,
+                  "modelHash": "0c46ebcf5e78425a2c4fcfac41ff0979d5f1ea3db5af4217b39dfc3c9d1637cc",
+                  "precision": "lowering",
+                  "sourceId": "source_guard_efca37b24d2e",
+                  "start": 124
+                }
+              },
+              {
+                "args": [
+                  {
+                    "args": [
+                      {
+                        "args": [
+                          {
+                            "id": "guard_efca37b24d2e_enabled_result_2_0_0_0",
+                            "op": "get",
+                            "origin": {
+                              "end": 473,
+                              "modelHash": "b41a3e9f67bce2724b7657a4232a57e99e58f3f8ebe122c575e5689255023655",
+                              "precision": "syntax",
+                              "sourceId": "source_guard_efca37b24d2e",
+                              "start": 466
+                            },
+                            "path": "toState"
+                          },
+                          {
+                            "id": "guard_efca37b24d2e_enabled_result_2_0_0_1",
+                            "op": "literal",
+                            "origin": {
+                              "end": 494,
+                              "modelHash": "0757ac58d9142ef61386738fe07da6dbd28907ea580fb9ffcccb4987780f4c02",
+                              "precision": "syntax",
+                              "sourceId": "source_guard_efca37b24d2e",
+                              "start": 478
+                            },
+                            "value": "PaymentSettled"
+                          }
+                        ],
+                        "id": "guard_efca37b24d2e_enabled_result_2_0_0",
+                        "op": "eq",
+                        "origin": {
+                          "end": 494,
+                          "modelHash": "05bebd13865beaf4da380012e6867ae4b26e88ee0a535b93c0cefa463fffd222",
+                          "precision": "syntax",
+                          "sourceId": "source_guard_efca37b24d2e",
+                          "start": 466
+                        }
+                      },
+                      {
+                        "args": [
+                          {
+                            "args": [
+                              {
+                                "id": "guard_efca37b24d2e_enabled_result_2_0_1_0_0",
+                                "op": "get",
+                                "origin": {
+                                  "end": 524,
+                                  "modelHash": "37badddb6d924b97a7a6b0b5850f5681f9cecd48c5ff180fb60c824032a317a4",
+                                  "precision": "syntax",
+                                  "sourceId": "source_guard_efca37b24d2e",
+                                  "start": 519
+                                },
+                                "path": "order"
+                              },
+                              {
+                                "id": "guard_efca37b24d2e_enabled_result_2_0_1_0_1",
+                                "op": "literal",
+                                "origin": {
+                                  "end": 535,
+                                  "modelHash": "19bacfae8c22a109de7daea8859b65209c6b612365b7df2498a37d872a8c5422",
+                                  "precision": "syntax",
+                                  "sourceId": "source_guard_efca37b24d2e",
+                                  "start": 526
+                                },
+                                "value": "Settled"
+                              }
+                            ],
+                            "id": "guard_efca37b24d2e_enabled_result_2_0_1_0",
+                            "name": "orderTotalIsCovered",
+                            "op": "call",
+                            "origin": {
+                              "end": 536,
+                              "modelHash": "ce41f5de519c227465481c22676cc5365645f2e22929e4d75734dc43c833a280",
+                              "precision": "syntax",
+                              "sourceId": "source_guard_efca37b24d2e",
+                              "start": 499
+                            }
+                          }
+                        ],
+                        "id": "guard_efca37b24d2e_enabled_result_2_0_1",
+                        "op": "not",
+                        "origin": {
+                          "end": 536,
+                          "modelHash": "dcf59146eefa3b1c6d69c705c24db5db40baf8fe6981f050938a4dbc12d57e9d",
+                          "precision": "syntax",
+                          "sourceId": "source_guard_efca37b24d2e",
+                          "start": 498
+                        }
+                      }
+                    ],
+                    "id": "guard_efca37b24d2e_enabled_result_2_0",
+                    "op": "and",
+                    "origin": {
+                      "end": 536,
+                      "modelHash": "873119bff0c992e8c3aca8dff735d4aea878946b941d3c2969223be73af63525",
+                      "precision": "syntax",
+                      "sourceId": "source_guard_efca37b24d2e",
+                      "start": 466
+                    }
+                  },
+                  {
+                    "args": [
+                      {
+                        "id": "guard_efca37b24d2e_enabled_result_2_1_0",
+                        "op": "literal",
+                        "origin": {
+                          "end": 620,
+                          "modelHash": "343e175f2a13a6cff369e0094789e1c6325a2f32e1fd19329546b07422116cb6",
+                          "precision": "lowering",
+                          "sourceId": "source_guard_efca37b24d2e",
+                          "start": 560
+                        },
+                        "value": "return"
+                      },
+                      {
+                        "id": "guard_efca37b24d2e_enabled_result_2_1_1",
+                        "op": "literal",
+                        "origin": {
+                          "end": 619,
+                          "modelHash": "c3cc88433b273ff75c5ab883e3d0a5c709d8e96cbcda9b2966500e6c0925bd11",
+                          "precision": "syntax",
+                          "sourceId": "source_guard_efca37b24d2e",
+                          "start": 567
+                        },
+                        "value": "message.cannot-transition-without-settled-payments"
+                      }
+                    ],
+                    "fields": [
+                      "kind",
+                      "value"
+                    ],
+                    "id": "guard_efca37b24d2e_enabled_result_2_1",
+                    "op": "record",
+                    "origin": {
+                      "end": 620,
+                      "modelHash": "60202be23e6697eb7a103a6a0f8b59d69e762cf2ef8f8a894dbe97943c52fc9a",
+                      "precision": "lowering",
+                      "sourceId": "source_guard_efca37b24d2e",
+                      "start": 560
+                    }
+                  },
+                  {
+                    "args": [
+                      {
+                        "id": "guard_efca37b24d2e_enabled_result_2_2_0",
+                        "op": "literal",
+                        "origin": {
+                          "end": 638,
+                          "modelHash": "6855044bf0c9bce7aba005effcc3e98f872811de41f1fc5edc6ae4d30ca74e6d",
+                          "precision": "lowering",
+                          "sourceId": "source_guard_efca37b24d2e",
+                          "start": 462
+                        },
+                        "value": "continue"
+                      }
+                    ],
+                    "fields": [
+                      "kind"
+                    ],
+                    "id": "guard_efca37b24d2e_enabled_result_2_2",
+                    "op": "record",
+                    "origin": {
+                      "end": 638,
+                      "modelHash": "48d211d71bbb1a34ea4b330e9f6ab717092b3bcb404b8a9e7d2e64bff98f1bbf",
+                      "precision": "lowering",
+                      "sourceId": "source_guard_efca37b24d2e",
+                      "start": 462
+                    }
+                  }
+                ],
+                "id": "guard_efca37b24d2e_enabled_result_2",
+                "op": "if",
+                "origin": {
+                  "end": 638,
+                  "modelHash": "dce61cf26f3c81858e9b81cb70fb9f35e2e91c58b60d5defd079fb80ce57c6aa",
+                  "precision": "lowering",
+                  "sourceId": "source_guard_efca37b24d2e",
+                  "start": 462
+                }
+              }
+            ],
+            "id": "guard_efca37b24d2e_enabled_result",
+            "op": "if",
+            "origin": {
+              "end": 638,
+              "modelHash": "a89a29c0a3cf59c8151c314c0aa8c69a151a4f56381b4259123092cd9a40aaf9",
+              "precision": "lowering",
+              "sourceId": "source_guard_efca37b24d2e",
+              "start": 65
+            }
+          },
+          "when": {
+            "args": [
+              {
+                "args": [
+                  {
+                    "id": "guard_efca37b24d2e_enabled_when_0_0",
+                    "op": "get",
+                    "origin": {
+                      "end": 11,
+                      "modelHash": "95fce5011c393cf1c9298b05e1f6e54072977ffcffbe36ce97f4f7363fd0225b",
+                      "precision": "syntax",
+                      "sourceId": "source_guard_efca37b24d2e",
+                      "start": 4
+                    },
+                    "path": "options"
+                  },
+                  {
+                    "id": "guard_efca37b24d2e_enabled_when_0_1",
+                    "op": "literal",
+                    "origin": {
+                      "end": 35,
+                      "modelHash": "a950c3d5f75fe0da8372c4cd36f5fa48cf016bc12a9aa9e0eaac2903eae9d521",
+                      "precision": "lowering",
+                      "sourceId": "source_guard_efca37b24d2e",
+                      "start": 4
+                    },
+                    "value": "checkPaymentsCoverTotal"
+                  }
+                ],
+                "id": "guard_efca37b24d2e_enabled_when_0",
+                "op": "at",
+                "origin": {
+                  "end": 35,
+                  "modelHash": "bf8d404cd64c893612d9c9963c77dd1f8c1df1a4a7d3036023f490509e2daa34",
+                  "precision": "syntax",
+                  "sourceId": "source_guard_efca37b24d2e",
+                  "start": 4
+                }
+              },
+              {
+                "id": "guard_efca37b24d2e_enabled_when_1",
+                "op": "literal",
+                "origin": {
+                  "end": 45,
+                  "modelHash": "88c85fb519f612163c71e03b7c90c4e5a2812454daf5d5279c0fe6924e0e1704",
+                  "precision": "syntax",
+                  "sourceId": "source_guard_efca37b24d2e",
+                  "start": 40
+                },
+                "value": false
+              }
+            ],
+            "id": "guard_efca37b24d2e_enabled_when",
+            "op": "ne",
+            "origin": {
+              "end": 45,
+              "modelHash": "89601fc1a2fbcedacb7937669db48eddb2673720525f41cec7296adcc2c977eb",
+              "precision": "syntax",
+              "sourceId": "source_guard_efca37b24d2e",
+              "start": 4
+            }
+          }
+        }
+      ],
+      "sourceId": "source_guard_efca37b24d2e"
+    }
+  ],
+  "functions": [
+    {
+      "body": {
+        "args": [
+          {
+            "args": [
+              {
+                "id": "totalCoveredByPayments_body_0_0",
+                "op": "get",
+                "origin": {
+                  "end": 128,
+                  "modelHash": "e15e391feba9bb9652a84392f1d287af8204c5d760e82f552ea796ca6ad639b3",
+                  "precision": "syntax",
+                  "sourceId": "source_7329167ead1d",
+                  "start": 123
+                },
+                "path": "state"
+              },
+              {
+                "args": [
+                  {
+                    "args": [
+                      {
+                        "id": "totalCoveredByPayments_body_0_1_0_0",
+                        "op": "get",
+                        "origin": {
+                          "end": 158,
+                          "modelHash": "e15e391feba9bb9652a84392f1d287af8204c5d760e82f552ea796ca6ad639b3",
+                          "precision": "syntax",
+                          "sourceId": "source_7329167ead1d",
+                          "start": 153
+                        },
+                        "path": "state"
+                      }
+                    ],
+                    "id": "totalCoveredByPayments_body_0_1_0",
+                    "op": "isArray",
+                    "origin": {
+                      "end": 159,
+                      "modelHash": "fbb43e2488fea5d421f12851f4a9948ea723d9c905f6e7629d99dd7e0cbb4cfc",
+                      "precision": "syntax",
+                      "sourceId": "source_7329167ead1d",
+                      "start": 139
+                    }
+                  },
+                  {
+                    "args": [
+                      {
+                        "args": [
+                          {
+                            "id": "totalCoveredByPayments_body_0_1_1_0_0",
+                            "op": "get",
+                            "origin": {
+                              "end": 179,
+                              "modelHash": "37badddb6d924b97a7a6b0b5850f5681f9cecd48c5ff180fb60c824032a317a4",
+                              "precision": "syntax",
+                              "sourceId": "source_7329167ead1d",
+                              "start": 174
+                            },
+                            "path": "order"
+                          },
+                          {
+                            "id": "totalCoveredByPayments_body_0_1_1_0_1",
+                            "op": "literal",
+                            "origin": {
+                              "end": 188,
+                              "modelHash": "682d7c03b576c53e5e5f12c71947f87c8ded2d45a92da2dcd547f3448fa09c78",
+                              "precision": "lowering",
+                              "sourceId": "source_7329167ead1d",
+                              "start": 174
+                            },
+                            "value": "payments"
+                          }
+                        ],
+                        "id": "totalCoveredByPayments_body_0_1_1_0",
+                        "op": "at",
+                        "origin": {
+                          "end": 188,
+                          "modelHash": "9946f4dd431c63933037d64e687b714f63eccf337a9a2f404d0a1ccd265491db",
+                          "precision": "syntax",
+                          "sourceId": "source_7329167ead1d",
+                          "start": 174
+                        }
+                      },
+                      {
+                        "args": [
+                          {
+                            "id": "totalCoveredByPayments_body_0_1_1_1_0",
+                            "op": "get",
+                            "origin": {
+                              "end": 206,
+                              "modelHash": "e15e391feba9bb9652a84392f1d287af8204c5d760e82f552ea796ca6ad639b3",
+                              "precision": "syntax",
+                              "sourceId": "source_7329167ead1d",
+                              "start": 201
+                            },
+                            "path": "state"
+                          },
+                          {
+                            "args": [
+                              {
+                                "id": "totalCoveredByPayments_body_0_1_1_1_1_0",
+                                "op": "get",
+                                "origin": {
+                                  "end": 217,
+                                  "modelHash": "15664a1c29272254aa376cd0adfe4fcfcdda8ad6e5e39f423286d372bbf7ed87",
+                                  "precision": "syntax",
+                                  "sourceId": "source_7329167ead1d",
+                                  "start": 216
+                                },
+                                "path": "p"
+                              },
+                              {
+                                "id": "totalCoveredByPayments_body_0_1_1_1_1_1",
+                                "op": "literal",
+                                "origin": {
+                                  "end": 223,
+                                  "modelHash": "8b58415fc7a1facbc211906b057b9da5562f36573703d08d8d9d50b461f686f8",
+                                  "precision": "lowering",
+                                  "sourceId": "source_7329167ead1d",
+                                  "start": 216
+                                },
+                                "value": "state"
+                              }
+                            ],
+                            "id": "totalCoveredByPayments_body_0_1_1_1_1",
+                            "op": "at",
+                            "origin": {
+                              "end": 223,
+                              "modelHash": "76639bca376cc0f9ccd4c0357e755ad890ba9cf5341cbbda1d3247fec0bbf4b5",
+                              "precision": "syntax",
+                              "sourceId": "source_7329167ead1d",
+                              "start": 216
+                            }
+                          }
+                        ],
+                        "id": "totalCoveredByPayments_body_0_1_1_1",
+                        "op": "includes",
+                        "origin": {
+                          "end": 224,
+                          "modelHash": "93a81a3ae142aa24b7108600b65f5571514953f7363ed0b9959e284376af3ca6",
+                          "precision": "syntax",
+                          "sourceId": "source_7329167ead1d",
+                          "start": 201
+                        }
+                      }
+                    ],
+                    "diagnostic": "order.payments.filter",
+                    "id": "totalCoveredByPayments_body_0_1_1",
+                    "name": "p",
+                    "op": "filter",
+                    "origin": {
+                      "end": 225,
+                      "modelHash": "01d5c4f03b6f95edffff1dcb0fd5cadb1b9dbebdfed4ae8d7c6c82607768efda",
+                      "precision": "syntax",
+                      "sourceId": "source_7329167ead1d",
+                      "start": 174
+                    }
+                  },
+                  {
+                    "args": [
+                      {
+                        "args": [
+                          {
+                            "id": "totalCoveredByPayments_body_0_1_2_0_0",
+                            "op": "get",
+                            "origin": {
+                              "end": 245,
+                              "modelHash": "37badddb6d924b97a7a6b0b5850f5681f9cecd48c5ff180fb60c824032a317a4",
+                              "precision": "syntax",
+                              "sourceId": "source_7329167ead1d",
+                              "start": 240
+                            },
+                            "path": "order"
+                          },
+                          {
+                            "id": "totalCoveredByPayments_body_0_1_2_0_1",
+                            "op": "literal",
+                            "origin": {
+                              "end": 254,
+                              "modelHash": "682d7c03b576c53e5e5f12c71947f87c8ded2d45a92da2dcd547f3448fa09c78",
+                              "precision": "lowering",
+                              "sourceId": "source_7329167ead1d",
+                              "start": 240
+                            },
+                            "value": "payments"
+                          }
+                        ],
+                        "id": "totalCoveredByPayments_body_0_1_2_0",
+                        "op": "at",
+                        "origin": {
+                          "end": 254,
+                          "modelHash": "9946f4dd431c63933037d64e687b714f63eccf337a9a2f404d0a1ccd265491db",
+                          "precision": "syntax",
+                          "sourceId": "source_7329167ead1d",
+                          "start": 240
+                        }
+                      },
+                      {
+                        "args": [
+                          {
+                            "args": [
+                              {
+                                "id": "totalCoveredByPayments_body_0_1_2_1_0_0",
+                                "op": "get",
+                                "origin": {
+                                  "end": 268,
+                                  "modelHash": "15664a1c29272254aa376cd0adfe4fcfcdda8ad6e5e39f423286d372bbf7ed87",
+                                  "precision": "syntax",
+                                  "sourceId": "source_7329167ead1d",
+                                  "start": 267
+                                },
+                                "path": "p"
+                              },
+                              {
+                                "id": "totalCoveredByPayments_body_0_1_2_1_0_1",
+                                "op": "literal",
+                                "origin": {
+                                  "end": 274,
+                                  "modelHash": "8b58415fc7a1facbc211906b057b9da5562f36573703d08d8d9d50b461f686f8",
+                                  "precision": "lowering",
+                                  "sourceId": "source_7329167ead1d",
+                                  "start": 267
+                                },
+                                "value": "state"
+                              }
+                            ],
+                            "id": "totalCoveredByPayments_body_0_1_2_1_0",
+                            "op": "at",
+                            "origin": {
+                              "end": 274,
+                              "modelHash": "76639bca376cc0f9ccd4c0357e755ad890ba9cf5341cbbda1d3247fec0bbf4b5",
+                              "precision": "syntax",
+                              "sourceId": "source_7329167ead1d",
+                              "start": 267
+                            }
+                          },
+                          {
+                            "id": "totalCoveredByPayments_body_0_1_2_1_1",
+                            "op": "get",
+                            "origin": {
+                              "end": 284,
+                              "modelHash": "e15e391feba9bb9652a84392f1d287af8204c5d760e82f552ea796ca6ad639b3",
+                              "precision": "syntax",
+                              "sourceId": "source_7329167ead1d",
+                              "start": 279
+                            },
+                            "path": "state"
+                          }
+                        ],
+                        "id": "totalCoveredByPayments_body_0_1_2_1",
+                        "op": "eq",
+                        "origin": {
+                          "end": 284,
+                          "modelHash": "88f8bb7ba76c14ea183e93c563064d93a16250146e8d2b394d0a1c7a0f15db6c",
+                          "precision": "syntax",
+                          "sourceId": "source_7329167ead1d",
+                          "start": 267
+                        }
+                      }
+                    ],
+                    "diagnostic": "order.payments.filter",
+                    "id": "totalCoveredByPayments_body_0_1_2",
+                    "name": "p",
+                    "op": "filter",
+                    "origin": {
+                      "end": 285,
+                      "modelHash": "195449b473d10b511b428d4f686c4f3cb64e2635b3e816c2a8b86f2cf210452a",
+                      "precision": "syntax",
+                      "sourceId": "source_7329167ead1d",
+                      "start": 240
+                    }
+                  }
+                ],
+                "id": "totalCoveredByPayments_body_0_1",
+                "op": "if",
+                "origin": {
+                  "end": 285,
+                  "modelHash": "243e2ae3f96eb150c9a42cdd79673c4be887db8d75ec139158bde807b7e7e636",
+                  "precision": "syntax",
+                  "sourceId": "source_7329167ead1d",
+                  "start": 139
+                }
+              },
+              {
+                "args": [
+                  {
+                    "args": [
+                      {
+                        "id": "totalCoveredByPayments_body_0_2_0_0",
+                        "op": "get",
+                        "origin": {
+                          "end": 301,
+                          "modelHash": "37badddb6d924b97a7a6b0b5850f5681f9cecd48c5ff180fb60c824032a317a4",
+                          "precision": "syntax",
+                          "sourceId": "source_7329167ead1d",
+                          "start": 296
+                        },
+                        "path": "order"
+                      },
+                      {
+                        "id": "totalCoveredByPayments_body_0_2_0_1",
+                        "op": "literal",
+                        "origin": {
+                          "end": 310,
+                          "modelHash": "682d7c03b576c53e5e5f12c71947f87c8ded2d45a92da2dcd547f3448fa09c78",
+                          "precision": "lowering",
+                          "sourceId": "source_7329167ead1d",
+                          "start": 296
+                        },
+                        "value": "payments"
+                      }
+                    ],
+                    "id": "totalCoveredByPayments_body_0_2_0",
+                    "op": "at",
+                    "origin": {
+                      "end": 310,
+                      "modelHash": "9946f4dd431c63933037d64e687b714f63eccf337a9a2f404d0a1ccd265491db",
+                      "precision": "syntax",
+                      "sourceId": "source_7329167ead1d",
+                      "start": 296
+                    }
+                  },
+                  {
+                    "args": [
+                      {
+                        "args": [
+                          {
+                            "args": [
+                              {
+                                "args": [
+                                  {
+                                    "id": "totalCoveredByPayments_body_0_2_1_0_0_0_0",
+                                    "op": "get",
+                                    "origin": {
+                                      "end": 339,
+                                      "modelHash": "15664a1c29272254aa376cd0adfe4fcfcdda8ad6e5e39f423286d372bbf7ed87",
+                                      "precision": "syntax",
+                                      "sourceId": "source_7329167ead1d",
+                                      "start": 338
+                                    },
+                                    "path": "p"
+                                  },
+                                  {
+                                    "id": "totalCoveredByPayments_body_0_2_1_0_0_0_1",
+                                    "op": "literal",
+                                    "origin": {
+                                      "end": 345,
+                                      "modelHash": "8b58415fc7a1facbc211906b057b9da5562f36573703d08d8d9d50b461f686f8",
+                                      "precision": "lowering",
+                                      "sourceId": "source_7329167ead1d",
+                                      "start": 338
+                                    },
+                                    "value": "state"
+                                  }
+                                ],
+                                "id": "totalCoveredByPayments_body_0_2_1_0_0_0",
+                                "op": "at",
+                                "origin": {
+                                  "end": 345,
+                                  "modelHash": "76639bca376cc0f9ccd4c0357e755ad890ba9cf5341cbbda1d3247fec0bbf4b5",
+                                  "precision": "syntax",
+                                  "sourceId": "source_7329167ead1d",
+                                  "start": 338
+                                }
+                              },
+                              {
+                                "id": "totalCoveredByPayments_body_0_2_1_0_0_1",
+                                "op": "literal",
+                                "origin": {
+                                  "end": 357,
+                                  "modelHash": "b008f2285ebe599016a5e5ee532ea2aa69b0a9c77127f39e64d173f866222c43",
+                                  "precision": "syntax",
+                                  "sourceId": "source_7329167ead1d",
+                                  "start": 350
+                                },
+                                "value": "Error"
+                              }
+                            ],
+                            "id": "totalCoveredByPayments_body_0_2_1_0_0",
+                            "op": "ne",
+                            "origin": {
+                              "end": 357,
+                              "modelHash": "3d175d9eac9b3bcfe58f398dc0528c5023d2ff922fc98a2fa2ecf9d0a45fe870",
+                              "precision": "syntax",
+                              "sourceId": "source_7329167ead1d",
+                              "start": 338
+                            }
+                          },
+                          {
+                            "args": [
+                              {
+                                "args": [
+                                  {
+                                    "id": "totalCoveredByPayments_body_0_2_1_0_1_0_0",
+                                    "op": "get",
+                                    "origin": {
+                                      "end": 362,
+                                      "modelHash": "15664a1c29272254aa376cd0adfe4fcfcdda8ad6e5e39f423286d372bbf7ed87",
+                                      "precision": "syntax",
+                                      "sourceId": "source_7329167ead1d",
+                                      "start": 361
+                                    },
+                                    "path": "p"
+                                  },
+                                  {
+                                    "id": "totalCoveredByPayments_body_0_2_1_0_1_0_1",
+                                    "op": "literal",
+                                    "origin": {
+                                      "end": 368,
+                                      "modelHash": "8b58415fc7a1facbc211906b057b9da5562f36573703d08d8d9d50b461f686f8",
+                                      "precision": "lowering",
+                                      "sourceId": "source_7329167ead1d",
+                                      "start": 361
+                                    },
+                                    "value": "state"
+                                  }
+                                ],
+                                "id": "totalCoveredByPayments_body_0_2_1_0_1_0",
+                                "op": "at",
+                                "origin": {
+                                  "end": 368,
+                                  "modelHash": "76639bca376cc0f9ccd4c0357e755ad890ba9cf5341cbbda1d3247fec0bbf4b5",
+                                  "precision": "syntax",
+                                  "sourceId": "source_7329167ead1d",
+                                  "start": 361
+                                }
+                              },
+                              {
+                                "id": "totalCoveredByPayments_body_0_2_1_0_1_1",
+                                "op": "literal",
+                                "origin": {
+                                  "end": 383,
+                                  "modelHash": "e1cf5457c8ae1607e38fe78c4fb4fea3698a84779e9b311e503268810b60e11a",
+                                  "precision": "syntax",
+                                  "sourceId": "source_7329167ead1d",
+                                  "start": 373
+                                },
+                                "value": "Declined"
+                              }
+                            ],
+                            "id": "totalCoveredByPayments_body_0_2_1_0_1",
+                            "op": "ne",
+                            "origin": {
+                              "end": 383,
+                              "modelHash": "a60dc6f93f2710d89e81383310ac824cb294f11adbc8aeb098982d05a793c44e",
+                              "precision": "syntax",
+                              "sourceId": "source_7329167ead1d",
+                              "start": 361
+                            }
+                          }
+                        ],
+                        "id": "totalCoveredByPayments_body_0_2_1_0",
+                        "op": "and",
+                        "origin": {
+                          "end": 383,
+                          "modelHash": "72eebf68dda361ed6319cbd896aacadfd740e5ff7908db24839410c95baf31d2",
+                          "precision": "syntax",
+                          "sourceId": "source_7329167ead1d",
+                          "start": 338
+                        }
+                      },
+                      {
+                        "args": [
+                          {
+                            "args": [
+                              {
+                                "id": "totalCoveredByPayments_body_0_2_1_1_0_0",
+                                "op": "get",
+                                "origin": {
+                                  "end": 388,
+                                  "modelHash": "15664a1c29272254aa376cd0adfe4fcfcdda8ad6e5e39f423286d372bbf7ed87",
+                                  "precision": "syntax",
+                                  "sourceId": "source_7329167ead1d",
+                                  "start": 387
+                                },
+                                "path": "p"
+                              },
+                              {
+                                "id": "totalCoveredByPayments_body_0_2_1_1_0_1",
+                                "op": "literal",
+                                "origin": {
+                                  "end": 394,
+                                  "modelHash": "8b58415fc7a1facbc211906b057b9da5562f36573703d08d8d9d50b461f686f8",
+                                  "precision": "lowering",
+                                  "sourceId": "source_7329167ead1d",
+                                  "start": 387
+                                },
+                                "value": "state"
+                              }
+                            ],
+                            "id": "totalCoveredByPayments_body_0_2_1_1_0",
+                            "op": "at",
+                            "origin": {
+                              "end": 394,
+                              "modelHash": "76639bca376cc0f9ccd4c0357e755ad890ba9cf5341cbbda1d3247fec0bbf4b5",
+                              "precision": "syntax",
+                              "sourceId": "source_7329167ead1d",
+                              "start": 387
+                            }
+                          },
+                          {
+                            "id": "totalCoveredByPayments_body_0_2_1_1_1",
+                            "op": "literal",
+                            "origin": {
+                              "end": 410,
+                              "modelHash": "8cb675fe144a00bd89b857dc420c44116b5205fab016dfbc9dbe73965b2f34e1",
+                              "precision": "syntax",
+                              "sourceId": "source_7329167ead1d",
+                              "start": 399
+                            },
+                            "value": "Cancelled"
+                          }
+                        ],
+                        "id": "totalCoveredByPayments_body_0_2_1_1",
+                        "op": "ne",
+                        "origin": {
+                          "end": 410,
+                          "modelHash": "dd5de816f803b8cf3320c7b29a6e8e28d40f6eb3da1b110a0b0c732ee2ee0a2b",
+                          "precision": "syntax",
+                          "sourceId": "source_7329167ead1d",
+                          "start": 387
+                        }
+                      }
+                    ],
+                    "id": "totalCoveredByPayments_body_0_2_1",
+                    "op": "and",
+                    "origin": {
+                      "end": 410,
+                      "modelHash": "68e44b8d7a72868b0206a4577871029d11a571f8263555d54e42a0086d2e8f81",
+                      "precision": "syntax",
+                      "sourceId": "source_7329167ead1d",
+                      "start": 338
+                    }
+                  }
+                ],
+                "diagnostic": "order.payments.filter",
+                "id": "totalCoveredByPayments_body_0_2",
+                "name": "p",
+                "op": "filter",
+                "origin": {
+                  "end": 423,
+                  "modelHash": "fa5e3919592ef1fc5156560aa8097eee04e947df9a0bc186eac004005fe2712d",
+                  "precision": "syntax",
+                  "sourceId": "source_7329167ead1d",
+                  "start": 296
+                }
+              }
+            ],
+            "id": "totalCoveredByPayments_body_0",
+            "op": "if",
+            "origin": {
+              "end": 423,
+              "modelHash": "a633367ba6a007d222ace76c7249c7a35153c713abd088eaa4fcd9e1ab03e32d",
+              "precision": "syntax",
+              "sourceId": "source_7329167ead1d",
+              "start": 123
+            }
+          },
+          {
+            "args": [
+              {
+                "id": "totalCoveredByPayments_body_1_0",
+                "op": "literal",
+                "origin": {
+                  "end": 442,
+                  "modelHash": "a5115ed9a9e0242fa7869a41d7111f745bdbda0fa6335b5aa625181a963d2029",
+                  "precision": "syntax",
+                  "sourceId": "source_7329167ead1d",
+                  "start": 441
+                },
+                "value": 0
+              },
+              {
+                "args": [
+                  {
+                    "args": [
+                      {
+                        "id": "totalCoveredByPayments_body_1_1_0_0",
+                        "op": "get",
+                        "origin": {
+                          "end": 478,
+                          "modelHash": "91ec73f596c0a14be77ac2d8550ccd0085260ba8298000bd798034ecfec17d65",
+                          "precision": "syntax",
+                          "sourceId": "source_7329167ead1d",
+                          "start": 470
+                        },
+                        "path": "payments"
+                      },
+                      {
+                        "id": "totalCoveredByPayments_body_1_1_0_1",
+                        "op": "get",
+                        "origin": {
+                          "end": 738,
+                          "modelHash": "fe009d1b072b596d79117fe605144dd617ffc63d874e12225d7d3b79548742b1",
+                          "precision": "lowering",
+                          "sourceId": "source_7329167ead1d",
+                          "start": 448
+                        },
+                        "path": "total"
+                      },
+                      {
+                        "args": [
+                          {
+                            "args": [
+                              {
+                                "args": [
+                                  {
+                                    "args": [
+                                      {
+                                        "id": "totalCoveredByPayments_body_1_1_0_2_0_0_0_0",
+                                        "op": "get",
+                                        "origin": {
+                                          "end": 520,
+                                          "modelHash": "bc0980c0fae60ecb7e1c354e7b037a51fa6ec5947ff0a6e6414adf91302b55f0",
+                                          "precision": "syntax",
+                                          "sourceId": "source_7329167ead1d",
+                                          "start": 513
+                                        },
+                                        "path": "payment"
+                                      },
+                                      {
+                                        "id": "totalCoveredByPayments_body_1_1_0_2_0_0_0_1",
+                                        "op": "literal",
+                                        "origin": {
+                                          "end": 528,
+                                          "modelHash": "e2f1a6ccbbc68f07979bb401936a29b304b6bf753ceb1baf60afd3956b8dafca",
+                                          "precision": "lowering",
+                                          "sourceId": "source_7329167ead1d",
+                                          "start": 513
+                                        },
+                                        "value": "refunds"
+                                      }
+                                    ],
+                                    "id": "totalCoveredByPayments_body_1_1_0_2_0_0_0",
+                                    "op": "at",
+                                    "origin": {
+                                      "end": 528,
+                                      "modelHash": "99d6f1b51d28135ea1eaaa80e5ba068cbbfe4bf95ae6b5f10539d7e8fbc2290d",
+                                      "precision": "syntax",
+                                      "sourceId": "source_7329167ead1d",
+                                      "start": 513
+                                    }
+                                  },
+                                  {
+                                    "args": [
+                                      {
+                                        "args": [
+                                          {
+                                            "args": [
+                                              {
+                                                "id": "totalCoveredByPayments_body_1_1_0_2_0_0_1_0_0_0",
+                                                "op": "get",
+                                                "origin": {
+                                                  "end": 574,
+                                                  "modelHash": "5ac8b35a954862187391749433249ca585ef4c8980232bf3aa41a97035c18ce5",
+                                                  "precision": "lowering",
+                                                  "sourceId": "source_7329167ead1d",
+                                                  "start": 513
+                                                },
+                                                "path": "__optional_0"
+                                              },
+                                              {
+                                                "id": "totalCoveredByPayments_body_1_1_0_2_0_0_1_0_0_1",
+                                                "op": "literal",
+                                                "origin": {
+                                                  "end": 574,
+                                                  "modelHash": "8f1321b550c143296c4f25b19fad8e9c326bd59e271f80c09a5784ec83ebd61c",
+                                                  "precision": "lowering",
+                                                  "sourceId": "source_7329167ead1d",
+                                                  "start": 513
+                                                },
+                                                "value": null
+                                              }
+                                            ],
+                                            "id": "totalCoveredByPayments_body_1_1_0_2_0_0_1_0_0",
+                                            "op": "eq",
+                                            "origin": {
+                                              "end": 574,
+                                              "modelHash": "f13938d7793d861111d50b90d60d9017bff74ba12302f7520555dfd89fedf0c2",
+                                              "precision": "lowering",
+                                              "sourceId": "source_7329167ead1d",
+                                              "start": 513
+                                            }
+                                          },
+                                          {
+                                            "args": [
+                                              {
+                                                "id": "totalCoveredByPayments_body_1_1_0_2_0_0_1_0_1_0",
+                                                "op": "get",
+                                                "origin": {
+                                                  "end": 574,
+                                                  "modelHash": "5ac8b35a954862187391749433249ca585ef4c8980232bf3aa41a97035c18ce5",
+                                                  "precision": "lowering",
+                                                  "sourceId": "source_7329167ead1d",
+                                                  "start": 513
+                                                },
+                                                "path": "__optional_0"
+                                              },
+                                              {
+                                                "id": "totalCoveredByPayments_body_1_1_0_2_0_0_1_0_1_1",
+                                                "op": "literal",
+                                                "origin": {
+                                                  "end": 574,
+                                                  "modelHash": "f234312e71fc93f419a2e918a6af53cd85ecaa03eb5c8a0b523855451ab97982",
+                                                  "precision": "lowering",
+                                                  "sourceId": "source_7329167ead1d",
+                                                  "start": 513
+                                                }
+                                              }
+                                            ],
+                                            "id": "totalCoveredByPayments_body_1_1_0_2_0_0_1_0_1",
+                                            "op": "eq",
+                                            "origin": {
+                                              "end": 574,
+                                              "modelHash": "a973cdf8abe599b4db575336369bdcc3cb5f20976c91c7807829bca4b902d172",
+                                              "precision": "lowering",
+                                              "sourceId": "source_7329167ead1d",
+                                              "start": 513
+                                            }
+                                          }
+                                        ],
+                                        "id": "totalCoveredByPayments_body_1_1_0_2_0_0_1_0",
+                                        "op": "or",
+                                        "origin": {
+                                          "end": 574,
+                                          "modelHash": "be5103fe3aa994ceb4dc0ae9b0b2bf34feffb4cc85a237f40cddc91f868048aa",
+                                          "precision": "lowering",
+                                          "sourceId": "source_7329167ead1d",
+                                          "start": 513
+                                        }
+                                      },
+                                      {
+                                        "id": "totalCoveredByPayments_body_1_1_0_2_0_0_1_1",
+                                        "op": "literal",
+                                        "origin": {
+                                          "end": 574,
+                                          "modelHash": "f234312e71fc93f419a2e918a6af53cd85ecaa03eb5c8a0b523855451ab97982",
+                                          "precision": "lowering",
+                                          "sourceId": "source_7329167ead1d",
+                                          "start": 513
+                                        }
+                                      },
+                                      {
+                                        "args": [
+                                          {
+                                            "id": "totalCoveredByPayments_body_1_1_0_2_0_0_1_2_0",
+                                            "op": "get",
+                                            "origin": {
+                                              "end": 574,
+                                              "modelHash": "5ac8b35a954862187391749433249ca585ef4c8980232bf3aa41a97035c18ce5",
+                                              "precision": "lowering",
+                                              "sourceId": "source_7329167ead1d",
+                                              "start": 513
+                                            },
+                                            "path": "__optional_0"
+                                          },
+                                          {
+                                            "args": [
+                                              {
+                                                "args": [
+                                                  {
+                                                    "id": "totalCoveredByPayments_body_1_1_0_2_0_0_1_2_1_0_0",
+                                                    "op": "get",
+                                                    "origin": {
+                                                      "end": 553,
+                                                      "modelHash": "75f803f88c808364b69739d3481c19ee8344cda4d113980c5485bac8cbedd675",
+                                                      "precision": "syntax",
+                                                      "sourceId": "source_7329167ead1d",
+                                                      "start": 547
+                                                    },
+                                                    "path": "refund"
+                                                  },
+                                                  {
+                                                    "id": "totalCoveredByPayments_body_1_1_0_2_0_0_1_2_1_0_1",
+                                                    "op": "literal",
+                                                    "origin": {
+                                                      "end": 559,
+                                                      "modelHash": "8b58415fc7a1facbc211906b057b9da5562f36573703d08d8d9d50b461f686f8",
+                                                      "precision": "lowering",
+                                                      "sourceId": "source_7329167ead1d",
+                                                      "start": 547
+                                                    },
+                                                    "value": "state"
+                                                  }
+                                                ],
+                                                "id": "totalCoveredByPayments_body_1_1_0_2_0_0_1_2_1_0",
+                                                "op": "at",
+                                                "origin": {
+                                                  "end": 559,
+                                                  "modelHash": "7376c400b1ecb38fa1a0ab6f8b26b19ec56b960d4ce8b88765e82572a9111732",
+                                                  "precision": "syntax",
+                                                  "sourceId": "source_7329167ead1d",
+                                                  "start": 547
+                                                }
+                                              },
+                                              {
+                                                "id": "totalCoveredByPayments_body_1_1_0_2_0_0_1_2_1_1",
+                                                "op": "literal",
+                                                "origin": {
+                                                  "end": 573,
+                                                  "modelHash": "19bacfae8c22a109de7daea8859b65209c6b612365b7df2498a37d872a8c5422",
+                                                  "precision": "syntax",
+                                                  "sourceId": "source_7329167ead1d",
+                                                  "start": 564
+                                                },
+                                                "value": "Settled"
+                                              }
+                                            ],
+                                            "id": "totalCoveredByPayments_body_1_1_0_2_0_0_1_2_1",
+                                            "op": "eq",
+                                            "origin": {
+                                              "end": 573,
+                                              "modelHash": "ed63cc5526525e5b5529c910f139a364581edd29a61ab13361483a452f4ab2dd",
+                                              "precision": "syntax",
+                                              "sourceId": "source_7329167ead1d",
+                                              "start": 547
+                                            }
+                                          }
+                                        ],
+                                        "diagnostic": "payment.refunds?.filter",
+                                        "id": "totalCoveredByPayments_body_1_1_0_2_0_0_1_2",
+                                        "name": "refund",
+                                        "op": "filter",
+                                        "origin": {
+                                          "end": 574,
+                                          "modelHash": "db6056041bf3e4812df697573ab6b4330c40a26373882b7f8fa695a105068f17",
+                                          "precision": "lowering",
+                                          "sourceId": "source_7329167ead1d",
+                                          "start": 513
+                                        }
+                                      }
+                                    ],
+                                    "id": "totalCoveredByPayments_body_1_1_0_2_0_0_1",
+                                    "op": "if",
+                                    "origin": {
+                                      "end": 574,
+                                      "modelHash": "43879e35ea4723e730db79e009f8d2962d2308aa6ba6578fbedcd3565d1799ce",
+                                      "precision": "lowering",
+                                      "sourceId": "source_7329167ead1d",
+                                      "start": 513
+                                    }
+                                  }
+                                ],
+                                "id": "totalCoveredByPayments_body_1_1_0_2_0_0",
+                                "name": "__optional_0",
+                                "op": "let",
+                                "origin": {
+                                  "end": 574,
+                                  "modelHash": "5f0d0342d79ce61dd62367d1b6ba1e2e96fc562419751ab8714e13c3681678ef",
+                                  "precision": "syntax",
+                                  "sourceId": "source_7329167ead1d",
+                                  "start": 513
+                                }
+                              },
+                              {
+                                "args": [],
+                                "id": "totalCoveredByPayments_body_1_1_0_2_0_1",
+                                "op": "array",
+                                "origin": {
+                                  "end": 580,
+                                  "modelHash": "66aaf5e81caf9193483e49a88b3490495d5a6cf40f5509117f74bb40a7072087",
+                                  "precision": "syntax",
+                                  "sourceId": "source_7329167ead1d",
+                                  "start": 578
+                                }
+                              }
+                            ],
+                            "id": "totalCoveredByPayments_body_1_1_0_2_0",
+                            "op": "coalesce",
+                            "origin": {
+                              "end": 580,
+                              "modelHash": "ad30ccbef080e68b3993cdedc62e0e2c1b79343d38f126d48dbf8183e8bfd952",
+                              "precision": "syntax",
+                              "sourceId": "source_7329167ead1d",
+                              "start": 513
+                            }
+                          },
+                          {
+                            "args": [
+                              {
+                                "args": [
+                                  {
+                                    "id": "totalCoveredByPayments_body_1_1_0_2_1_0_0",
+                                    "op": "get",
+                                    "origin": {
+                                      "end": 639,
+                                      "modelHash": "3d95659f3fd0b74e26043f4257ebf7853e1488ff6c113c5b4e1f223df11676e0",
+                                      "precision": "syntax",
+                                      "sourceId": "source_7329167ead1d",
+                                      "start": 625
+                                    },
+                                    "path": "settledRefunds"
+                                  },
+                                  {
+                                    "id": "totalCoveredByPayments_body_1_1_0_2_1_0_1",
+                                    "op": "literal",
+                                    "origin": {
+                                      "end": 648,
+                                      "modelHash": "cd9f7ec9fd94e3e9ad31968146b9b17d4207f0f9db34f4b25553443b250b28ca",
+                                      "precision": "syntax",
+                                      "sourceId": "source_7329167ead1d",
+                                      "start": 641
+                                    },
+                                    "value": "total"
+                                  }
+                                ],
+                                "id": "totalCoveredByPayments_body_1_1_0_2_1_0",
+                                "name": "operation_c3e562fb80_summate",
+                                "op": "call",
+                                "origin": {
+                                  "end": 649,
+                                  "modelHash": "ad2865bdd0ff6c777b9e2547eaf9d20aed9382e90092d3e3af4c685368f740bf",
+                                  "precision": "syntax",
+                                  "sourceId": "source_7329167ead1d",
+                                  "start": 617
+                                }
+                              },
+                              {
+                                "args": [
+                                  {
+                                    "id": "totalCoveredByPayments_body_1_1_0_2_1_1_0",
+                                    "op": "get",
+                                    "origin": {
+                                      "end": 650,
+                                      "modelHash": "fe009d1b072b596d79117fe605144dd617ffc63d874e12225d7d3b79548742b1",
+                                      "precision": "lowering",
+                                      "sourceId": "source_7329167ead1d",
+                                      "start": 590
+                                    },
+                                    "path": "total"
+                                  },
+                                  {
+                                    "args": [
+                                      {
+                                        "args": [
+                                          {
+                                            "id": "totalCoveredByPayments_body_1_1_0_2_1_1_1_0_0",
+                                            "op": "get",
+                                            "origin": {
+                                              "end": 675,
+                                              "modelHash": "bc0980c0fae60ecb7e1c354e7b037a51fa6ec5947ff0a6e6414adf91302b55f0",
+                                              "precision": "syntax",
+                                              "sourceId": "source_7329167ead1d",
+                                              "start": 668
+                                            },
+                                            "path": "payment"
+                                          },
+                                          {
+                                            "id": "totalCoveredByPayments_body_1_1_0_2_1_1_1_0_1",
+                                            "op": "literal",
+                                            "origin": {
+                                              "end": 682,
+                                              "modelHash": "f0a8519667d37f6707f2c6c724482033866d99ab5d0d85d7b8ea547a441b9199",
+                                              "precision": "lowering",
+                                              "sourceId": "source_7329167ead1d",
+                                              "start": 668
+                                            },
+                                            "value": "amount"
+                                          }
+                                        ],
+                                        "id": "totalCoveredByPayments_body_1_1_0_2_1_1_1_0",
+                                        "op": "at",
+                                        "origin": {
+                                          "end": 682,
+                                          "modelHash": "7501a8180fa65ee8895d02221231686eb119305f4226120be66f44dac468e0ab",
+                                          "precision": "syntax",
+                                          "sourceId": "source_7329167ead1d",
+                                          "start": 668
+                                        }
+                                      },
+                                      {
+                                        "args": [
+                                          {
+                                            "id": "totalCoveredByPayments_body_1_1_0_2_1_1_1_1_0",
+                                            "op": "get",
+                                            "origin": {
+                                              "end": 712,
+                                              "modelHash": "cffeb8a32261f939f56da1ae8ef98863ee127407f095177ad95830f21bdf6475",
+                                              "precision": "syntax",
+                                              "sourceId": "source_7329167ead1d",
+                                              "start": 694
+                                            },
+                                            "path": "settledRefundTotal"
+                                          }
+                                        ],
+                                        "id": "totalCoveredByPayments_body_1_1_0_2_1_1_1_1",
+                                        "op": "abs",
+                                        "origin": {
+                                          "end": 713,
+                                          "modelHash": "39ba1f2e1998b7797aa84f42e2393597cc478db22e9199605eb38206f4ac78bd",
+                                          "precision": "syntax",
+                                          "sourceId": "source_7329167ead1d",
+                                          "start": 685
+                                        }
+                                      }
+                                    ],
+                                    "id": "totalCoveredByPayments_body_1_1_0_2_1_1_1",
+                                    "op": "sub",
+                                    "origin": {
+                                      "end": 713,
+                                      "modelHash": "5b9b6df979f2bd1a3c87534d0e6c2aef27681d488c92515e034dc9271d63a317",
+                                      "precision": "syntax",
+                                      "sourceId": "source_7329167ead1d",
+                                      "start": 668
+                                    }
+                                  }
+                                ],
+                                "id": "totalCoveredByPayments_body_1_1_0_2_1_1",
+                                "op": "add",
+                                "origin": {
+                                  "end": 650,
+                                  "modelHash": "412a62f60f0cf4cbc192a851641b2ee98d43525b738288ef855079eb694f1055",
+                                  "precision": "lowering",
+                                  "sourceId": "source_7329167ead1d",
+                                  "start": 590
+                                }
+                              }
+                            ],
+                            "id": "totalCoveredByPayments_body_1_1_0_2_1",
+                            "name": "settledRefundTotal",
+                            "op": "let",
+                            "origin": {
+                              "end": 650,
+                              "modelHash": "183514e612f88f9deeaa63bd15ed066e056b10e4a4cc04302d1309a2a5c8dc6b",
+                              "precision": "lowering",
+                              "sourceId": "source_7329167ead1d",
+                              "start": 590
+                            }
+                          }
+                        ],
+                        "id": "totalCoveredByPayments_body_1_1_0_2",
+                        "name": "settledRefunds",
+                        "op": "let",
+                        "origin": {
+                          "end": 650,
+                          "modelHash": "1a85d990a90271e8612bcb35749ed10500cb0d983b29862095dd9d7c7f63ee92",
+                          "precision": "lowering",
+                          "sourceId": "source_7329167ead1d",
+                          "start": 490
+                        }
+                      }
+                    ],
+                    "diagnostic": "payments",
+                    "id": "totalCoveredByPayments_body_1_1_0",
+                    "mode": "iterate",
+                    "name": "payment",
+                    "op": "fold",
+                    "origin": {
+                      "end": 738,
+                      "modelHash": "8def1519317e83be7f8017b72940340572a3e30b58256202791b355507b1d795",
+                      "precision": "lowering",
+                      "sourceId": "source_7329167ead1d",
+                      "start": 448
+                    },
+                    "path": "total"
+                  },
+                  {
+                    "id": "totalCoveredByPayments_body_1_1_1",
+                    "op": "get",
+                    "origin": {
+                      "end": 737,
+                      "modelHash": "fe009d1b072b596d79117fe605144dd617ffc63d874e12225d7d3b79548742b1",
+                      "precision": "syntax",
+                      "sourceId": "source_7329167ead1d",
+                      "start": 732
+                    },
+                    "path": "total"
+                  }
+                ],
+                "id": "totalCoveredByPayments_body_1_1",
+                "name": "total",
+                "op": "let",
+                "origin": {
+                  "end": 738,
+                  "modelHash": "f6f48f4353f8570595262d5ec02da5ec68c2ace3d568950bb5a554fd48229706",
+                  "precision": "lowering",
+                  "sourceId": "source_7329167ead1d",
+                  "start": 448
+                }
+              }
+            ],
+            "id": "totalCoveredByPayments_body_1",
+            "name": "total",
+            "op": "let",
+            "origin": {
+              "end": 738,
+              "modelHash": "2dbe79646ace7c2a257d346ac68fa67235fab8fc0c59f45bc6818fba90e10490",
+              "precision": "lowering",
+              "sourceId": "source_7329167ead1d",
+              "start": 429
+            }
+          }
+        ],
+        "id": "totalCoveredByPayments_body",
+        "name": "payments",
+        "op": "let",
+        "origin": {
+          "end": 738,
+          "modelHash": "8fdbccccaca2686ca6598fc7cb98c2547c224e14198861b05e8825bdbabc2b57",
+          "precision": "lowering",
+          "sourceId": "source_7329167ead1d",
+          "start": 106
+        }
+      },
+      "id": "totalCoveredByPayments",
+      "name": "totalCoveredByPayments",
+      "params": [
+        "order",
+        "state"
+      ],
+      "sourceId": "source_7329167ead1d"
+    },
+    {
+      "body": {
+        "args": [
+          {
+            "args": [
+              {
+                "id": "orderTotalIsCovered_body_0_0",
+                "op": "get",
+                "origin": {
+                  "end": 153,
+                  "modelHash": "37badddb6d924b97a7a6b0b5850f5681f9cecd48c5ff180fb60c824032a317a4",
+                  "precision": "syntax",
+                  "sourceId": "source_43272d162c71",
+                  "start": 148
+                },
+                "path": "order"
+              },
+              {
+                "id": "orderTotalIsCovered_body_0_1",
+                "op": "get",
+                "origin": {
+                  "end": 160,
+                  "modelHash": "e15e391feba9bb9652a84392f1d287af8204c5d760e82f552ea796ca6ad639b3",
+                  "precision": "syntax",
+                  "sourceId": "source_43272d162c71",
+                  "start": 155
+                },
+                "path": "state"
+              }
+            ],
+            "id": "orderTotalIsCovered_body_0",
+            "name": "totalCoveredByPayments",
+            "op": "call",
+            "origin": {
+              "end": 161,
+              "modelHash": "245435d7f9f898a2ed4b1db77fc5f9437436ca9f1cf8b5de96cd119ebc43c374",
+              "precision": "syntax",
+              "sourceId": "source_43272d162c71",
+              "start": 125
+            }
+          },
+          {
+            "args": [
+              {
+                "id": "orderTotalIsCovered_body_1_0",
+                "op": "get",
+                "origin": {
+                  "end": 187,
+                  "modelHash": "2b927318956826f63ab19c97f6c00fad377550034ca60fd47ef75c1a49218bd1",
+                  "precision": "syntax",
+                  "sourceId": "source_43272d162c71",
+                  "start": 174
+                },
+                "path": "paymentsTotal"
+              },
+              {
+                "args": [
+                  {
+                    "id": "orderTotalIsCovered_body_1_1_0",
+                    "op": "get",
+                    "origin": {
+                      "end": 196,
+                      "modelHash": "37badddb6d924b97a7a6b0b5850f5681f9cecd48c5ff180fb60c824032a317a4",
+                      "precision": "syntax",
+                      "sourceId": "source_43272d162c71",
+                      "start": 191
+                    },
+                    "path": "order"
+                  },
+                  {
+                    "id": "orderTotalIsCovered_body_1_1_1",
+                    "op": "literal",
+                    "origin": {
+                      "end": 209,
+                      "modelHash": "347767caa3d67e1bd462a5675812915309fe16f620563edbd10dbc2ae8dc79e4",
+                      "precision": "lowering",
+                      "sourceId": "source_43272d162c71",
+                      "start": 191
+                    },
+                    "value": "totalWithTax"
+                  }
+                ],
+                "id": "orderTotalIsCovered_body_1_1",
+                "op": "at",
+                "origin": {
+                  "end": 209,
+                  "modelHash": "4049394e0331f118c15a58293dc408b8142124a79719148fc079aa91cd6ea9ca",
+                  "precision": "syntax",
+                  "sourceId": "source_43272d162c71",
+                  "start": 191
+                }
+              }
+            ],
+            "id": "orderTotalIsCovered_body_1",
+            "op": "ge",
+            "origin": {
+              "end": 209,
+              "modelHash": "85f56cf28969c10b9e99e69d374b234a41d918d2f407714c39b99ebba3a76591",
+              "precision": "syntax",
+              "sourceId": "source_43272d162c71",
+              "start": 174
+            }
+          }
+        ],
+        "id": "orderTotalIsCovered_body",
+        "name": "paymentsTotal",
+        "op": "let",
+        "origin": {
+          "end": 210,
+          "modelHash": "9ed071a29242aefc0966aaba319db8e534640ba870d77b8a34a40febaf14fb77",
+          "precision": "lowering",
+          "sourceId": "source_43272d162c71",
+          "start": 103
+        }
+      },
+      "id": "orderTotalIsCovered",
+      "name": "orderTotalIsCovered",
+      "params": [
+        "order",
+        "state"
+      ],
+      "sourceId": "source_43272d162c71"
+    }
+  ],
+  "machines": [
+    {
+      "id": "graph_8f054d6116ba",
+      "kind": "graph",
+      "sourceId": "source_graph_8f054d6116ba",
+      "stateIds": {
+        "AddingItems": "state_f59a975354714a96a3",
+        "ArrangingAdditionalPayment": "state_cd9793327684fd86d3",
+        "ArrangingPayment": "state_5e65d1df6b65ffcd91",
+        "Cancelled": "state_e8befb9eb52cf2ebcb",
+        "Created": "state_bc8b952821faa5c711",
+        "Delivered": "state_9e5567bfbb6a25e31f",
+        "Draft": "state_94b9bd571d4e546ffa",
+        "Modifying": "state_9ae672f0ce8f823a60",
+        "PartiallyDelivered": "state_8fdfa63adad1440df7",
+        "PartiallyShipped": "state_7b0cae3e0c46d65dc0",
+        "PaymentAuthorized": "state_6fb84922995c4182c9",
+        "PaymentSettled": "state_a52ecc6386cb9ed4cb",
+        "Shipped": "state_5361b509526c4e0437"
+      },
+      "stateOrigins": {
+        "AddingItems": {
+          "end": 213,
+          "modelHash": "a61701abdc55d54e2d37ce39bc66aae3d91f1636bb9f7a8da063dd6611cac9ba",
+          "precision": "syntax",
+          "sourceId": "source_graph_8f054d6116ba",
+          "start": 202
+        },
+        "ArrangingAdditionalPayment": {
+          "end": 1710,
+          "modelHash": "bb38adf24513d530a495561bf08e5547ce9e553ff4d7eef4736f6b7c5c0a9475",
+          "precision": "syntax",
+          "sourceId": "source_graph_8f054d6116ba",
+          "start": 1684
+        },
+        "ArrangingPayment": {
+          "end": 315,
+          "modelHash": "a166b4b14fa7c1acf68e473642a2a7af9b25abb87486750ab3a97137ba4a0a4c",
+          "precision": "syntax",
+          "sourceId": "source_graph_8f054d6116ba",
+          "start": 299
+        },
+        "Cancelled": {
+          "end": 2016,
+          "modelHash": "5818a573ef661fa044e31430985d64c6cef7bf3d496ec9806461a3d28c79ebd1",
+          "precision": "syntax",
+          "sourceId": "source_graph_8f054d6116ba",
+          "start": 2007
+        },
+        "Created": {
+          "end": 34,
+          "modelHash": "f042d43f915123c28f280b303741fb00bc10dec3fa962250bd1379b5b781633a",
+          "precision": "syntax",
+          "sourceId": "source_graph_8f054d6116ba",
+          "start": 27
+        },
+        "Delivered": {
+          "end": 1295,
+          "modelHash": "94ec40827829e93900c94e1c27cc247feaa94e4d2cd7ae31afe679cfbac5b609",
+          "precision": "syntax",
+          "sourceId": "source_graph_8f054d6116ba",
+          "start": 1286
+        },
+        "Draft": {
+          "end": 116,
+          "modelHash": "0f80d38c431412cd7974b6e185589b091283a20752d322b7bf2fcb2f819216e8",
+          "precision": "syntax",
+          "sourceId": "source_graph_8f054d6116ba",
+          "start": 111
+        },
+        "Modifying": {
+          "end": 1370,
+          "modelHash": "bf32c99b9bb61434238649524826d2f2c497f3b73e28c767757e5184644b840c",
+          "precision": "syntax",
+          "sourceId": "source_graph_8f054d6116ba",
+          "start": 1361
+        },
+        "PartiallyDelivered": {
+          "end": 1194,
+          "modelHash": "395e38f0d353e290947de43d92ebc02b42e1137d87f6b07f7021b2049d4e97fa",
+          "precision": "syntax",
+          "sourceId": "source_graph_8f054d6116ba",
+          "start": 1176
+        },
+        "PartiallyShipped": {
+          "end": 943,
+          "modelHash": "546d4b33e2f606f0f5c995eb6d91bc7d588caf3218c583f89fd9d29b5321f024",
+          "precision": "syntax",
+          "sourceId": "source_graph_8f054d6116ba",
+          "start": 927
+        },
+        "PaymentAuthorized": {
+          "end": 452,
+          "modelHash": "8e23aadee8795bd4fa9d191409db523171205864e7edd5de414cb77771cee768",
+          "precision": "syntax",
+          "sourceId": "source_graph_8f054d6116ba",
+          "start": 435
+        },
+        "PaymentSettled": {
+          "end": 593,
+          "modelHash": "15c8eab1c8b4880a32e201a1e5428d2b71a13b0053cf66eed9761e3cad75e2b9",
+          "precision": "syntax",
+          "sourceId": "source_graph_8f054d6116ba",
+          "start": 579
+        },
+        "Shipped": {
+          "end": 1062,
+          "modelHash": "09109638abbea81871462c1d976d4b496d7167f378488e140afa3d1cbce092f6",
+          "precision": "syntax",
+          "sourceId": "source_graph_8f054d6116ba",
+          "start": 1055
+        }
+      },
+      "states": [
+        "Created",
+        "Draft",
+        "AddingItems",
+        "ArrangingPayment",
+        "PaymentAuthorized",
+        "PaymentSettled",
+        "PartiallyShipped",
+        "Shipped",
+        "PartiallyDelivered",
+        "Delivered",
+        "Modifying",
+        "ArrangingAdditionalPayment",
+        "Cancelled"
+      ],
+      "transitions": [
+        {
+          "from": "Created",
+          "id": "edge_67a53a12b68bc8",
+          "origin": {
+            "end": 72,
+            "modelHash": "13e05258ab9325e7f903da04dce9531f8fa4115695a35bb0c8417df505424113",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 59
+          },
+          "retained": [],
+          "to": "AddingItems"
+        },
+        {
+          "from": "Created",
+          "id": "edge_a23896dedceb76",
+          "origin": {
+            "end": 81,
+            "modelHash": "a9c2fac5722b0cda6d5ed55784fc43c75c1df7b3187c7f457ba578d7067adcda",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 74
+          },
+          "retained": [],
+          "to": "Draft"
+        },
+        {
+          "from": "Draft",
+          "id": "edge_8acba87e21ac18",
+          "origin": {
+            "end": 152,
+            "modelHash": "87476da101d5e732062e1c0e16ebf82c141cb6fd6d6d1e02906c1e180e7c0cb7",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 141
+          },
+          "retained": [],
+          "to": "Cancelled"
+        },
+        {
+          "from": "Draft",
+          "id": "edge_0ffa3c8a7e4387",
+          "origin": {
+            "end": 172,
+            "modelHash": "5ba85160da92ecfacfd5b372ee82d44ec0136b79d45df76f34930856de265ad4",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 154
+          },
+          "retained": [],
+          "to": "ArrangingPayment"
+        },
+        {
+          "from": "AddingItems",
+          "id": "edge_7659daefd4b72f",
+          "origin": {
+            "end": 256,
+            "modelHash": "27893bf3cbc1b0c8f1e81a319c5b5c9f9cff6e89136326ca69f038922642a799",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 238
+          },
+          "retained": [],
+          "to": "ArrangingPayment"
+        },
+        {
+          "from": "AddingItems",
+          "id": "edge_40a7ced92ff986",
+          "origin": {
+            "end": 269,
+            "modelHash": "b8165f9a342097c030cd9f18f8bbc3023343949d8e75d97eb441717d4b66ec4f",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 258
+          },
+          "retained": [],
+          "to": "Cancelled"
+        },
+        {
+          "from": "ArrangingPayment",
+          "id": "edge_cacb6a8e24ae8d",
+          "origin": {
+            "end": 359,
+            "modelHash": "2bdf66cdd19ca502b153951d99300b8a1607d26e5769963e19cbdd76851ec06f",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 340
+          },
+          "retained": [],
+          "to": "PaymentAuthorized"
+        },
+        {
+          "from": "ArrangingPayment",
+          "id": "edge_590742d199c0d3",
+          "origin": {
+            "end": 377,
+            "modelHash": "11ef856930d1f02773a9965def6f91ad193224a52523347621e85a6a32265bcd",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 361
+          },
+          "retained": [],
+          "to": "PaymentSettled"
+        },
+        {
+          "from": "ArrangingPayment",
+          "id": "edge_f685af6e2b3c85",
+          "origin": {
+            "end": 392,
+            "modelHash": "fffd393ea3521174f2eb8ae66cc733903d4134c3254920d1adac766c2d88224a",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 379
+          },
+          "retained": [],
+          "to": "AddingItems"
+        },
+        {
+          "from": "ArrangingPayment",
+          "id": "edge_a1bbfec1ad67df",
+          "origin": {
+            "end": 405,
+            "modelHash": "91a7fd74c46779b58f9085098ecc79b10ce3b0ed33425691f414390e07d6991d",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 394
+          },
+          "retained": [],
+          "to": "Cancelled"
+        },
+        {
+          "from": "PaymentAuthorized",
+          "id": "edge_838b4fabc46587",
+          "origin": {
+            "end": 493,
+            "modelHash": "15025dd7b0ceb204b29b4fba78ad75d7445a5bc59776bbb4ac56cc62fdeaf6bd",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 477
+          },
+          "retained": [],
+          "to": "PaymentSettled"
+        },
+        {
+          "from": "PaymentAuthorized",
+          "id": "edge_8716fb379af685",
+          "origin": {
+            "end": 506,
+            "modelHash": "68b025cd7779e50f9bc8a4afec4a94a29170b93cb16e19e1d9444d6e94124835",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 495
+          },
+          "retained": [],
+          "to": "Cancelled"
+        },
+        {
+          "from": "PaymentAuthorized",
+          "id": "edge_f1d96a75ffac8f",
+          "origin": {
+            "end": 519,
+            "modelHash": "6a4414ab5b893f05ef87d14c86e06cb5a9f8c7870590d0a92ca760450dc20258",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 508
+          },
+          "retained": [],
+          "to": "Modifying"
+        },
+        {
+          "from": "PaymentAuthorized",
+          "id": "edge_d5c93cabf9e89f",
+          "origin": {
+            "end": 549,
+            "modelHash": "40162fc9cedff96c9b2c87ae413793a054388ed7ad3f2ee294a5fbc77eb4b4ac",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 521
+          },
+          "retained": [],
+          "to": "ArrangingAdditionalPayment"
+        },
+        {
+          "from": "PaymentSettled",
+          "id": "edge_ddc8ed1b0e7daf",
+          "origin": {
+            "end": 659,
+            "modelHash": "c79301c73dca55906ddfc6fe56b24d6e8f07a637dc478363887c7445581343cf",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 639
+          },
+          "retained": [],
+          "to": "PartiallyDelivered"
+        },
+        {
+          "from": "PaymentSettled",
+          "id": "edge_a3689101d0db92",
+          "origin": {
+            "end": 692,
+            "modelHash": "563a0ae2af164eb1ac8d23a8b717c370d1c35fd8da3b3ac0256bdeb18f702800",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 681
+          },
+          "retained": [],
+          "to": "Delivered"
+        },
+        {
+          "from": "PaymentSettled",
+          "id": "edge_d9bc30dbe8b4ab",
+          "origin": {
+            "end": 732,
+            "modelHash": "06a2e4df3af425703d9d422f862db867e2b505d3a03d07d189d0743fee616421",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 714
+          },
+          "retained": [],
+          "to": "PartiallyShipped"
+        },
+        {
+          "from": "PaymentSettled",
+          "id": "edge_58eb400798771d",
+          "origin": {
+            "end": 763,
+            "modelHash": "6bb912674ab5bc00c27ec21e551be6436bf39d6d85bf135ad8777eee05525d76",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 754
+          },
+          "retained": [],
+          "to": "Shipped"
+        },
+        {
+          "from": "PaymentSettled",
+          "id": "edge_ecc261cc63e310",
+          "origin": {
+            "end": 796,
+            "modelHash": "f1da76c6212568edbd73408b2b24141990aabeb97827ab0b6ac858dfdf26832f",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 785
+          },
+          "retained": [],
+          "to": "Cancelled"
+        },
+        {
+          "from": "PaymentSettled",
+          "id": "edge_d47e4cd63c290f",
+          "origin": {
+            "end": 829,
+            "modelHash": "75cfd1710567804ee59732c1ae933ae7a4f631c124c38ef5c08753d0bc2c0285",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 818
+          },
+          "retained": [],
+          "to": "Modifying"
+        },
+        {
+          "from": "PaymentSettled",
+          "id": "edge_d6ab430ef65dc3",
+          "origin": {
+            "end": 879,
+            "modelHash": "18cdeb63ff2463dacb6e06663651a8d2fc3061277eceb79cbcb37fae0de5991a",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 851
+          },
+          "retained": [],
+          "to": "ArrangingAdditionalPayment"
+        },
+        {
+          "from": "PartiallyShipped",
+          "id": "edge_f70320f42fc3f6",
+          "origin": {
+            "end": 977,
+            "modelHash": "6f2eca6d7644949cb4a1704a6f92892e0815947722da97fee0ba8d4fe9e6c6d4",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 968
+          },
+          "retained": [],
+          "to": "Shipped"
+        },
+        {
+          "from": "PartiallyShipped",
+          "id": "edge_175d4dad6a4371",
+          "origin": {
+            "end": 999,
+            "modelHash": "e9aaa2c5347b4f5b77c6a8760515b16ce629be0fc0dfbacb420b9fcb6ddd7da4",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 979
+          },
+          "retained": [],
+          "to": "PartiallyDelivered"
+        },
+        {
+          "from": "PartiallyShipped",
+          "id": "edge_b47fc9ad585294",
+          "origin": {
+            "end": 1012,
+            "modelHash": "95b0632ee1f4c39960791251abb51d03194ac590aa7de8ac1b65115c8c6c0808",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 1001
+          },
+          "retained": [],
+          "to": "Cancelled"
+        },
+        {
+          "from": "PartiallyShipped",
+          "id": "edge_75756810aaa7f8",
+          "origin": {
+            "end": 1025,
+            "modelHash": "ebaec363964e4558d979a458a25d6d565c5d362fa19c415153c2e4c0f115d8fc",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 1014
+          },
+          "retained": [],
+          "to": "Modifying"
+        },
+        {
+          "from": "Shipped",
+          "id": "edge_e30f668b6ee598",
+          "origin": {
+            "end": 1107,
+            "modelHash": "84878badcea0e224cb3a3b9bbda14f7442892daa44799458ea0dc83e2f206fb2",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 1087
+          },
+          "retained": [],
+          "to": "PartiallyDelivered"
+        },
+        {
+          "from": "Shipped",
+          "id": "edge_02ff043cf97883",
+          "origin": {
+            "end": 1120,
+            "modelHash": "c5b17c81f3664386f46cac28c7bddb548bcd68ada6776ca3ee2cf870172d2a2d",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 1109
+          },
+          "retained": [],
+          "to": "Delivered"
+        },
+        {
+          "from": "Shipped",
+          "id": "edge_b7b1e77958973a",
+          "origin": {
+            "end": 1133,
+            "modelHash": "86540506c7656ddffed5c27f56c070bcfaf388cb5fc2ed4825ddad47fd13b5ad",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 1122
+          },
+          "retained": [],
+          "to": "Cancelled"
+        },
+        {
+          "from": "Shipped",
+          "id": "edge_507542cfe15be5",
+          "origin": {
+            "end": 1146,
+            "modelHash": "ae21785c0c40ab38a14aade9c9bde422b4b78d644a6200fe1755dadf25677ccf",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 1135
+          },
+          "retained": [],
+          "to": "Modifying"
+        },
+        {
+          "from": "PartiallyDelivered",
+          "id": "edge_7a91047034b950",
+          "origin": {
+            "end": 1230,
+            "modelHash": "76cfa1fbeaf6a551fafb39336fb624c59c34c54954cbf2a6435383ae76e56914",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 1219
+          },
+          "retained": [],
+          "to": "Delivered"
+        },
+        {
+          "from": "PartiallyDelivered",
+          "id": "edge_23887843b49a16",
+          "origin": {
+            "end": 1243,
+            "modelHash": "fb91f6544451fc01c94fec92374d353d7f9e6ca7119d854a80e00c8961b23787",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 1232
+          },
+          "retained": [],
+          "to": "Cancelled"
+        },
+        {
+          "from": "PartiallyDelivered",
+          "id": "edge_abe1ebb553ceb6",
+          "origin": {
+            "end": 1256,
+            "modelHash": "d5bbc37f9cc2c1608c806eabd8ce3be82a46ffa7d234a978ec71edf52d365a2b",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 1245
+          },
+          "retained": [],
+          "to": "Modifying"
+        },
+        {
+          "from": "Delivered",
+          "id": "edge_ac750acec16e43",
+          "origin": {
+            "end": 1331,
+            "modelHash": "a3c4df28a998c4865f54777e833ea099cb624236be3728e1c79a3cf2433d7d42",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 1320
+          },
+          "retained": [],
+          "to": "Cancelled"
+        },
+        {
+          "from": "Modifying",
+          "id": "edge_50c12c159e7350",
+          "origin": {
+            "end": 1435,
+            "modelHash": "e03d5cac1b28af99c87ef10a5fa4ca6cee5affd5d6a901dcc80553394c0b78e7",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 1416
+          },
+          "retained": [],
+          "to": "PaymentAuthorized"
+        },
+        {
+          "from": "Modifying",
+          "id": "edge_c4971264c9806e",
+          "origin": {
+            "end": 1473,
+            "modelHash": "698b19db3cf519051558a172b6510b632de7794bff0687452d574ae48ad4f906",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 1457
+          },
+          "retained": [],
+          "to": "PaymentSettled"
+        },
+        {
+          "from": "Modifying",
+          "id": "edge_e0efd002faf1bc",
+          "origin": {
+            "end": 1513,
+            "modelHash": "16135961ccac1056b2d3149927359b5f477f6c7e823e9dfad979df62238b5053",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 1495
+          },
+          "retained": [],
+          "to": "PartiallyShipped"
+        },
+        {
+          "from": "Modifying",
+          "id": "edge_7662081c2da134",
+          "origin": {
+            "end": 1544,
+            "modelHash": "507cdfe50e9445d40fde40ca1d7a8c54301470f6442ba2e2d0d597cc5d8589ec",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 1535
+          },
+          "retained": [],
+          "to": "Shipped"
+        },
+        {
+          "from": "Modifying",
+          "id": "edge_d554f46535f362",
+          "origin": {
+            "end": 1586,
+            "modelHash": "947f503673a4cdfe4983f4a05ab77e9c94967357b7ea81bf3e974a791cd33c6a",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 1566
+          },
+          "retained": [],
+          "to": "PartiallyDelivered"
+        },
+        {
+          "from": "Modifying",
+          "id": "edge_e0e04b8614fc65",
+          "origin": {
+            "end": 1636,
+            "modelHash": "2297404f7fec440c3601311cec5fbf694ba69a226f619891a7a6cec87812915f",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 1608
+          },
+          "retained": [],
+          "to": "ArrangingAdditionalPayment"
+        },
+        {
+          "from": "ArrangingAdditionalPayment",
+          "id": "edge_a4ec87d189affa",
+          "origin": {
+            "end": 1775,
+            "modelHash": "83fa2292017f2458ed21170601d7205bcd57c921208a859aac4c282c79eb1c85",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 1756
+          },
+          "retained": [],
+          "to": "PaymentAuthorized"
+        },
+        {
+          "from": "ArrangingAdditionalPayment",
+          "id": "edge_e2038c2e33e2c6",
+          "origin": {
+            "end": 1813,
+            "modelHash": "865fc5535144ed17db5ba9ddf381b837b977d68cb22a9876ef25cc19bbe0e78f",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 1797
+          },
+          "retained": [],
+          "to": "PaymentSettled"
+        },
+        {
+          "from": "ArrangingAdditionalPayment",
+          "id": "edge_12bea3af7e6175",
+          "origin": {
+            "end": 1853,
+            "modelHash": "eb851819ce3bba59b7ee63aabea545e806ad8acfe1ba827520d906fcd009ef81",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 1835
+          },
+          "retained": [],
+          "to": "PartiallyShipped"
+        },
+        {
+          "from": "ArrangingAdditionalPayment",
+          "id": "edge_b65fe7d292e32e",
+          "origin": {
+            "end": 1884,
+            "modelHash": "061e987486d365483a2aedcb16935146d302e2e13540cc7603c350bb05e8b25d",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 1875
+          },
+          "retained": [],
+          "to": "Shipped"
+        },
+        {
+          "from": "ArrangingAdditionalPayment",
+          "id": "edge_e9923906c96767",
+          "origin": {
+            "end": 1926,
+            "modelHash": "6e6290e69d1200123a9206f41e8b5f9f29279cb20863ec5e5c56a30000251c9c",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 1906
+          },
+          "retained": [],
+          "to": "PartiallyDelivered"
+        },
+        {
+          "from": "ArrangingAdditionalPayment",
+          "id": "edge_355a65d2fffcbc",
+          "origin": {
+            "end": 1959,
+            "modelHash": "fa2f0993337cbab473eafd38d2ad63b02f4e797dde3b7c34c29bf0c78629bedb",
+            "precision": "syntax",
+            "sourceId": "source_graph_8f054d6116ba",
+            "start": 1948
+          },
+          "retained": [],
+          "to": "Cancelled"
+        }
+      ]
+    }
+  ],
+  "name": "Default order process — workflow and decisions",
   "version": 1
 }

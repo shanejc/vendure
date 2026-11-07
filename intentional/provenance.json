@@ -1,1 +1,58 @@
-[]
+[
+  {
+    "end": 238,
+    "hash": "5d6cfc52aacbeab2dbb66db097a0a4e68245fc0b4ca7feed4f845894f281b706",
+    "id": "source_graph_8f054d6116ba",
+    "path": "packages/core/src/config/order/default-order-process.ts",
+    "retained": [
+      "retained_773315f47809b6",
+      "retained_b0a77e381a52cf",
+      "retained_f8ab79f584b78a"
+    ],
+    "source": "transitions: {\n            Created: {\n                to: ['AddingItems', 'Draft'],\n            },\n            Draft: {\n                to: ['Cancelled', 'ArrangingPayment'],\n            },\n            AddingItems: {\n                to: ['ArrangingPayment', 'Cancelled'],\n            },\n            ArrangingPayment: {\n                to: ['PaymentAuthorized', 'PaymentSettled', 'AddingItems', 'Cancelled'],\n            },\n            PaymentAuthorized: {\n                to: ['PaymentSettled', 'Cancelled', 'Modifying', 'ArrangingAdditionalPayment'],\n            },\n            PaymentSettled: {\n                to: [\n                    'PartiallyDelivered',\n                    'Delivered',\n                    'PartiallyShipped',\n                    'Shipped',\n                    'Cancelled',\n                    'Modifying',\n                    'ArrangingAdditionalPayment',\n                ],\n            },\n            PartiallyShipped: {\n                to: ['Shipped', 'PartiallyDelivered', 'Cancelled', 'Modifying'],\n            },\n            Shipped: {\n                to: ['PartiallyDelivered', 'Delivered', 'Cancelled', 'Modifying'],\n            },\n            PartiallyDelivered: {\n                to: ['Delivered', 'Cancelled', 'Modifying'],\n            },\n            Delivered: {\n                to: ['Cancelled'],\n            },\n            Modifying: {\n                to: [\n                    'PaymentAuthorized',\n                    'PaymentSettled',\n                    'PartiallyShipped',\n                    'Shipped',\n                    'PartiallyDelivered',\n                    'ArrangingAdditionalPayment',\n                ],\n            },\n            ArrangingAdditionalPayment: {\n                to: [\n                    'PaymentAuthorized',\n                    'PaymentSettled',\n                    'PartiallyShipped',\n                    'Shipped',\n                    'PartiallyDelivered',\n                    'Cancelled',\n                ],\n            },\n            Cancelled: {\n                to: [],\n            },\n        }",
+    "start": 176
+  },
+  {
+    "end": 417,
+    "hash": "0f328a4c3714a9f52d2734604f8b25f145159d1d57504ec39f0ef24aab2aaad2",
+    "id": "source_guard_efca37b24d2e",
+    "path": "packages/core/src/config/order/default-order-process.ts",
+    "retained": [
+      "retained_c13288317c9d86",
+      "retained_7cd193405c719c",
+      "retained_409e239e0ca036",
+      "retained_3b75b5cb41f0d6",
+      "retained_fa770733fd8327",
+      "retained_4f1acf904e28cf"
+    ],
+    "source": "if (options.checkPaymentsCoverTotal !== false) {\n                if (toState === 'PaymentAuthorized') {\n                    const hasAnAuthorizedPayment = !!order.payments.find(p => p.state === 'Authorized');\n                    if (!orderTotalIsCovered(order, ['Authorized', 'Settled']) || !hasAnAuthorizedPayment) {\n                        return 'message.cannot-transition-without-authorized-payments';\n                    }\n                }\n                if (toState === 'PaymentSettled' && !orderTotalIsCovered(order, 'Settled')) {\n                    return 'message.cannot-transition-without-settled-payments';\n                }\n            }",
+    "start": 407
+  },
+  {
+    "end": 58,
+    "hash": "9cfa1a2243ba5e21b0da19392b7ee2b9153320cafdbc631ccee918edf902ba7a",
+    "id": "source_c3e562fb80eb",
+    "path": "packages/common/src/shared-utils.ts",
+    "retained": [],
+    "source": "export function summate<T extends OnlyNumerics<T>>(\n    items: T[] | undefined | null,\n    prop: keyof OnlyNumerics<T>,\n): number {\n    return (items || []).reduce((sum, i) => sum + (i[prop] as unknown as number), 0);\n}",
+    "start": 53
+  },
+  {
+    "end": 43,
+    "hash": "26c4988842fdc97a71708f6e2dd7ac506e91636327cc6f169cd76cd8cff3c9b3",
+    "id": "source_7329167ead1d",
+    "path": "packages/core/src/service/helpers/utils/order-utils.ts",
+    "retained": [],
+    "source": "export function totalCoveredByPayments(order: Order, state?: PaymentState | PaymentState[]): number {\n    const payments = state\n        ? Array.isArray(state)\n            ? order.payments.filter(p => state.includes(p.state))\n            : order.payments.filter(p => p.state === state)\n        : order.payments.filter(\n              p => p.state !== 'Error' && p.state !== 'Declined' && p.state !== 'Cancelled',\n          );\n    let total = 0;\n    for (const payment of payments) {\n        const settledRefunds = payment.refunds?.filter(refund => refund.state === 'Settled') ?? [];\n        const settledRefundTotal = summate(settledRefunds, 'total');\n        total += payment.amount - Math.abs(settledRefundTotal);\n    }\n    return total;\n}",
+    "start": 28
+  },
+  {
+    "end": 23,
+    "hash": "6212b833a47aaeee3e72a243a02de1116d369ea52d3b5a58303e07e5ce089057",
+    "id": "source_43272d162c71",
+    "path": "packages/core/src/service/helpers/utils/order-utils.ts",
+    "retained": [],
+    "source": "export function orderTotalIsCovered(order: Order, state: PaymentState | PaymentState[]): boolean {\n    const paymentsTotal = totalCoveredByPayments(order, state);\n    return paymentsTotal >= order.totalWithTax;\n}",
+    "start": 20
+  }
+]
