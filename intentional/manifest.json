@@ -63,12 +63,12 @@
       "intentional/verification/corpus.json": "2ba0b64be758052b12e8217018ce73d77e57dd384424a28a32ac395ae5466dc0"
     },
     "programHash": "398594838fba97489ca146d2c1037d728d56a1bfff704d70a66b4e1c769b845a",
-    "stale": false,
+    "stale": true,
     "toolHash": "adff457395030a47b54445dfb315379f6a6ece44f7efd09e55a8edefc8f2b538",
     "verificationHash": "9ef1d262916fd35dfa58412cc9ddce1a99f103a358f44c8f0a3d65ae01a9e0ca",
     "version": 2
   },
-  "revision": 7,
+  "revision": 8,
   "scenarioFormatVersion": 1,
   "scenarioHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
   "sourceCommit": "f97b18759178bd22cbd88062edcff6c308652342",
