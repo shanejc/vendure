@@ -31,7 +31,7 @@
           "ownerId": "orderTotalIsCovered"
         },
         "description": "An input to Order Total Is Covered. All uses linked here read this declaration; another definition may have an input with the same spelling.",
-        "label": "Input: state1",
+        "label": "Input: state",
         "target": "input:orderTotalIsCovered:1"
       }
     ],
