@@ -1,4 +1,4 @@
-First checkpoint, recover a lost reply
+Second checkpoint, recover interrupted finalization
 
 
 

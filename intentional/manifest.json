@@ -1,11 +1,11 @@
 {
-  "artifactHash": "00a48eae7ddb621c9a731f3afa390af809a6225c2b9def17b56d0aa3dfcf2deb",
+  "artifactHash": "aaf8a7bd233c2f9ae5871445b2831f594ce3a47644f352b7ba8ac5a7c55c518f",
   "boundaries": [],
   "compiler": "0.5.0",
   "generation": null,
   "identityFormatVersion": 0,
   "integration": null,
-  "revision": 1,
+  "revision": 2,
   "scenarioFormatVersion": 1,
   "scenarioHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
   "sourceCommit": "f97b18759178bd22cbd88062edcff6c308652342",
