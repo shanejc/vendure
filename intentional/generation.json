@@ -1,0 +1,35 @@
+{
+  "candidateFilesHash": "09d647642eaf0d176c798f07005ae43aa827e8830812d35c5c32ce9b9ed61397",
+  "compiler": "0.5.0",
+  "fileHashAlgorithm": "sha256-utf8",
+  "files": {
+    "packages/core/src/config/order/default-order-process.ts": "4d434b35feda1396581a360f7e9c3d42b08586f1ac20214a963c7ea1354c5cfe",
+    "packages/core/src/intentional/domain.ts": "3c567f5c1af412b711d23d7250ed20df6136d78d4e51451b80071455abc1f678",
+    "packages/core/src/service/helpers/utils/order-utils.ts": "cbf72cc684f08bb4cf0da77bd87cfca74370e24edf96be947625eaa180e95780"
+  },
+  "generatedPath": "packages/core/src/intentional/domain.ts",
+  "programHash": "398594838fba97489ca146d2c1037d728d56a1bfff704d70a66b4e1c769b845a",
+  "regions": [
+    {
+      "description": "Replace selected modeled regions; preserve the public interface and surrounding source.",
+      "originalHash": "d6ad9310ff0c8bbfd0d2458ce6d6b0d91d9d8d60d7938a508e55888d6e71f3ef",
+      "path": "packages/core/src/config/order/default-order-process.ts",
+      "regions": [
+        "binding_graph_8f054d6116ba",
+        "binding_guard_efca37b24d2e"
+      ]
+    },
+    {
+      "description": "Replace selected modeled regions; preserve the public interface and surrounding source.",
+      "originalHash": "fe2e93914dddc3c39c6ffff97de099926b744b73f25cc3a2ecc3a43399572158",
+      "path": "packages/core/src/service/helpers/utils/order-utils.ts",
+      "regions": [
+        "binding_source_7329167ead1d",
+        "binding_source_43272d162c71"
+      ]
+    }
+  ],
+  "revision": 5,
+  "sourceCommit": "f97b18759178bd22cbd88062edcff6c308652342",
+  "version": 1
+}

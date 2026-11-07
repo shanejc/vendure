@@ -1,3 +1,4 @@
+import { totalCoveredByPayments as __intentional_50ada1aea6ba37d2, orderTotalIsCovered as __intentional_078d06d8333a28b7 } from "../../../intentional/domain.js";
 import { OrderLineInput } from '@vendure/common/lib/generated-types';
 import { ID } from '@vendure/common/lib/shared-types';
 import { summate } from '@vendure/common/lib/shared-utils';
@@ -17,30 +18,12 @@ import { PaymentState } from '../payment-state-machine/payment-state';
 /**
  * Returns true if the Order total is covered by Payments in the specified state.
  */
-export function orderTotalIsCovered(order: Order, state: PaymentState | PaymentState[]): boolean {
-    const paymentsTotal = totalCoveredByPayments(order, state);
-    return paymentsTotal >= order.totalWithTax;
-}
+export function orderTotalIsCovered(order: Order, state: PaymentState | PaymentState[]): boolean { return __intentional_078d06d8333a28b7(order, state); }
 
 /**
  * Returns the total amount covered by all Payments (minus any refunds)
  */
-export function totalCoveredByPayments(order: Order, state?: PaymentState | PaymentState[]): number {
-    const payments = state
-        ? Array.isArray(state)
-            ? order.payments.filter(p => state.includes(p.state))
-            : order.payments.filter(p => p.state === state)
-        : order.payments.filter(
-              p => p.state !== 'Error' && p.state !== 'Declined' && p.state !== 'Cancelled',
-          );
-    let total = 0;
-    for (const payment of payments) {
-        const settledRefunds = payment.refunds?.filter(refund => refund.state === 'Settled') ?? [];
-        const settledRefundTotal = summate(settledRefunds, 'total');
-        total += payment.amount - Math.abs(settledRefundTotal);
-    }
-    return total;
-}
+export function totalCoveredByPayments(order: Order, state?: PaymentState | PaymentState[]): number { return __intentional_50ada1aea6ba37d2(order, state); }
 
 /**
  * Returns true if all (non-cancelled) OrderItems are delivered.

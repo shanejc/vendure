@@ -1,3 +1,4 @@
+import { graph_8f054d6116baDefinition as __intentional_fee158d0887e61b5, guard_efca37b24d2e as __intentional_dcbfb04097548bf0 } from "../../intentional/domain.js";
 import { HistoryEntryType } from '@vendure/common/lib/generated-types';
 import { ID } from '@vendure/common/lib/shared-types';
 import { unique } from '@vendure/common/lib/unique';
@@ -173,69 +174,7 @@ export function configureDefaultOrderProcess(options: DefaultOrderProcessOptions
     let orderService: import('../../service/index').OrderService;
 
     const orderProcess: OrderProcess<OrderState> = {
-        transitions: {
-            Created: {
-                to: ['AddingItems', 'Draft'],
-            },
-            Draft: {
-                to: ['Cancelled', 'ArrangingPayment'],
-            },
-            AddingItems: {
-                to: ['ArrangingPayment', 'Cancelled'],
-            },
-            ArrangingPayment: {
-                to: ['PaymentAuthorized', 'PaymentSettled', 'AddingItems', 'Cancelled'],
-            },
-            PaymentAuthorized: {
-                to: ['PaymentSettled', 'Cancelled', 'Modifying', 'ArrangingAdditionalPayment'],
-            },
-            PaymentSettled: {
-                to: [
-                    'PartiallyDelivered',
-                    'Delivered',
-                    'PartiallyShipped',
-                    'Shipped',
-                    'Cancelled',
-                    'Modifying',
-                    'ArrangingAdditionalPayment',
-                ],
-            },
-            PartiallyShipped: {
-                to: ['Shipped', 'PartiallyDelivered', 'Cancelled', 'Modifying'],
-            },
-            Shipped: {
-                to: ['PartiallyDelivered', 'Delivered', 'Cancelled', 'Modifying'],
-            },
-            PartiallyDelivered: {
-                to: ['Delivered', 'Cancelled', 'Modifying'],
-            },
-            Delivered: {
-                to: ['Cancelled'],
-            },
-            Modifying: {
-                to: [
-                    'PaymentAuthorized',
-                    'PaymentSettled',
-                    'PartiallyShipped',
-                    'Shipped',
-                    'PartiallyDelivered',
-                    'ArrangingAdditionalPayment',
-                ],
-            },
-            ArrangingAdditionalPayment: {
-                to: [
-                    'PaymentAuthorized',
-                    'PaymentSettled',
-                    'PartiallyShipped',
-                    'Shipped',
-                    'PartiallyDelivered',
-                    'Cancelled',
-                ],
-            },
-            Cancelled: {
-                to: [],
-            },
-        },
+        transitions: __intentional_fee158d0887e61b5,
         async init(injector) {
             // Lazily import these services to avoid a circular dependency error
             // due to this being used as part of the DefaultConfig
@@ -404,17 +343,7 @@ export function configureDefaultOrderProcess(options: DefaultOrderProcessOptions
                     await orderService.applyPriceAdjustments(ctx, order, order.lines);
                 }
             }
-            if (options.checkPaymentsCoverTotal !== false) {
-                if (toState === 'PaymentAuthorized') {
-                    const hasAnAuthorizedPayment = !!order.payments.find(p => p.state === 'Authorized');
-                    if (!orderTotalIsCovered(order, ['Authorized', 'Settled']) || !hasAnAuthorizedPayment) {
-                        return 'message.cannot-transition-without-authorized-payments';
-                    }
-                }
-                if (toState === 'PaymentSettled' && !orderTotalIsCovered(order, 'Settled')) {
-                    return 'message.cannot-transition-without-settled-payments';
-                }
-            }
+            { const __completion_dcbfb04097548bf0 = __intentional_dcbfb04097548bf0(options, toState, order); if (__completion_dcbfb04097548bf0.kind === 'return') return __completion_dcbfb04097548bf0.value; }
             if (options.checkAllItemsBeforeCancel !== false) {
                 if (
                     toState === 'Cancelled' &&

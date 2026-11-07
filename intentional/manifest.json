@@ -27,10 +27,19 @@
     }
   ],
   "compiler": "0.5.0",
-  "generation": null,
+  "generation": {
+    "generatedPath": "packages/core/src/intentional/domain.ts",
+    "programHash": "398594838fba97489ca146d2c1037d728d56a1bfff704d70a66b4e1c769b845a",
+    "revision": 5,
+    "stale": false,
+    "version": 1
+  },
   "identityFormatVersion": 1,
-  "integration": null,
-  "revision": 4,
+  "integration": {
+    "generatedPath": "packages/core/src/intentional/domain.ts",
+    "version": 1
+  },
+  "revision": 5,
   "scenarioFormatVersion": 1,
   "scenarioHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
   "sourceCommit": "f97b18759178bd22cbd88062edcff6c308652342",
