@@ -2,7 +2,7 @@
   "version": 2,
   "status": "ready",
   "compiler": "0.5.0",
-  "sourceAdapter": "typescript-source/1",
+  "sourceAdapter": "typescript-source/2",
   "programHash": "398594838fba97489ca146d2c1037d728d56a1bfff704d70a66b4e1c769b845a",
   "evidenceHash": "fc1e0430c5f7665b858b78fbfd2c121b21320e1060cee1340c5c23687d7d0f73",
   "recoveryHash": "efb51e11b9a44b1227a88714fccc1c094f8780a1080a57aff8a7f5992ffd4d76",

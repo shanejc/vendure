@@ -5264,7 +5264,7 @@ async function loadPortable(root) {
 var digest5 = external_exports.string().regex(/^[a-f0-9]{64}$/);
 var preparedImplementationSchema = external_exports.discriminatedUnion("status", [
   external_exports.object({ version: external_exports.literal(2), status: external_exports.literal("not-generated"), programHash: digest5 }).strict(),
-  external_exports.object({ version: external_exports.literal(2), status: external_exports.literal("ready"), compiler: external_exports.string(), sourceAdapter: external_exports.literal("typescript-source/1"), programHash: digest5, evidenceHash: digest5, recoveryHash: digest5, generatedPath: external_exports.string(), candidateFilesHash: digest5, files: external_exports.record(digest5) }).strict()
+  external_exports.object({ version: external_exports.literal(2), status: external_exports.literal("ready"), compiler: external_exports.string(), sourceAdapter: external_exports.enum(["typescript-source/1", "typescript-source/2"]), programHash: digest5, evidenceHash: digest5, recoveryHash: digest5, generatedPath: external_exports.string(), candidateFilesHash: digest5, files: external_exports.record(digest5) }).strict()
 ]);
 
 // src/portable-verification.ts
@@ -5290,7 +5290,7 @@ async function preparedPortableComparison(root, scope = "checkout") {
   if (sha256(bytes) !== manifest.prepared.sha256) throw new Error("Prepared implementation record changed; regenerate with the reviewed source adapter");
   const prepared = preparedImplementationSchema.parse(JSON.parse(bytes.toString("utf8"))), generated = compile(bundle);
   if (prepared.status !== "ready" || prepared.programHash !== generated.hash) throw new Error("Generation is stale; run the optional source adapter before comparing");
-  if (prepared.compiler !== manifest.compiler || prepared.generatedPath !== manifest.integration.generatedPath || prepared.evidenceHash !== manifest.integration.evidenceHash || prepared.recoveryHash !== manifest.integration.recoveryHash) throw new Error("Prepared implementation provenance differs from the package");
+  if (prepared.sourceAdapter !== manifest.toolchain.sourceAdapter.version || prepared.compiler !== manifest.compiler || prepared.generatedPath !== manifest.integration.generatedPath || prepared.evidenceHash !== manifest.integration.evidenceHash || prepared.recoveryHash !== manifest.integration.recoveryHash) throw new Error("Prepared implementation provenance differs from the package");
   const paths = [.../* @__PURE__ */ new Set([manifest.integration.generatedPath, ...bundle.recovery.bindings.map((b) => bundle.evidence.find((e) => e.id === b.sourceId).path)])].sort();
   if (hash(paths) !== hash(Object.keys(prepared.files).sort())) throw new Error("Prepared implementation files differ from the selected source boundary");
   const candidateFiles = {};

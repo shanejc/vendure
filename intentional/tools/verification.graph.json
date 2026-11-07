@@ -702,7 +702,7 @@
       "format": "esm"
     },
     "src/portable-prepared.ts": {
-      "bytes": 1712,
+      "bytes": 1869,
       "imports": [
         {
           "path": "node_modules/zod/index.js",
@@ -723,7 +723,7 @@
       "format": "esm"
     },
     "src/portable-verification.ts": {
-      "bytes": 7435,
+      "bytes": 7502,
       "imports": [
         {
           "path": "node:fs/promises",
@@ -996,7 +996,7 @@
           "bytesInOutput": 1318
         },
         "src/portable-verification.ts": {
-          "bytesInOutput": 7637
+          "bytesInOutput": 7708
         },
         "src/artifacts.ts": {
           "bytesInOutput": 1929
@@ -1005,10 +1005,10 @@
           "bytesInOutput": 8128
         },
         "src/portable-prepared.ts": {
-          "bytesInOutput": 704
+          "bytesInOutput": 726
         }
       },
-      "bytes": 221836
+      "bytes": 221929
     }
   }
 }

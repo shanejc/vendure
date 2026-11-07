@@ -73,25 +73,25 @@
     },
     "sourceAdapter": {
       "path": "intentional/tools/typescript-source.cjs",
-      "sha256": "e486d7ebc66864f96cddf0c93bc636241b8390d8e181080d5758b07c37d44309",
-      "version": "typescript-source/1",
-      "rawSha256": "48f29bf4f1bd878564d11f37825f3cef291dc516f33cb51a9ee9a1368e7df544",
-      "rawBytes": 10143093,
-      "distributionBytes": 2196116,
+      "sha256": "8feaa0601d5e2b31ba5dbf262777afbbd4506cd375b55751d6f860a4757529eb",
+      "version": "typescript-source/2",
+      "rawSha256": "34d415b7928a589be15a7f20cff8b9178af86929c8b2918db310ef5f71de7686",
+      "rawBytes": 10144130,
+      "distributionBytes": 2196396,
       "encoding": "gzip-base64-checksummed-loader"
     },
     "verification": {
       "path": "intentional/tools/verification.cjs",
-      "sha256": "5c3fa99bcd8cfbfd58d218ae837e591b47149d5f9589030d65be9e2477819141",
+      "sha256": "d8ee56e7599e148abaaff46100863e542a8d860523d427317978cc98097935e5",
       "version": "0.2.0",
-      "rawSha256": "5c3fa99bcd8cfbfd58d218ae837e591b47149d5f9589030d65be9e2477819141",
-      "rawBytes": 221836,
-      "distributionBytes": 221836,
+      "rawSha256": "d8ee56e7599e148abaaff46100863e542a8d860523d427317978cc98097935e5",
+      "rawBytes": 221929,
+      "distributionBytes": 221929,
       "encoding": "plain-javascript"
     }
   },
   "prepared": {
     "path": "intentional/prepared-implementation.json",
-    "sha256": "2c060342725941edb1cf2350ea6a1910642a9cf015f6dbf7b0772ba4c0f4dbe8"
+    "sha256": "f16eb864fe099b3c39798fef645348411cff0ae2af7607a9fb348a7e0e0cf4f7"
   }
 }

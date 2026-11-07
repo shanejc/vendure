@@ -649,7 +649,7 @@
       "format": "esm"
     },
     "src/portable-prepared.ts": {
-      "bytes": 1712,
+      "bytes": 1869,
       "imports": [
         {
           "path": "node_modules/zod/index.js",
@@ -670,7 +670,7 @@
       "format": "esm"
     },
     "src/portable-generation.ts": {
-      "bytes": 2562,
+      "bytes": 3446,
       "imports": [
         {
           "path": "node:fs/promises",
@@ -808,7 +808,7 @@
           "bytesInOutput": 9940754
         },
         "src/portable-generation.ts": {
-          "bytesInOutput": 2342
+          "bytesInOutput": 3188
         },
         "src/generated-map.ts": {
           "bytesInOutput": 1886
@@ -907,13 +907,13 @@
           "bytesInOutput": 32
         },
         "src/portable-prepared.ts": {
-          "bytesInOutput": 1664
+          "bytesInOutput": 1855
         },
         "src/typescript-source-cli.ts": {
           "bytesInOutput": 343
         }
       },
-      "bytes": 10143093
+      "bytes": 10144130
     }
   }
 }

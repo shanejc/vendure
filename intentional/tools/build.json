@@ -194,7 +194,7 @@
     {
       "version": 1,
       "name": "typescript-source",
-      "toolVersion": "typescript-source/1",
+      "toolVersion": "typescript-source/2",
       "contractVersion": "contracts/2",
       "defaultCompiler": "0.5.0",
       "supportedCompilers": [
@@ -206,11 +206,11 @@
       "target": "node22",
       "format": "cjs",
       "encoding": "gzip-base64-checksummed-loader",
-      "rawBytes": 10143093,
-      "distributionBytes": 2196116,
-      "gzipBytes": 1646704,
-      "sha256": "e486d7ebc66864f96cddf0c93bc636241b8390d8e181080d5758b07c37d44309",
-      "rawSha256": "48f29bf4f1bd878564d11f37825f3cef291dc516f33cb51a9ee9a1368e7df544",
+      "rawBytes": 10144130,
+      "distributionBytes": 2196396,
+      "gzipBytes": 1646915,
+      "sha256": "8feaa0601d5e2b31ba5dbf262777afbbd4506cd375b55751d6f860a4757529eb",
+      "rawSha256": "34d415b7928a589be15a7f20cff8b9178af86929c8b2918db310ef5f71de7686",
       "typescriptInputs": [
         "node_modules/typescript/lib/typescript.js"
       ],
@@ -408,11 +408,11 @@
         },
         {
           "path": "src/portable-prepared.ts",
-          "sha256": "eb0fc5e7336c6d0ea0d68afc1490a299754a211fbcd06827de07d95ea342c912"
+          "sha256": "dfae4d1db318543e61aa0cecbc222151b95d3714c7460636da57c207cceb86df"
         },
         {
           "path": "src/portable-generation.ts",
-          "sha256": "3e3348a3e3ee8be673f72aedcfe56b0f3dad2fa6ba284ab40d62d9ee6338ce77"
+          "sha256": "4c38bd66ea580192fee709a6f7c33f4a10cf1af429f601acfce741152838c967"
         },
         {
           "path": "src/typescript-source-cli.ts",
@@ -435,11 +435,11 @@
       "target": "node22",
       "format": "cjs",
       "encoding": "plain-javascript",
-      "rawBytes": 221836,
-      "distributionBytes": 221836,
-      "gzipBytes": 44495,
-      "sha256": "5c3fa99bcd8cfbfd58d218ae837e591b47149d5f9589030d65be9e2477819141",
-      "rawSha256": "5c3fa99bcd8cfbfd58d218ae837e591b47149d5f9589030d65be9e2477819141",
+      "rawBytes": 221929,
+      "distributionBytes": 221929,
+      "gzipBytes": 44516,
+      "sha256": "d8ee56e7599e148abaaff46100863e542a8d860523d427317978cc98097935e5",
+      "rawSha256": "d8ee56e7599e148abaaff46100863e542a8d860523d427317978cc98097935e5",
       "typescriptInputs": [],
       "externalImports": [
         "node:child_process",
@@ -468,7 +468,7 @@
         },
         {
           "path": "src/portable-verification.ts",
-          "bytes": 7637
+          "bytes": 7708
         },
         {
           "path": "node_modules/zod/v3/locales/en.js",
@@ -642,11 +642,11 @@
         },
         {
           "path": "src/portable-prepared.ts",
-          "sha256": "eb0fc5e7336c6d0ea0d68afc1490a299754a211fbcd06827de07d95ea342c912"
+          "sha256": "dfae4d1db318543e61aa0cecbc222151b95d3714c7460636da57c207cceb86df"
         },
         {
           "path": "src/portable-verification.ts",
-          "sha256": "2b0e53dd538232929b825bd0223cd57ff2a4dfedf0ea571675c9c2209fc037a4"
+          "sha256": "1dfbde8008d09b3486a73887fc1157a268dc7f3dba1a7e11e678cddbcf27bc52"
         },
         {
           "path": "src/prepared-comparison-cli.ts",
