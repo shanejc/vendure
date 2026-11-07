@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "tools": {
+    "core": {
+      "version": "core/2",
+      "sha256": "597b466bc3326c63358ff4dfb3dad2b639ded2687b0a1deaa6db4cf91e05887a"
+    },
+    "typescript-source": {
+      "version": "typescript-source/1",
+      "sha256": "e486d7ebc66864f96cddf0c93bc636241b8390d8e181080d5758b07c37d44309"
+    },
+    "verification": {
+      "version": "0.2.0",
+      "sha256": "5c3fa99bcd8cfbfd58d218ae837e591b47149d5f9589030d65be9e2477819141"
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "version": 2,
+  "compiler": "0.5.0",
+  "verifier": "0.2.0",
+  "identityVersion": 1,
+  "tool": {
+    "path": "intentional/tools/intentional.cjs",
+    "sha256": "adff457395030a47b54445dfb315379f6a6ece44f7efd09e55a8edefc8f2b538"
+  },
+  "source": {
+    "repository": "shanejc/vendure",
+    "commit": "f97b18759178bd22cbd88062edcff6c308652342",
+    "archiveSha256": "f9219bafeca7d917e201c6ec2b04e8bb1596e24d4eda40ae9760113f45336705",
+    "archiveUrl": "https://codeload.github.com/vendurehq/vendure/tar.gz/f97b18759178bd22cbd88062edcff6c308652342"
+  },
+  "integration": {
+    "generatedPath": "packages/core/src/intentional/domain.ts",
+    "evidenceHash": "fc1e0430c5f7665b858b78fbfd2c121b21320e1060cee1340c5c23687d7d0f73",
+    "recoveryHash": "efb51e11b9a44b1227a88714fccc1c094f8780a1080a57aff8a7f5992ffd4d76"
+  },
+  "verification": {
+    "adapterId": "vendure-recovered-order-v1",
+    "adapter": {
+      "path": "intentional/verification/adapter.cjs",
+      "sha256": "edfd3275d8e888aba0bda039fa2040f27402d56cfec51d05d4fe4137fa379005"
+    },
+    "corpus": {
+      "path": "intentional/verification/corpus.json",
+      "sha256": "2ba0b64be758052b12e8217018ce73d77e57dd384424a28a32ac395ae5466dc0",
+      "scenarioHash": "9ef1d262916fd35dfa58412cc9ddce1a99f103a358f44c8f0a3d65ae01a9e0ca",
+      "cases": 1515
+    },
+    "authoredScenariosHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "independentCorpusHash": "9ef1d262916fd35dfa58412cc9ddce1a99f103a358f44c8f0a3d65ae01a9e0ca",
+    "build": [
+      [
+        "bun",
+        "run",
+        "build:core-common"
+      ]
+    ],
+    "tests": [
+      [
+        "bun",
+        "run",
+        "--cwd",
+        "packages/core",
+        "test",
+        "src/service/helpers/utils/order-utils.spec.ts",
+        "--maxWorkers=2",
+        "--minWorkers=1"
+      ]
+    ],
+    "excludedTests": [
+      "The broader core suite is outside this component comparison; an initial full-core run reached 118 passing files but failed in 10 files, including missing better-sqlite3 native bindings."
+    ],
+    "seeds": {
+      "payments": 42,
+      "heldOut": 1779033703
+    }
+  },
+  "toolchain": {
+    "version": 2,
+    "registry": "intentional/tools/toolchain.json",
+    "core": {
+      "path": "intentional/tools/core.cjs",
+      "sha256": "597b466bc3326c63358ff4dfb3dad2b639ded2687b0a1deaa6db4cf91e05887a",
+      "version": "core/2",
+      "rawSha256": "597b466bc3326c63358ff4dfb3dad2b639ded2687b0a1deaa6db4cf91e05887a",
+      "rawBytes": 192682,
+      "distributionBytes": 192682,
+      "encoding": "plain-javascript"
+    },
+    "sourceAdapter": {
+      "path": "intentional/tools/typescript-source.cjs",
+      "sha256": "e486d7ebc66864f96cddf0c93bc636241b8390d8e181080d5758b07c37d44309",
+      "version": "typescript-source/1",
+      "rawSha256": "48f29bf4f1bd878564d11f37825f3cef291dc516f33cb51a9ee9a1368e7df544",
+      "rawBytes": 10143093,
+      "distributionBytes": 2196116,
+      "encoding": "gzip-base64-checksummed-loader"
+    },
+    "verification": {
+      "path": "intentional/tools/verification.cjs",
+      "sha256": "5c3fa99bcd8cfbfd58d218ae837e591b47149d5f9589030d65be9e2477819141",
+      "version": "0.2.0",
+      "rawSha256": "5c3fa99bcd8cfbfd58d218ae837e591b47149d5f9589030d65be9e2477819141",
+      "rawBytes": 221836,
+      "distributionBytes": 221836,
+      "encoding": "plain-javascript"
+    }
+  },
+  "prepared": {
+    "path": "intentional/prepared-implementation.json",
+    "sha256": "2c060342725941edb1cf2350ea6a1910642a9cf015f6dbf7b0772ba4c0f4dbe8"
+  }
+}

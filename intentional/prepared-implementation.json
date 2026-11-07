@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "status": "ready",
+  "compiler": "0.5.0",
+  "sourceAdapter": "typescript-source/1",
+  "programHash": "398594838fba97489ca146d2c1037d728d56a1bfff704d70a66b4e1c769b845a",
+  "evidenceHash": "fc1e0430c5f7665b858b78fbfd2c121b21320e1060cee1340c5c23687d7d0f73",
+  "recoveryHash": "efb51e11b9a44b1227a88714fccc1c094f8780a1080a57aff8a7f5992ffd4d76",
+  "generatedPath": "packages/core/src/intentional/domain.ts",
+  "candidateFilesHash": "09d647642eaf0d176c798f07005ae43aa827e8830812d35c5c32ce9b9ed61397",
+  "files": {
+    "packages/core/src/intentional/domain.ts": "3c567f5c1af412b711d23d7250ed20df6136d78d4e51451b80071455abc1f678",
+    "packages/core/src/config/order/default-order-process.ts": "4d434b35feda1396581a360f7e9c3d42b08586f1ac20214a963c7ea1354c5cfe",
+    "packages/core/src/service/helpers/utils/order-utils.ts": "cbf72cc684f08bb4cf0da77bd87cfca74370e24edf96be947625eaa180e95780"
+  }
+}
