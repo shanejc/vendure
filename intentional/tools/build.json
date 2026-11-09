@@ -1,0 +1,718 @@
+{
+  "version": 2,
+  "artifacts": [
+    {
+      "version": 1,
+      "name": "core",
+      "toolVersion": "core/4",
+      "contractVersion": "contracts/3",
+      "defaultCompiler": "0.5.0",
+      "supportedCompilers": [
+        "0.5.0",
+        "0.5.1"
+      ],
+      "bundler": "esbuild",
+      "bundlerVersion": "0.28.2",
+      "target": "node22",
+      "format": "cjs",
+      "encoding": "plain-javascript",
+      "rawBytes": 219279,
+      "distributionBytes": 219279,
+      "gzipBytes": 43411,
+      "sha256": "ba1cbe3e96c3887a6e6878627f071f79abd03278f0b509dee4e44dede672579e",
+      "rawSha256": "ba1cbe3e96c3887a6e6878627f071f79abd03278f0b509dee4e44dede672579e",
+      "coreRawBytesTarget": 1000000,
+      "withinCoreSizeTarget": true,
+      "typescriptInputs": [],
+      "externalImports": [
+        "node:crypto",
+        "node:fs/promises",
+        "node:path"
+      ],
+      "optionalExternalImports": [],
+      "majorContributors": [
+        {
+          "path": "node_modules/zod/v3/types.js",
+          "bytes": 102748
+        },
+        {
+          "path": "src/domain.ts",
+          "bytes": 35794
+        },
+        {
+          "path": "src/domain-atlas.ts",
+          "bytes": 14026
+        },
+        {
+          "path": "node_modules/zod/v3/locales/en.js",
+          "bytes": 4803
+        },
+        {
+          "path": "src/execution-observer.ts",
+          "bytes": 4601
+        },
+        {
+          "path": "src/semantic-nodes.ts",
+          "bytes": 4406
+        },
+        {
+          "path": "src/outcomes.ts",
+          "bytes": 3949
+        },
+        {
+          "path": "node_modules/zod/v3/helpers/util.js",
+          "bytes": 3409
+        }
+      ],
+      "inputs": [
+        {
+          "path": "node_modules/zod/v3/helpers/util.js",
+          "sha256": "906ef685e5853d496e293ee8f8a2bb8b1ed2d078a1bcdfedb2dfd61d75b6330c"
+        },
+        {
+          "path": "node_modules/zod/v3/ZodError.js",
+          "sha256": "f5ac9e86b92e201d41e294d7aa35986a2aa28829e1bcc8ac25f7c8dce0674b99"
+        },
+        {
+          "path": "node_modules/zod/v3/locales/en.js",
+          "sha256": "51a6dcc5d4bd52a64da127c012c6c963395c1d9a343ad75d4a8eca662fc8b205"
+        },
+        {
+          "path": "node_modules/zod/v3/errors.js",
+          "sha256": "d40831f478288d76e82bbbcc3b7e95c8513b6e76471f2d49a37c979bc57d492d"
+        },
+        {
+          "path": "node_modules/zod/v3/helpers/parseUtil.js",
+          "sha256": "b57484013bb360bac2e334d58fcd5f6cbfa63ffcc7d8ff3dbbb3380ca659b956"
+        },
+        {
+          "path": "node_modules/zod/v3/helpers/typeAliases.js",
+          "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+        },
+        {
+          "path": "node_modules/zod/v3/helpers/errorUtil.js",
+          "sha256": "68589c0cf44c8b4ad19b77418f53caad2cd1dbc8d714f526e1876ebdee4828c5"
+        },
+        {
+          "path": "node_modules/zod/v3/types.js",
+          "sha256": "9763a2938f0e7f983363ef4bf6530e7583e3f2d54f8a4a6684efad58febc6e8e"
+        },
+        {
+          "path": "node_modules/zod/v3/external.js",
+          "sha256": "5d26d2e47e2352def36f89a3e8bf8581da22b7f857e07ef3114cd52cf4813445"
+        },
+        {
+          "path": "node_modules/zod/index.js",
+          "sha256": "6419c4ac0e637ff08463083e31886d10354f74cbcc4e584400b2b837e39ac881"
+        },
+        {
+          "path": "src/outcomes.ts",
+          "sha256": "f7d56d14a2593c8844f542240fadf14978a848d50126003f704b86878e493220"
+        },
+        {
+          "path": "src/artifact-data.ts",
+          "sha256": "d74683b198e73c373746709eeb7e855c55932c7488d2e3ef0d8c1d0442580cb2"
+        },
+        {
+          "path": "src/outcome-schema.ts",
+          "sha256": "e764213cce405d83dcf0c6d1446d653e0597caef5bc76b23f306e68780bea160"
+        },
+        {
+          "path": "src/execution-observer.ts",
+          "sha256": "59d3149d488201ebb9a3c60ca723f7541d4a1626f1acb580edf21a28c70a91bb"
+        },
+        {
+          "path": "src/generated-map.ts",
+          "sha256": "6384a5fab2b47406a15d6d504f20f75435156e66b3e4f4b21b8ba9cf06ac2eca"
+        },
+        {
+          "path": "src/projection-registry.ts",
+          "sha256": "ea8005abc5ce3154631f22e40fd4139dac1ca30b7be80d2ffa5460d6cdca535d"
+        },
+        {
+          "path": "src/source-origin.ts",
+          "sha256": "5f9ec2dff798702b583faf5885432badccb289fdf649aa6ae0c3b25f6d83d6d5"
+        },
+        {
+          "path": "src/semantic-nodes.ts",
+          "sha256": "472616e832c6aa14d6def241780e047eb2a6ec70947a12de6ea979c5e1aa2cfe"
+        },
+        {
+          "path": "src/behavior.ts",
+          "sha256": "9ac73f84bd244fbd0ac46d62ea5441790d3b3a5be23e3cb667336bfcce613557"
+        },
+        {
+          "path": "src/scenario-values.ts",
+          "sha256": "3443e7e56aab4e48aa91ffe38736d4063c524707362afcd7b0de54ead4c9736b"
+        },
+        {
+          "path": "src/type-validation.ts",
+          "sha256": "7fbe592589a131e819d1aec7c86371b314e8278cf277cc4c804bcb7b0babdcca"
+        },
+        {
+          "path": "src/provenance-validation.ts",
+          "sha256": "0f6d13e2d4c0b5ce8c8208ecc4cd49f972b6eefbb4a348dba819a41c6a073d4f"
+        },
+        {
+          "path": "src/composition-validation.ts",
+          "sha256": "c6e74903b0e8fa707aee7fafa174db87e386c3ed41180d807308899f2d20ba6d"
+        },
+        {
+          "path": "src/compiler-contract.ts",
+          "sha256": "1103df2c6319fa141e75b4aa53fecf8c4aa947273b3c05f2243bca412dd1daa4"
+        },
+        {
+          "path": "src/program-identity.ts",
+          "sha256": "77bcd513d6545e7f3bba3a7d972e621ff0cc87096b03d5782e6f05a04c4bdb59"
+        },
+        {
+          "path": "src/revision-contract.ts",
+          "sha256": "27c0235876861e783c031e42ada85325227a161e7955d159be45cb600596332e"
+        },
+        {
+          "path": "src/scenario-report-contract.ts",
+          "sha256": "e674892c0c1e61175a921db281729b3c94a6d5878916651802dc52a481fd425a"
+        },
+        {
+          "path": "src/types.ts",
+          "sha256": "0b8e4349c1d317f5ac0e61dad56e342e4c526b6cc71c6079e1b95b85415b59a4"
+        },
+        {
+          "path": "src/binding-contract.ts",
+          "sha256": "81617006cefae27a5d40f979abf273867b2c40da8c13833503a7bdf57fc16b5a"
+        },
+        {
+          "path": "src/authoring-contract.ts",
+          "sha256": "662d5a4248f6933be5bb06f008cc6cc4ba993b92bbe97acb153d5cecaed72162"
+        },
+        {
+          "path": "src/expression-patterns.ts",
+          "sha256": "6d6f98291596f6afe8487e906de524f52117b6e613f98d1304b19345af6a81f3"
+        },
+        {
+          "path": "src/meaning-types.ts",
+          "sha256": "52ddef1e6e4c566d4681c4df15f98d8b3a773e9fa8e007598bc2d861e4d53d7e"
+        },
+        {
+          "path": "src/domain-atlas.ts",
+          "sha256": "ff1756d838a9de906e1aa7b49ba66f61ac0b0a1f3b93f4a878cbe11cd28f63c4"
+        },
+        {
+          "path": "src/domain.ts",
+          "sha256": "8ee3a8b930cadf4dc43d1c8742eb27aaf889db3ce83db361faf86e1f46562337"
+        },
+        {
+          "path": "src/simulation-contract.ts",
+          "sha256": "2dc58be37b86767d4bc6d279755788db949bdd15193ffa74715c5681c6ce86f5"
+        },
+        {
+          "path": "src/simulation.ts",
+          "sha256": "b371649ca6ae7dee783c3264ef5c1ee9aab7ffa142b999848bb866601dbcad83"
+        },
+        {
+          "path": "src/core-bundle.ts",
+          "sha256": "7817297f04115a8f13a8a245e4e06776dfad1ec2cdf7cb4bcdf111e5aafda52d"
+        },
+        {
+          "path": "src/core-cli.ts",
+          "sha256": "e101c44b16cff47a87c0b53099f0ea660a74366809c24d34f21c1379216949e8"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "name": "typescript-source",
+      "toolVersion": "typescript-source/3",
+      "contractVersion": "contracts/3",
+      "defaultCompiler": "0.5.0",
+      "supportedCompilers": [
+        "0.5.0",
+        "0.5.1"
+      ],
+      "bundler": "esbuild",
+      "bundlerVersion": "0.28.2",
+      "target": "node22",
+      "format": "cjs",
+      "encoding": "gzip-base64-checksummed-loader",
+      "rawBytes": 10163883,
+      "distributionBytes": 2202788,
+      "gzipBytes": 1651708,
+      "sha256": "25d7c9d3687c18f11687dc5d6dd90de67a26cd5f7894261f431c68be67fa75d7",
+      "rawSha256": "3ff2bcb303199d881edc12fd802618f03e2722b04e4a34199510a21ca8106f09",
+      "typescriptInputs": [
+        "node_modules/typescript/lib/typescript.js"
+      ],
+      "externalImports": [
+        "node:crypto",
+        "node:fs/promises",
+        "node:path",
+        "perf_hooks",
+        "fs",
+        "path",
+        "os",
+        "crypto",
+        "source-map-support",
+        "inspector",
+        "node:child_process",
+        "node:util"
+      ],
+      "optionalExternalImports": [
+        "source-map-support"
+      ],
+      "majorContributors": [
+        {
+          "path": "node_modules/typescript/lib/typescript.js",
+          "bytes": 9942721
+        },
+        {
+          "path": "node_modules/zod/v3/types.js",
+          "bytes": 102744
+        },
+        {
+          "path": "src/domain.ts",
+          "bytes": 28127
+        },
+        {
+          "path": "src/domain-atlas.ts",
+          "bytes": 14047
+        },
+        {
+          "path": "src/portable-common.ts",
+          "bytes": 6769
+        },
+        {
+          "path": "src/integrate-recovered.ts",
+          "bytes": 5294
+        },
+        {
+          "path": "node_modules/zod/v3/locales/en.js",
+          "bytes": 4803
+        },
+        {
+          "path": "src/semantic-nodes.ts",
+          "bytes": 4406
+        }
+      ],
+      "inputs": [
+        {
+          "path": "src/generated-map.ts",
+          "sha256": "6384a5fab2b47406a15d6d504f20f75435156e66b3e4f4b21b8ba9cf06ac2eca"
+        },
+        {
+          "path": "src/projection-registry.ts",
+          "sha256": "ea8005abc5ce3154631f22e40fd4139dac1ca30b7be80d2ffa5460d6cdca535d"
+        },
+        {
+          "path": "node_modules/zod/v3/helpers/util.js",
+          "sha256": "906ef685e5853d496e293ee8f8a2bb8b1ed2d078a1bcdfedb2dfd61d75b6330c"
+        },
+        {
+          "path": "node_modules/zod/v3/ZodError.js",
+          "sha256": "f5ac9e86b92e201d41e294d7aa35986a2aa28829e1bcc8ac25f7c8dce0674b99"
+        },
+        {
+          "path": "node_modules/zod/v3/locales/en.js",
+          "sha256": "51a6dcc5d4bd52a64da127c012c6c963395c1d9a343ad75d4a8eca662fc8b205"
+        },
+        {
+          "path": "node_modules/zod/v3/errors.js",
+          "sha256": "d40831f478288d76e82bbbcc3b7e95c8513b6e76471f2d49a37c979bc57d492d"
+        },
+        {
+          "path": "node_modules/zod/v3/helpers/parseUtil.js",
+          "sha256": "b57484013bb360bac2e334d58fcd5f6cbfa63ffcc7d8ff3dbbb3380ca659b956"
+        },
+        {
+          "path": "node_modules/zod/v3/helpers/typeAliases.js",
+          "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+        },
+        {
+          "path": "node_modules/zod/v3/helpers/errorUtil.js",
+          "sha256": "68589c0cf44c8b4ad19b77418f53caad2cd1dbc8d714f526e1876ebdee4828c5"
+        },
+        {
+          "path": "node_modules/zod/v3/types.js",
+          "sha256": "9763a2938f0e7f983363ef4bf6530e7583e3f2d54f8a4a6684efad58febc6e8e"
+        },
+        {
+          "path": "node_modules/zod/v3/external.js",
+          "sha256": "5d26d2e47e2352def36f89a3e8bf8581da22b7f857e07ef3114cd52cf4813445"
+        },
+        {
+          "path": "node_modules/zod/index.js",
+          "sha256": "6419c4ac0e637ff08463083e31886d10354f74cbcc4e584400b2b837e39ac881"
+        },
+        {
+          "path": "src/source-origin.ts",
+          "sha256": "5f9ec2dff798702b583faf5885432badccb289fdf649aa6ae0c3b25f6d83d6d5"
+        },
+        {
+          "path": "src/semantic-nodes.ts",
+          "sha256": "472616e832c6aa14d6def241780e047eb2a6ec70947a12de6ea979c5e1aa2cfe"
+        },
+        {
+          "path": "src/artifact-data.ts",
+          "sha256": "d74683b198e73c373746709eeb7e855c55932c7488d2e3ef0d8c1d0442580cb2"
+        },
+        {
+          "path": "src/outcomes.ts",
+          "sha256": "f7d56d14a2593c8844f542240fadf14978a848d50126003f704b86878e493220"
+        },
+        {
+          "path": "src/outcome-schema.ts",
+          "sha256": "e764213cce405d83dcf0c6d1446d653e0597caef5bc76b23f306e68780bea160"
+        },
+        {
+          "path": "src/behavior.ts",
+          "sha256": "9ac73f84bd244fbd0ac46d62ea5441790d3b3a5be23e3cb667336bfcce613557"
+        },
+        {
+          "path": "src/scenario-values.ts",
+          "sha256": "3443e7e56aab4e48aa91ffe38736d4063c524707362afcd7b0de54ead4c9736b"
+        },
+        {
+          "path": "src/type-validation.ts",
+          "sha256": "7fbe592589a131e819d1aec7c86371b314e8278cf277cc4c804bcb7b0babdcca"
+        },
+        {
+          "path": "src/provenance-validation.ts",
+          "sha256": "0f6d13e2d4c0b5ce8c8208ecc4cd49f972b6eefbb4a348dba819a41c6a073d4f"
+        },
+        {
+          "path": "src/composition-validation.ts",
+          "sha256": "c6e74903b0e8fa707aee7fafa174db87e386c3ed41180d807308899f2d20ba6d"
+        },
+        {
+          "path": "src/compiler-contract.ts",
+          "sha256": "1103df2c6319fa141e75b4aa53fecf8c4aa947273b3c05f2243bca412dd1daa4"
+        },
+        {
+          "path": "src/program-identity.ts",
+          "sha256": "77bcd513d6545e7f3bba3a7d972e621ff0cc87096b03d5782e6f05a04c4bdb59"
+        },
+        {
+          "path": "src/revision-contract.ts",
+          "sha256": "27c0235876861e783c031e42ada85325227a161e7955d159be45cb600596332e"
+        },
+        {
+          "path": "src/scenario-report-contract.ts",
+          "sha256": "e674892c0c1e61175a921db281729b3c94a6d5878916651802dc52a481fd425a"
+        },
+        {
+          "path": "src/types.ts",
+          "sha256": "0b8e4349c1d317f5ac0e61dad56e342e4c526b6cc71c6079e1b95b85415b59a4"
+        },
+        {
+          "path": "src/binding-contract.ts",
+          "sha256": "81617006cefae27a5d40f979abf273867b2c40da8c13833503a7bdf57fc16b5a"
+        },
+        {
+          "path": "src/authoring-contract.ts",
+          "sha256": "662d5a4248f6933be5bb06f008cc6cc4ba993b92bbe97acb153d5cecaed72162"
+        },
+        {
+          "path": "src/expression-patterns.ts",
+          "sha256": "6d6f98291596f6afe8487e906de524f52117b6e613f98d1304b19345af6a81f3"
+        },
+        {
+          "path": "src/meaning-types.ts",
+          "sha256": "52ddef1e6e4c566d4681c4df15f98d8b3a773e9fa8e007598bc2d861e4d53d7e"
+        },
+        {
+          "path": "src/domain-atlas.ts",
+          "sha256": "ff1756d838a9de906e1aa7b49ba66f61ac0b0a1f3b93f4a878cbe11cd28f63c4"
+        },
+        {
+          "path": "src/domain.ts",
+          "sha256": "8ee3a8b930cadf4dc43d1c8742eb27aaf889db3ce83db361faf86e1f46562337"
+        },
+        {
+          "path": "src/artifacts.ts",
+          "sha256": "8f6a056383cc880b4c8556ebc834208a324158fa23986f822325bc3a57a39219"
+        },
+        {
+          "path": "node_modules/typescript/lib/typescript.js",
+          "sha256": "3ae902c92cc44dace175c0e69e13a4b0899f6983c6121d76b9ab8dd5795e7675"
+        },
+        {
+          "path": "src/regions.ts",
+          "sha256": "1b9a44fc19351187e803083d087648e673c2b0866029851cdfb9b4e1c7d4acd5"
+        },
+        {
+          "path": "src/integrate-recovered.ts",
+          "sha256": "28f055dd1bb0409585b563f10cb1ecad5310ad795b0bb0d6aea7d0892c7e7de7"
+        },
+        {
+          "path": "src/observations.ts",
+          "sha256": "4ab1b2196f7c7439150081747ab0b39f9bd0c84893d73f958694411390881561"
+        },
+        {
+          "path": "src/portable-common.ts",
+          "sha256": "b7f8c69085a682922c09e491f3ca3e93e187a89dc88b872e9b47662f90528406"
+        },
+        {
+          "path": "src/portable-prepared.ts",
+          "sha256": "917cbc508840138454040dad6ada609148273997b979dcc54bbcd94356340948"
+        },
+        {
+          "path": "src/portable-generation.ts",
+          "sha256": "4c38bd66ea580192fee709a6f7c33f4a10cf1af429f601acfce741152838c967"
+        },
+        {
+          "path": "src/typescript-source-cli.ts",
+          "sha256": "f3ddf4184f5b1eca5c585768fd13ba7f1089d0851250abe451a2bb023eeef075"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "name": "verification",
+      "toolVersion": "0.2.0",
+      "contractVersion": "contracts/3",
+      "defaultCompiler": "0.5.0",
+      "supportedCompilers": [
+        "0.5.0",
+        "0.5.1"
+      ],
+      "bundler": "esbuild",
+      "bundlerVersion": "0.28.2",
+      "target": "node22",
+      "format": "cjs",
+      "encoding": "plain-javascript",
+      "rawBytes": 239670,
+      "distributionBytes": 239670,
+      "gzipBytes": 49176,
+      "sha256": "8afa1fa2c555e43da290d44ca75c556702cb73653b36c98c01a88581aa5b072b",
+      "rawSha256": "8afa1fa2c555e43da290d44ca75c556702cb73653b36c98c01a88581aa5b072b",
+      "typescriptInputs": [],
+      "externalImports": [
+        "node:child_process",
+        "node:crypto",
+        "node:fs/promises",
+        "node:path",
+        "node:util"
+      ],
+      "optionalExternalImports": [],
+      "majorContributors": [
+        {
+          "path": "node_modules/zod/v3/types.js",
+          "bytes": 102744
+        },
+        {
+          "path": "src/domain.ts",
+          "bytes": 28129
+        },
+        {
+          "path": "src/domain-atlas.ts",
+          "bytes": 14047
+        },
+        {
+          "path": "src/repository-runner.ts",
+          "bytes": 8241
+        },
+        {
+          "path": "src/portable-common.ts",
+          "bytes": 8128
+        },
+        {
+          "path": "src/portable-verification.ts",
+          "bytes": 7708
+        },
+        {
+          "path": "node_modules/zod/v3/locales/en.js",
+          "bytes": 4803
+        },
+        {
+          "path": "src/semantic-nodes.ts",
+          "bytes": 4406
+        }
+      ],
+      "inputs": [
+        {
+          "path": "src/adapters.ts",
+          "sha256": "557e09d624526afdc49084ecda779910ad81c1488f3c762b43d0e91ab0470474"
+        },
+        {
+          "path": "src/repository-runner.ts",
+          "sha256": "4cf114af8f964756055e814a686404c2815db545ab9abb3a0b1e496c7f270c50"
+        },
+        {
+          "path": "src/generated-map.ts",
+          "sha256": "6384a5fab2b47406a15d6d504f20f75435156e66b3e4f4b21b8ba9cf06ac2eca"
+        },
+        {
+          "path": "src/projection-registry.ts",
+          "sha256": "ea8005abc5ce3154631f22e40fd4139dac1ca30b7be80d2ffa5460d6cdca535d"
+        },
+        {
+          "path": "node_modules/zod/v3/helpers/util.js",
+          "sha256": "906ef685e5853d496e293ee8f8a2bb8b1ed2d078a1bcdfedb2dfd61d75b6330c"
+        },
+        {
+          "path": "node_modules/zod/v3/ZodError.js",
+          "sha256": "f5ac9e86b92e201d41e294d7aa35986a2aa28829e1bcc8ac25f7c8dce0674b99"
+        },
+        {
+          "path": "node_modules/zod/v3/locales/en.js",
+          "sha256": "51a6dcc5d4bd52a64da127c012c6c963395c1d9a343ad75d4a8eca662fc8b205"
+        },
+        {
+          "path": "node_modules/zod/v3/errors.js",
+          "sha256": "d40831f478288d76e82bbbcc3b7e95c8513b6e76471f2d49a37c979bc57d492d"
+        },
+        {
+          "path": "node_modules/zod/v3/helpers/parseUtil.js",
+          "sha256": "b57484013bb360bac2e334d58fcd5f6cbfa63ffcc7d8ff3dbbb3380ca659b956"
+        },
+        {
+          "path": "node_modules/zod/v3/helpers/typeAliases.js",
+          "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+        },
+        {
+          "path": "node_modules/zod/v3/helpers/errorUtil.js",
+          "sha256": "68589c0cf44c8b4ad19b77418f53caad2cd1dbc8d714f526e1876ebdee4828c5"
+        },
+        {
+          "path": "node_modules/zod/v3/types.js",
+          "sha256": "9763a2938f0e7f983363ef4bf6530e7583e3f2d54f8a4a6684efad58febc6e8e"
+        },
+        {
+          "path": "node_modules/zod/v3/external.js",
+          "sha256": "5d26d2e47e2352def36f89a3e8bf8581da22b7f857e07ef3114cd52cf4813445"
+        },
+        {
+          "path": "node_modules/zod/index.js",
+          "sha256": "6419c4ac0e637ff08463083e31886d10354f74cbcc4e584400b2b837e39ac881"
+        },
+        {
+          "path": "src/source-origin.ts",
+          "sha256": "5f9ec2dff798702b583faf5885432badccb289fdf649aa6ae0c3b25f6d83d6d5"
+        },
+        {
+          "path": "src/semantic-nodes.ts",
+          "sha256": "472616e832c6aa14d6def241780e047eb2a6ec70947a12de6ea979c5e1aa2cfe"
+        },
+        {
+          "path": "src/artifact-data.ts",
+          "sha256": "d74683b198e73c373746709eeb7e855c55932c7488d2e3ef0d8c1d0442580cb2"
+        },
+        {
+          "path": "src/outcomes.ts",
+          "sha256": "f7d56d14a2593c8844f542240fadf14978a848d50126003f704b86878e493220"
+        },
+        {
+          "path": "src/outcome-schema.ts",
+          "sha256": "e764213cce405d83dcf0c6d1446d653e0597caef5bc76b23f306e68780bea160"
+        },
+        {
+          "path": "src/behavior.ts",
+          "sha256": "9ac73f84bd244fbd0ac46d62ea5441790d3b3a5be23e3cb667336bfcce613557"
+        },
+        {
+          "path": "src/scenario-values.ts",
+          "sha256": "3443e7e56aab4e48aa91ffe38736d4063c524707362afcd7b0de54ead4c9736b"
+        },
+        {
+          "path": "src/type-validation.ts",
+          "sha256": "7fbe592589a131e819d1aec7c86371b314e8278cf277cc4c804bcb7b0babdcca"
+        },
+        {
+          "path": "src/provenance-validation.ts",
+          "sha256": "0f6d13e2d4c0b5ce8c8208ecc4cd49f972b6eefbb4a348dba819a41c6a073d4f"
+        },
+        {
+          "path": "src/composition-validation.ts",
+          "sha256": "c6e74903b0e8fa707aee7fafa174db87e386c3ed41180d807308899f2d20ba6d"
+        },
+        {
+          "path": "src/compiler-contract.ts",
+          "sha256": "1103df2c6319fa141e75b4aa53fecf8c4aa947273b3c05f2243bca412dd1daa4"
+        },
+        {
+          "path": "src/program-identity.ts",
+          "sha256": "77bcd513d6545e7f3bba3a7d972e621ff0cc87096b03d5782e6f05a04c4bdb59"
+        },
+        {
+          "path": "src/revision-contract.ts",
+          "sha256": "27c0235876861e783c031e42ada85325227a161e7955d159be45cb600596332e"
+        },
+        {
+          "path": "src/scenario-report-contract.ts",
+          "sha256": "e674892c0c1e61175a921db281729b3c94a6d5878916651802dc52a481fd425a"
+        },
+        {
+          "path": "src/types.ts",
+          "sha256": "0b8e4349c1d317f5ac0e61dad56e342e4c526b6cc71c6079e1b95b85415b59a4"
+        },
+        {
+          "path": "src/binding-contract.ts",
+          "sha256": "81617006cefae27a5d40f979abf273867b2c40da8c13833503a7bdf57fc16b5a"
+        },
+        {
+          "path": "src/authoring-contract.ts",
+          "sha256": "662d5a4248f6933be5bb06f008cc6cc4ba993b92bbe97acb153d5cecaed72162"
+        },
+        {
+          "path": "src/expression-patterns.ts",
+          "sha256": "6d6f98291596f6afe8487e906de524f52117b6e613f98d1304b19345af6a81f3"
+        },
+        {
+          "path": "src/meaning-types.ts",
+          "sha256": "52ddef1e6e4c566d4681c4df15f98d8b3a773e9fa8e007598bc2d861e4d53d7e"
+        },
+        {
+          "path": "src/domain-atlas.ts",
+          "sha256": "ff1756d838a9de906e1aa7b49ba66f61ac0b0a1f3b93f4a878cbe11cd28f63c4"
+        },
+        {
+          "path": "src/domain.ts",
+          "sha256": "8ee3a8b930cadf4dc43d1c8742eb27aaf889db3ce83db361faf86e1f46562337"
+        },
+        {
+          "path": "src/observations.ts",
+          "sha256": "4ab1b2196f7c7439150081747ab0b39f9bd0c84893d73f958694411390881561"
+        },
+        {
+          "path": "src/portable-state.ts",
+          "sha256": "9975c42758237f046979f61eb0dd57e1b8fff7264b0129433113f1c53da2386f"
+        },
+        {
+          "path": "src/branch-continuation.ts",
+          "sha256": "4fabac11aacbc722295ffc6f3d622650d1025b757a38ff7dd71a8bf3e1197eed"
+        },
+        {
+          "path": "src/repository-mutation.ts",
+          "sha256": "af4b2ed4b2611aa09e7004e3116806301a507f87a5e1807ffcb61139b18d96d6"
+        },
+        {
+          "path": "src/repository-snapshot-contract.ts",
+          "sha256": "3039e992e96c93525103f72ef1113c6b09c7ffb7d7fb20209110d108d76aee86"
+        },
+        {
+          "path": "src/repository-comparison.ts",
+          "sha256": "fc68e5bc9139b8e62804c36c443bf3e62ff492f3c3fce2c34d4cd982b38c4321"
+        },
+        {
+          "path": "src/artifacts.ts",
+          "sha256": "8f6a056383cc880b4c8556ebc834208a324158fa23986f822325bc3a57a39219"
+        },
+        {
+          "path": "src/portable-common.ts",
+          "sha256": "b7f8c69085a682922c09e491f3ca3e93e187a89dc88b872e9b47662f90528406"
+        },
+        {
+          "path": "src/portable-prepared.ts",
+          "sha256": "917cbc508840138454040dad6ada609148273997b979dcc54bbcd94356340948"
+        },
+        {
+          "path": "src/portable-verification.ts",
+          "sha256": "1dfbde8008d09b3486a73887fc1157a268dc7f3dba1a7e11e678cddbcf27bc52"
+        },
+        {
+          "path": "src/prepared-comparison-cli.ts",
+          "sha256": "06e59415b956b7e0b281c5f54f2fca15bd42094c00fc38259e0162fd15ea369e"
+        }
+      ]
+    }
+  ]
+}

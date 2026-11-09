@@ -1,0 +1,815 @@
+{
+  "inputs": {
+    "node_modules/zod/v3/helpers/util.js": {
+      "bytes": 4055,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/zod/v3/ZodError.js": {
+      "bytes": 4349,
+      "imports": [
+        {
+          "path": "node_modules/zod/v3/helpers/util.js",
+          "kind": "import-statement",
+          "original": "./helpers/util.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/zod/v3/locales/en.js": {
+      "bytes": 5602,
+      "imports": [
+        {
+          "path": "node_modules/zod/v3/ZodError.js",
+          "kind": "import-statement",
+          "original": "../ZodError.js"
+        },
+        {
+          "path": "node_modules/zod/v3/helpers/util.js",
+          "kind": "import-statement",
+          "original": "../helpers/util.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/zod/v3/errors.js": {
+      "bytes": 243,
+      "imports": [
+        {
+          "path": "node_modules/zod/v3/locales/en.js",
+          "kind": "import-statement",
+          "original": "./locales/en.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/zod/v3/helpers/parseUtil.js": {
+      "bytes": 3601,
+      "imports": [
+        {
+          "path": "node_modules/zod/v3/errors.js",
+          "kind": "import-statement",
+          "original": "../errors.js"
+        },
+        {
+          "path": "node_modules/zod/v3/locales/en.js",
+          "kind": "import-statement",
+          "original": "../locales/en.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/zod/v3/helpers/typeAliases.js": {
+      "bytes": 11,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/zod/v3/helpers/errorUtil.js": {
+      "bytes": 300,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/zod/v3/types.js": {
+      "bytes": 131212,
+      "imports": [
+        {
+          "path": "node_modules/zod/v3/ZodError.js",
+          "kind": "import-statement",
+          "original": "./ZodError.js"
+        },
+        {
+          "path": "node_modules/zod/v3/errors.js",
+          "kind": "import-statement",
+          "original": "./errors.js"
+        },
+        {
+          "path": "node_modules/zod/v3/helpers/errorUtil.js",
+          "kind": "import-statement",
+          "original": "./helpers/errorUtil.js"
+        },
+        {
+          "path": "node_modules/zod/v3/helpers/parseUtil.js",
+          "kind": "import-statement",
+          "original": "./helpers/parseUtil.js"
+        },
+        {
+          "path": "node_modules/zod/v3/helpers/util.js",
+          "kind": "import-statement",
+          "original": "./helpers/util.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/zod/v3/external.js": {
+      "bytes": 205,
+      "imports": [
+        {
+          "path": "node_modules/zod/v3/errors.js",
+          "kind": "import-statement",
+          "original": "./errors.js"
+        },
+        {
+          "path": "node_modules/zod/v3/helpers/parseUtil.js",
+          "kind": "import-statement",
+          "original": "./helpers/parseUtil.js"
+        },
+        {
+          "path": "node_modules/zod/v3/helpers/typeAliases.js",
+          "kind": "import-statement",
+          "original": "./helpers/typeAliases.js"
+        },
+        {
+          "path": "node_modules/zod/v3/helpers/util.js",
+          "kind": "import-statement",
+          "original": "./helpers/util.js"
+        },
+        {
+          "path": "node_modules/zod/v3/types.js",
+          "kind": "import-statement",
+          "original": "./types.js"
+        },
+        {
+          "path": "node_modules/zod/v3/ZodError.js",
+          "kind": "import-statement",
+          "original": "./ZodError.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/zod/index.js": {
+      "bytes": 105,
+      "imports": [
+        {
+          "path": "node_modules/zod/v3/external.js",
+          "kind": "import-statement",
+          "original": "./v3/external.js"
+        },
+        {
+          "path": "node_modules/zod/v3/external.js",
+          "kind": "import-statement",
+          "original": "./v3/external.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/outcomes.ts": {
+      "bytes": 4096,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/artifact-data.ts": {
+      "bytes": 3149,
+      "imports": [
+        {
+          "path": "node_modules/zod/index.js",
+          "kind": "import-statement",
+          "original": "zod"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/outcome-schema.ts": {
+      "bytes": 1538,
+      "imports": [
+        {
+          "path": "src/artifact-data.ts",
+          "kind": "import-statement",
+          "original": "./artifact-data.js"
+        },
+        {
+          "path": "node_modules/zod/index.js",
+          "kind": "import-statement",
+          "original": "zod"
+        },
+        {
+          "path": "src/outcomes.ts",
+          "kind": "import-statement",
+          "original": "./outcomes.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/execution-observer.ts": {
+      "bytes": 4717,
+      "imports": [
+        {
+          "path": "node_modules/zod/index.js",
+          "kind": "import-statement",
+          "original": "zod"
+        },
+        {
+          "path": "src/outcomes.ts",
+          "kind": "import-statement",
+          "original": "./outcomes.js"
+        },
+        {
+          "path": "src/outcome-schema.ts",
+          "kind": "import-statement",
+          "original": "./outcome-schema.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/generated-map.ts": {
+      "bytes": 1722,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/projection-registry.ts": {
+      "bytes": 2275,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/source-origin.ts": {
+      "bytes": 576,
+      "imports": [
+        {
+          "path": "node_modules/zod/index.js",
+          "kind": "import-statement",
+          "original": "zod"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/semantic-nodes.ts": {
+      "bytes": 4241,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/behavior.ts": {
+      "bytes": 1786,
+      "imports": [
+        {
+          "path": "node_modules/zod/index.js",
+          "kind": "import-statement",
+          "original": "zod"
+        },
+        {
+          "path": "src/outcome-schema.ts",
+          "kind": "import-statement",
+          "original": "./outcome-schema.js"
+        },
+        {
+          "path": "src/outcomes.ts",
+          "kind": "import-statement",
+          "original": "./outcomes.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/scenario-values.ts": {
+      "bytes": 1138,
+      "imports": [
+        {
+          "path": "src/outcome-schema.ts",
+          "kind": "import-statement",
+          "original": "./outcome-schema.js"
+        },
+        {
+          "path": "src/outcomes.ts",
+          "kind": "import-statement",
+          "original": "./outcomes.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/type-validation.ts": {
+      "bytes": 1821,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/provenance-validation.ts": {
+      "bytes": 2037,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/composition-validation.ts": {
+      "bytes": 2364,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/compiler-contract.ts": {
+      "bytes": 1331,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/program-identity.ts": {
+      "bytes": 397,
+      "imports": [
+        {
+          "path": "src/compiler-contract.ts",
+          "kind": "import-statement",
+          "original": "./compiler-contract.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/revision-contract.ts": {
+      "bytes": 1420,
+      "imports": [
+        {
+          "path": "node_modules/zod/index.js",
+          "kind": "import-statement",
+          "original": "zod"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/scenario-report-contract.ts": {
+      "bytes": 1939,
+      "imports": [
+        {
+          "path": "node_modules/zod/index.js",
+          "kind": "import-statement",
+          "original": "zod"
+        },
+        {
+          "path": "src/outcome-schema.ts",
+          "kind": "import-statement",
+          "original": "./outcome-schema.js"
+        },
+        {
+          "path": "src/outcomes.ts",
+          "kind": "import-statement",
+          "original": "./outcomes.js"
+        },
+        {
+          "path": "src/compiler-contract.ts",
+          "kind": "import-statement",
+          "original": "./compiler-contract.js"
+        },
+        {
+          "path": "src/revision-contract.ts",
+          "kind": "import-statement",
+          "original": "./revision-contract.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/types.ts": {
+      "bytes": 1065,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/binding-contract.ts": {
+      "bytes": 1650,
+      "imports": [
+        {
+          "path": "src/compiler-contract.ts",
+          "kind": "import-statement",
+          "original": "./compiler-contract.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/authoring-contract.ts": {
+      "bytes": 712,
+      "imports": [
+        {
+          "path": "node_modules/zod/index.js",
+          "kind": "import-statement",
+          "original": "zod"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/expression-patterns.ts": {
+      "bytes": 676,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/meaning-types.ts": {
+      "bytes": 1427,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/domain-atlas.ts": {
+      "bytes": 14110,
+      "imports": [
+        {
+          "path": "src/expression-patterns.ts",
+          "kind": "import-statement",
+          "original": "./expression-patterns.js"
+        },
+        {
+          "path": "src/meaning-types.ts",
+          "kind": "import-statement",
+          "original": "./meaning-types.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/domain.ts": {
+      "bytes": 33910,
+      "imports": [
+        {
+          "path": "src/generated-map.ts",
+          "kind": "import-statement",
+          "original": "./generated-map.js"
+        },
+        {
+          "path": "src/projection-registry.ts",
+          "kind": "import-statement",
+          "original": "./projection-registry.js"
+        },
+        {
+          "path": "src/source-origin.ts",
+          "kind": "import-statement",
+          "original": "./source-origin.js"
+        },
+        {
+          "path": "src/semantic-nodes.ts",
+          "kind": "import-statement",
+          "original": "./semantic-nodes.js"
+        },
+        {
+          "path": "src/behavior.ts",
+          "kind": "import-statement",
+          "original": "./behavior.js"
+        },
+        {
+          "path": "src/scenario-values.ts",
+          "kind": "import-statement",
+          "original": "./scenario-values.js"
+        },
+        {
+          "path": "src/outcome-schema.ts",
+          "kind": "import-statement",
+          "original": "./outcome-schema.js"
+        },
+        {
+          "path": "src/outcomes.ts",
+          "kind": "import-statement",
+          "original": "./outcomes.js"
+        },
+        {
+          "path": "src/type-validation.ts",
+          "kind": "import-statement",
+          "original": "./type-validation.js"
+        },
+        {
+          "path": "src/provenance-validation.ts",
+          "kind": "import-statement",
+          "original": "./provenance-validation.js"
+        },
+        {
+          "path": "src/composition-validation.ts",
+          "kind": "import-statement",
+          "original": "./composition-validation.js"
+        },
+        {
+          "path": "src/artifact-data.ts",
+          "kind": "import-statement",
+          "original": "./artifact-data.js"
+        },
+        {
+          "path": "src/program-identity.ts",
+          "kind": "import-statement",
+          "original": "./program-identity.js"
+        },
+        {
+          "path": "src/scenario-report-contract.ts",
+          "kind": "import-statement",
+          "original": "./scenario-report-contract.js"
+        },
+        {
+          "path": "src/outcome-schema.ts",
+          "kind": "import-statement",
+          "original": "./outcome-schema.js"
+        },
+        {
+          "path": "src/revision-contract.ts",
+          "kind": "import-statement",
+          "original": "./revision-contract.js"
+        },
+        {
+          "path": "src/types.ts",
+          "kind": "import-statement",
+          "original": "./types.js"
+        },
+        {
+          "path": "src/compiler-contract.ts",
+          "kind": "import-statement",
+          "original": "./compiler-contract.js"
+        },
+        {
+          "path": "src/binding-contract.ts",
+          "kind": "import-statement",
+          "original": "./binding-contract.js"
+        },
+        {
+          "path": "node_modules/zod/index.js",
+          "kind": "import-statement",
+          "original": "zod"
+        },
+        {
+          "path": "src/authoring-contract.ts",
+          "kind": "import-statement",
+          "original": "./authoring-contract.js"
+        },
+        {
+          "path": "src/domain-atlas.ts",
+          "kind": "import-statement",
+          "original": "./domain-atlas.js"
+        },
+        {
+          "path": "node:crypto",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "src/simulation-contract.ts": {
+      "bytes": 1959,
+      "imports": [
+        {
+          "path": "src/execution-observer.ts",
+          "kind": "import-statement",
+          "original": "./execution-observer.js"
+        },
+        {
+          "path": "node_modules/zod/index.js",
+          "kind": "import-statement",
+          "original": "zod"
+        },
+        {
+          "path": "src/revision-contract.ts",
+          "kind": "import-statement",
+          "original": "./revision-contract.js"
+        },
+        {
+          "path": "src/outcome-schema.ts",
+          "kind": "import-statement",
+          "original": "./outcome-schema.js"
+        },
+        {
+          "path": "src/scenario-values.ts",
+          "kind": "import-statement",
+          "original": "./scenario-values.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/simulation.ts": {
+      "bytes": 1438,
+      "imports": [
+        {
+          "path": "src/execution-observer.ts",
+          "kind": "import-statement",
+          "original": "./execution-observer.js"
+        },
+        {
+          "path": "src/domain.ts",
+          "kind": "import-statement",
+          "original": "./domain.js"
+        },
+        {
+          "path": "src/outcomes.ts",
+          "kind": "import-statement",
+          "original": "./outcomes.js"
+        },
+        {
+          "path": "src/scenario-values.ts",
+          "kind": "import-statement",
+          "original": "./scenario-values.js"
+        },
+        {
+          "path": "src/simulation-contract.ts",
+          "kind": "import-statement",
+          "original": "./simulation-contract.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/core-bundle.ts": {
+      "bytes": 1704,
+      "imports": [
+        {
+          "path": "node:fs/promises",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "node:path",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "src/domain.ts",
+          "kind": "import-statement",
+          "original": "./domain.js"
+        },
+        {
+          "path": "src/compiler-contract.ts",
+          "kind": "import-statement",
+          "original": "./compiler-contract.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/core-cli.ts": {
+      "bytes": 2657,
+      "imports": [
+        {
+          "path": "src/simulation.ts",
+          "kind": "import-statement",
+          "original": "./simulation.js"
+        },
+        {
+          "path": "src/outcomes.ts",
+          "kind": "import-statement",
+          "original": "./outcomes.js"
+        },
+        {
+          "path": "node:fs/promises",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "node:path",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "src/domain.ts",
+          "kind": "import-statement",
+          "original": "./domain.js"
+        },
+        {
+          "path": "src/outcomes.ts",
+          "kind": "import-statement",
+          "original": "./outcomes.js"
+        },
+        {
+          "path": "src/scenario-values.ts",
+          "kind": "import-statement",
+          "original": "./scenario-values.js"
+        },
+        {
+          "path": "src/compiler-contract.ts",
+          "kind": "import-statement",
+          "original": "./compiler-contract.js"
+        },
+        {
+          "path": "src/core-bundle.ts",
+          "kind": "import-statement",
+          "original": "./core-bundle.js"
+        },
+        {
+          "path": "src/core-bundle.ts",
+          "kind": "import-statement",
+          "original": "./core-bundle.js"
+        }
+      ],
+      "format": "esm"
+    }
+  },
+  "outputs": {
+    "core-cli.js": {
+      "imports": [
+        {
+          "path": "node:crypto",
+          "kind": "require-call",
+          "external": true
+        },
+        {
+          "path": "node:fs/promises",
+          "kind": "require-call",
+          "external": true
+        },
+        {
+          "path": "node:path",
+          "kind": "require-call",
+          "external": true
+        },
+        {
+          "path": "node:fs/promises",
+          "kind": "require-call",
+          "external": true
+        },
+        {
+          "path": "node:path",
+          "kind": "require-call",
+          "external": true
+        }
+      ],
+      "exports": [],
+      "entryPoint": "src/core-cli.ts",
+      "inputs": {
+        "src/core-cli.ts": {
+          "bytesInOutput": 2656
+        },
+        "node_modules/zod/v3/external.js": {
+          "bytesInOutput": 3282
+        },
+        "node_modules/zod/v3/helpers/util.js": {
+          "bytesInOutput": 3409
+        },
+        "node_modules/zod/v3/ZodError.js": {
+          "bytesInOutput": 3148
+        },
+        "node_modules/zod/v3/locales/en.js": {
+          "bytesInOutput": 4803
+        },
+        "node_modules/zod/v3/errors.js": {
+          "bytesInOutput": 145
+        },
+        "node_modules/zod/v3/helpers/parseUtil.js": {
+          "bytesInOutput": 3016
+        },
+        "node_modules/zod/v3/helpers/errorUtil.js": {
+          "bytesInOutput": 265
+        },
+        "node_modules/zod/v3/types.js": {
+          "bytesInOutput": 102748
+        },
+        "node_modules/zod/index.js": {
+          "bytesInOutput": 0
+        },
+        "src/outcomes.ts": {
+          "bytesInOutput": 3949
+        },
+        "src/artifact-data.ts": {
+          "bytesInOutput": 3353
+        },
+        "src/outcome-schema.ts": {
+          "bytesInOutput": 1971
+        },
+        "src/execution-observer.ts": {
+          "bytesInOutput": 4601
+        },
+        "src/generated-map.ts": {
+          "bytesInOutput": 1886
+        },
+        "src/projection-registry.ts": {
+          "bytesInOutput": 1633
+        },
+        "src/source-origin.ts": {
+          "bytesInOutput": 533
+        },
+        "src/semantic-nodes.ts": {
+          "bytesInOutput": 4406
+        },
+        "src/behavior.ts": {
+          "bytesInOutput": 1360
+        },
+        "src/scenario-values.ts": {
+          "bytesInOutput": 670
+        },
+        "src/type-validation.ts": {
+          "bytesInOutput": 2063
+        },
+        "src/provenance-validation.ts": {
+          "bytesInOutput": 2095
+        },
+        "src/composition-validation.ts": {
+          "bytesInOutput": 2611
+        },
+        "src/compiler-contract.ts": {
+          "bytesInOutput": 833
+        },
+        "src/program-identity.ts": {
+          "bytesInOutput": 167
+        },
+        "src/revision-contract.ts": {
+          "bytesInOutput": 264
+        },
+        "src/scenario-report-contract.ts": {
+          "bytesInOutput": 1941
+        },
+        "src/types.ts": {
+          "bytesInOutput": 1098
+        },
+        "src/binding-contract.ts": {
+          "bytesInOutput": 1673
+        },
+        "src/authoring-contract.ts": {
+          "bytesInOutput": 789
+        },
+        "src/expression-patterns.ts": {
+          "bytesInOutput": 567
+        },
+        "src/meaning-types.ts": {
+          "bytesInOutput": 1354
+        },
+        "src/domain-atlas.ts": {
+          "bytesInOutput": 14026
+        },
+        "src/domain.ts": {
+          "bytesInOutput": 35794
+        },
+        "src/simulation-contract.ts": {
+          "bytesInOutput": 1412
+        },
+        "src/simulation.ts": {
+          "bytesInOutput": 998
+        },
+        "src/core-bundle.ts": {
+          "bytesInOutput": 1766
+        }
+      },
+      "bytes": 219279
+    }
+  }
+}

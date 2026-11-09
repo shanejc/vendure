@@ -1,0 +1,25 @@
+{
+  "generatedPath": "packages/core/src/intentional/domain.ts",
+  "regions": [
+    {
+      "description": "Replace selected modeled regions; preserve the public interface and surrounding source.",
+      "originalHash": "d6ad9310ff0c8bbfd0d2458ce6d6b0d91d9d8d60d7938a508e55888d6e71f3ef",
+      "path": "packages/core/src/config/order/default-order-process.ts",
+      "regions": [
+        "binding_graph_8f054d6116ba",
+        "binding_guard_efca37b24d2e"
+      ]
+    },
+    {
+      "description": "Replace selected modeled regions; preserve the public interface and surrounding source.",
+      "originalHash": "fe2e93914dddc3c39c6ffff97de099926b744b73f25cc3a2ecc3a43399572158",
+      "path": "packages/core/src/service/helpers/utils/order-utils.ts",
+      "regions": [
+        "binding_source_7329167ead1d",
+        "binding_source_43272d162c71"
+      ]
+    }
+  ],
+  "sourceCommit": "f97b18759178bd22cbd88062edcff6c308652342",
+  "version": 1
+}

@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "views": [
+    {
+      "kind": "form",
+      "target": "totalCoveredByPayments",
+      "title": "totalCoveredByPayments"
+    },
+    {
+      "kind": "form",
+      "target": "orderTotalIsCovered",
+      "title": "orderTotalIsCovered"
+    },
+    {
+      "kind": "state",
+      "target": "graph_8f054d6116ba",
+      "title": "Recovered transition graph"
+    },
+    {
+      "kind": "table",
+      "target": "guard_efca37b24d2e",
+      "title": "Ordered guard outcome"
+    }
+  ],
+  "vocabulary": {
+    "terms": [
+      {
+        "declaration": {
+          "kind": "input",
+          "name": "state",
+          "ownerId": "orderTotalIsCovered"
+        },
+        "description": "An input to Order Total Is Covered. All uses linked here read this declaration; another definition may have an input with the same spelling.",
+        "label": "Input: state",
+        "target": "input:orderTotalIsCovered:1"
+      }
+    ],
+    "version": 1
+  }
+}

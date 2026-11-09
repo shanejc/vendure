@@ -1,0 +1,78 @@
+{
+  "artifactHash": "398594838fba97489ca146d2c1037d728d56a1bfff704d70a66b4e1c769b845a",
+  "boundaries": [
+    {
+      "id": "binding_graph_8f054d6116ba",
+      "kind": "graph",
+      "sourceId": "source_graph_8f054d6116ba",
+      "target": "graph_8f054d6116ba"
+    },
+    {
+      "id": "binding_source_7329167ead1d",
+      "kind": "function",
+      "sourceId": "source_7329167ead1d",
+      "target": "totalCoveredByPayments"
+    },
+    {
+      "id": "binding_source_43272d162c71",
+      "kind": "function",
+      "sourceId": "source_43272d162c71",
+      "target": "orderTotalIsCovered"
+    },
+    {
+      "id": "binding_guard_efca37b24d2e",
+      "kind": "guard",
+      "sourceId": "source_guard_efca37b24d2e",
+      "target": "guard_efca37b24d2e"
+    }
+  ],
+  "compiler": "0.5.0",
+  "generation": {
+    "generatedPath": "packages/core/src/intentional/domain.ts",
+    "programHash": "398594838fba97489ca146d2c1037d728d56a1bfff704d70a66b4e1c769b845a",
+    "revision": 5,
+    "stale": false,
+    "version": 1
+  },
+  "identityFormatVersion": 1,
+  "integration": {
+    "generatedPath": "packages/core/src/intentional/domain.ts",
+    "version": 1
+  },
+  "portable": {
+    "bundleHash": "c0a8b7f8c3cd3cda177d9db29d6d6ff006a5ddbfc215bc5d03d05645c831ab99",
+    "cases": 1515,
+    "files": {
+      "intentional/REPRODUCE.md": "d4e1bfc1e3ba338a6be125141ee5765a147cf9a3ffeab376b3997aa60b881906",
+      "intentional/portable.json": "7381dc332b43b266864502878f01010641735c1080bc496865a5bec822f0df4d",
+      "intentional/prepared-implementation.json": "ac036c358d9176e2bb06fccb227e3c8e758369c11e55e08e3c4420bb46bb1de7",
+      "intentional/tools/THIRD-PARTY-NOTICES.txt": "f68c95aaead83c5df19e78ad68258d2487afb5020df521224a794dd9a9b8ead3",
+      "intentional/tools/build.json": "8ad7a723f571c45d4f3fe82d2c0e93d18b8abb2562aa850cdab8fbcf13bb17ef",
+      "intentional/tools/core.cjs": "ba1cbe3e96c3887a6e6878627f071f79abd03278f0b509dee4e44dede672579e",
+      "intentional/tools/core.graph.json": "d2ef30cd818f137533f0c7d7130df2ef537d0b34dc3adb48ecbb7def0e6b5f29",
+      "intentional/tools/core.notices.txt": "669bb383c09726f3f2d1e71be44b038fd6cc14081169130193804f25398e4d18",
+      "intentional/tools/intentional.cjs": "adff457395030a47b54445dfb315379f6a6ece44f7efd09e55a8edefc8f2b538",
+      "intentional/tools/toolchain.json": "31dcf2feb65493f28f324c9bd438b1e3cb42d4ea8af638e85916275a1f594d31",
+      "intentional/tools/typescript-source.cjs": "25d7c9d3687c18f11687dc5d6dd90de67a26cd5f7894261f431c68be67fa75d7",
+      "intentional/tools/typescript-source.graph.json": "bc1d71a474c0e47eb216a4c8b17cbefcf939357a9cdfefb12f8470c91e413a04",
+      "intentional/tools/typescript-source.notices.txt": "17c2d2110860089d4724b2a2328e849cc276f9085d9c407d471603b1597721d2",
+      "intentional/tools/verification.cjs": "8afa1fa2c555e43da290d44ca75c556702cb73653b36c98c01a88581aa5b072b",
+      "intentional/tools/verification.graph.json": "e9c8fae59bc01dbb1b54a6a86c074371ea8621609c52be1a19fac920e5b5d6c0",
+      "intentional/tools/verification.notices.txt": "669bb383c09726f3f2d1e71be44b038fd6cc14081169130193804f25398e4d18",
+      "intentional/verification/adapter.cjs": "edfd3275d8e888aba0bda039fa2040f27402d56cfec51d05d4fe4137fa379005",
+      "intentional/verification/corpus.json": "2ba0b64be758052b12e8217018ce73d77e57dd384424a28a32ac395ae5466dc0"
+    },
+    "programHash": "398594838fba97489ca146d2c1037d728d56a1bfff704d70a66b4e1c769b845a",
+    "stale": false,
+    "toolHash": "adff457395030a47b54445dfb315379f6a6ece44f7efd09e55a8edefc8f2b538",
+    "verificationHash": "9ef1d262916fd35dfa58412cc9ddce1a99f103a358f44c8f0a3d65ae01a9e0ca",
+    "version": 2
+  },
+  "revision": 12,
+  "scenarioFormatVersion": 1,
+  "scenarioHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "sourceCommit": "f97b18759178bd22cbd88062edcff6c308652342",
+  "sourceMapVersion": 2,
+  "version": 1,
+  "workspaceId": "d1bafb05-17fb-4679-92b8-2952c500443a"
+}
