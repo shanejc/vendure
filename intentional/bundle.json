@@ -3037,11 +3037,6 @@
           "description": "An input to Order Total Is Covered. All uses linked here read this declaration; another definition may have an input with the same spelling.",
           "label": "Input: state",
           "target": "input:orderTotalIsCovered:1"
-        },
-        {
-          "description": "Computes a value from its inputs. Calls below show which other modeled definitions it uses.",
-          "label": "Payment coverage total",
-          "target": "totalCoveredByPayments"
         }
       ],
       "version": 1
