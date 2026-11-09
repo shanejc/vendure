@@ -4,8 +4,8 @@
     {
       "version": 1,
       "name": "core",
-      "toolVersion": "core/2",
-      "contractVersion": "contracts/2",
+      "toolVersion": "core/4",
+      "contractVersion": "contracts/3",
       "defaultCompiler": "0.5.0",
       "supportedCompilers": [
         "0.5.0",
@@ -16,11 +16,11 @@
       "target": "node22",
       "format": "cjs",
       "encoding": "plain-javascript",
-      "rawBytes": 192682,
-      "distributionBytes": 192682,
-      "gzipBytes": 37055,
-      "sha256": "597b466bc3326c63358ff4dfb3dad2b639ded2687b0a1deaa6db4cf91e05887a",
-      "rawSha256": "597b466bc3326c63358ff4dfb3dad2b639ded2687b0a1deaa6db4cf91e05887a",
+      "rawBytes": 219279,
+      "distributionBytes": 219279,
+      "gzipBytes": 43411,
+      "sha256": "ba1cbe3e96c3887a6e6878627f071f79abd03278f0b509dee4e44dede672579e",
+      "rawSha256": "ba1cbe3e96c3887a6e6878627f071f79abd03278f0b509dee4e44dede672579e",
       "coreRawBytesTarget": 1000000,
       "withinCoreSizeTarget": true,
       "typescriptInputs": [],
@@ -33,15 +33,23 @@
       "majorContributors": [
         {
           "path": "node_modules/zod/v3/types.js",
-          "bytes": 102742
+          "bytes": 102748
         },
         {
           "path": "src/domain.ts",
-          "bytes": 33539
+          "bytes": 35794
+        },
+        {
+          "path": "src/domain-atlas.ts",
+          "bytes": 14026
         },
         {
           "path": "node_modules/zod/v3/locales/en.js",
           "bytes": 4803
+        },
+        {
+          "path": "src/execution-observer.ts",
+          "bytes": 4601
         },
         {
           "path": "src/semantic-nodes.ts",
@@ -54,25 +62,9 @@
         {
           "path": "node_modules/zod/v3/helpers/util.js",
           "bytes": 3409
-        },
-        {
-          "path": "src/artifact-data.ts",
-          "bytes": 3353
-        },
-        {
-          "path": "node_modules/zod/v3/external.js",
-          "bytes": 3282
         }
       ],
       "inputs": [
-        {
-          "path": "src/generated-map.ts",
-          "sha256": "6384a5fab2b47406a15d6d504f20f75435156e66b3e4f4b21b8ba9cf06ac2eca"
-        },
-        {
-          "path": "src/projection-registry.ts",
-          "sha256": "9f3b55262576da35e957e0db137e51a310331da97f47d9b46c27f31872e3bd48"
-        },
         {
           "path": "node_modules/zod/v3/helpers/util.js",
           "sha256": "906ef685e5853d496e293ee8f8a2bb8b1ed2d078a1bcdfedb2dfd61d75b6330c"
@@ -114,24 +106,36 @@
           "sha256": "6419c4ac0e637ff08463083e31886d10354f74cbcc4e584400b2b837e39ac881"
         },
         {
-          "path": "src/source-origin.ts",
-          "sha256": "5f9ec2dff798702b583faf5885432badccb289fdf649aa6ae0c3b25f6d83d6d5"
-        },
-        {
-          "path": "src/semantic-nodes.ts",
-          "sha256": "472616e832c6aa14d6def241780e047eb2a6ec70947a12de6ea979c5e1aa2cfe"
+          "path": "src/outcomes.ts",
+          "sha256": "f7d56d14a2593c8844f542240fadf14978a848d50126003f704b86878e493220"
         },
         {
           "path": "src/artifact-data.ts",
           "sha256": "d74683b198e73c373746709eeb7e855c55932c7488d2e3ef0d8c1d0442580cb2"
         },
         {
-          "path": "src/outcomes.ts",
-          "sha256": "f7d56d14a2593c8844f542240fadf14978a848d50126003f704b86878e493220"
-        },
-        {
           "path": "src/outcome-schema.ts",
           "sha256": "e764213cce405d83dcf0c6d1446d653e0597caef5bc76b23f306e68780bea160"
+        },
+        {
+          "path": "src/execution-observer.ts",
+          "sha256": "59d3149d488201ebb9a3c60ca723f7541d4a1626f1acb580edf21a28c70a91bb"
+        },
+        {
+          "path": "src/generated-map.ts",
+          "sha256": "6384a5fab2b47406a15d6d504f20f75435156e66b3e4f4b21b8ba9cf06ac2eca"
+        },
+        {
+          "path": "src/projection-registry.ts",
+          "sha256": "ea8005abc5ce3154631f22e40fd4139dac1ca30b7be80d2ffa5460d6cdca535d"
+        },
+        {
+          "path": "src/source-origin.ts",
+          "sha256": "5f9ec2dff798702b583faf5885432badccb289fdf649aa6ae0c3b25f6d83d6d5"
+        },
+        {
+          "path": "src/semantic-nodes.ts",
+          "sha256": "472616e832c6aa14d6def241780e047eb2a6ec70947a12de6ea979c5e1aa2cfe"
         },
         {
           "path": "src/behavior.ts",
@@ -155,7 +159,7 @@
         },
         {
           "path": "src/compiler-contract.ts",
-          "sha256": "3757f7f736f5031b3efedc3184de90549f2595ef136f37a44af0e775972c96d1"
+          "sha256": "1103df2c6319fa141e75b4aa53fecf8c4aa947273b3c05f2243bca412dd1daa4"
         },
         {
           "path": "src/program-identity.ts",
@@ -178,8 +182,32 @@
           "sha256": "81617006cefae27a5d40f979abf273867b2c40da8c13833503a7bdf57fc16b5a"
         },
         {
+          "path": "src/authoring-contract.ts",
+          "sha256": "662d5a4248f6933be5bb06f008cc6cc4ba993b92bbe97acb153d5cecaed72162"
+        },
+        {
+          "path": "src/expression-patterns.ts",
+          "sha256": "6d6f98291596f6afe8487e906de524f52117b6e613f98d1304b19345af6a81f3"
+        },
+        {
+          "path": "src/meaning-types.ts",
+          "sha256": "52ddef1e6e4c566d4681c4df15f98d8b3a773e9fa8e007598bc2d861e4d53d7e"
+        },
+        {
+          "path": "src/domain-atlas.ts",
+          "sha256": "ff1756d838a9de906e1aa7b49ba66f61ac0b0a1f3b93f4a878cbe11cd28f63c4"
+        },
+        {
           "path": "src/domain.ts",
-          "sha256": "0994e31bcd9037b74942e99f607fde082ebabc4b1adb5fa4f93c62f50f4052a0"
+          "sha256": "8ee3a8b930cadf4dc43d1c8742eb27aaf889db3ce83db361faf86e1f46562337"
+        },
+        {
+          "path": "src/simulation-contract.ts",
+          "sha256": "2dc58be37b86767d4bc6d279755788db949bdd15193ffa74715c5681c6ce86f5"
+        },
+        {
+          "path": "src/simulation.ts",
+          "sha256": "b371649ca6ae7dee783c3264ef5c1ee9aab7ffa142b999848bb866601dbcad83"
         },
         {
           "path": "src/core-bundle.ts",
@@ -187,15 +215,15 @@
         },
         {
           "path": "src/core-cli.ts",
-          "sha256": "e65a91cdffc9fc5bef6a80e608db8f8e87068b278c9c6709c1c91af457aa09bd"
+          "sha256": "e101c44b16cff47a87c0b53099f0ea660a74366809c24d34f21c1379216949e8"
         }
       ]
     },
     {
       "version": 1,
       "name": "typescript-source",
-      "toolVersion": "typescript-source/2",
-      "contractVersion": "contracts/2",
+      "toolVersion": "typescript-source/3",
+      "contractVersion": "contracts/3",
       "defaultCompiler": "0.5.0",
       "supportedCompilers": [
         "0.5.0",
@@ -206,11 +234,11 @@
       "target": "node22",
       "format": "cjs",
       "encoding": "gzip-base64-checksummed-loader",
-      "rawBytes": 10144130,
-      "distributionBytes": 2196396,
-      "gzipBytes": 1646915,
-      "sha256": "8feaa0601d5e2b31ba5dbf262777afbbd4506cd375b55751d6f860a4757529eb",
-      "rawSha256": "34d415b7928a589be15a7f20cff8b9178af86929c8b2918db310ef5f71de7686",
+      "rawBytes": 10163883,
+      "distributionBytes": 2202788,
+      "gzipBytes": 1651708,
+      "sha256": "25d7c9d3687c18f11687dc5d6dd90de67a26cd5f7894261f431c68be67fa75d7",
+      "rawSha256": "3ff2bcb303199d881edc12fd802618f03e2722b04e4a34199510a21ca8106f09",
       "typescriptInputs": [
         "node_modules/typescript/lib/typescript.js"
       ],
@@ -234,7 +262,7 @@
       "majorContributors": [
         {
           "path": "node_modules/typescript/lib/typescript.js",
-          "bytes": 9940754
+          "bytes": 9942721
         },
         {
           "path": "node_modules/zod/v3/types.js",
@@ -242,7 +270,11 @@
         },
         {
           "path": "src/domain.ts",
-          "bytes": 27444
+          "bytes": 28127
+        },
+        {
+          "path": "src/domain-atlas.ts",
+          "bytes": 14047
         },
         {
           "path": "src/portable-common.ts",
@@ -250,7 +282,7 @@
         },
         {
           "path": "src/integrate-recovered.ts",
-          "bytes": 5272
+          "bytes": 5294
         },
         {
           "path": "node_modules/zod/v3/locales/en.js",
@@ -259,10 +291,6 @@
         {
           "path": "src/semantic-nodes.ts",
           "bytes": 4406
-        },
-        {
-          "path": "src/outcomes.ts",
-          "bytes": 3949
         }
       ],
       "inputs": [
@@ -272,7 +300,7 @@
         },
         {
           "path": "src/projection-registry.ts",
-          "sha256": "9f3b55262576da35e957e0db137e51a310331da97f47d9b46c27f31872e3bd48"
+          "sha256": "ea8005abc5ce3154631f22e40fd4139dac1ca30b7be80d2ffa5460d6cdca535d"
         },
         {
           "path": "node_modules/zod/v3/helpers/util.js",
@@ -356,7 +384,7 @@
         },
         {
           "path": "src/compiler-contract.ts",
-          "sha256": "3757f7f736f5031b3efedc3184de90549f2595ef136f37a44af0e775972c96d1"
+          "sha256": "1103df2c6319fa141e75b4aa53fecf8c4aa947273b3c05f2243bca412dd1daa4"
         },
         {
           "path": "src/program-identity.ts",
@@ -379,8 +407,24 @@
           "sha256": "81617006cefae27a5d40f979abf273867b2c40da8c13833503a7bdf57fc16b5a"
         },
         {
+          "path": "src/authoring-contract.ts",
+          "sha256": "662d5a4248f6933be5bb06f008cc6cc4ba993b92bbe97acb153d5cecaed72162"
+        },
+        {
+          "path": "src/expression-patterns.ts",
+          "sha256": "6d6f98291596f6afe8487e906de524f52117b6e613f98d1304b19345af6a81f3"
+        },
+        {
+          "path": "src/meaning-types.ts",
+          "sha256": "52ddef1e6e4c566d4681c4df15f98d8b3a773e9fa8e007598bc2d861e4d53d7e"
+        },
+        {
+          "path": "src/domain-atlas.ts",
+          "sha256": "ff1756d838a9de906e1aa7b49ba66f61ac0b0a1f3b93f4a878cbe11cd28f63c4"
+        },
+        {
           "path": "src/domain.ts",
-          "sha256": "0994e31bcd9037b74942e99f607fde082ebabc4b1adb5fa4f93c62f50f4052a0"
+          "sha256": "8ee3a8b930cadf4dc43d1c8742eb27aaf889db3ce83db361faf86e1f46562337"
         },
         {
           "path": "src/artifacts.ts",
@@ -396,7 +440,7 @@
         },
         {
           "path": "src/integrate-recovered.ts",
-          "sha256": "dcd2d326e3b8ab84b4be1fbec7033657d31bb64eeebd611793a50a51771da2b9"
+          "sha256": "28f055dd1bb0409585b563f10cb1ecad5310ad795b0bb0d6aea7d0892c7e7de7"
         },
         {
           "path": "src/observations.ts",
@@ -408,7 +452,7 @@
         },
         {
           "path": "src/portable-prepared.ts",
-          "sha256": "dfae4d1db318543e61aa0cecbc222151b95d3714c7460636da57c207cceb86df"
+          "sha256": "917cbc508840138454040dad6ada609148273997b979dcc54bbcd94356340948"
         },
         {
           "path": "src/portable-generation.ts",
@@ -424,7 +468,7 @@
       "version": 1,
       "name": "verification",
       "toolVersion": "0.2.0",
-      "contractVersion": "contracts/2",
+      "contractVersion": "contracts/3",
       "defaultCompiler": "0.5.0",
       "supportedCompilers": [
         "0.5.0",
@@ -435,11 +479,11 @@
       "target": "node22",
       "format": "cjs",
       "encoding": "plain-javascript",
-      "rawBytes": 221929,
-      "distributionBytes": 221929,
-      "gzipBytes": 44516,
-      "sha256": "d8ee56e7599e148abaaff46100863e542a8d860523d427317978cc98097935e5",
-      "rawSha256": "d8ee56e7599e148abaaff46100863e542a8d860523d427317978cc98097935e5",
+      "rawBytes": 239670,
+      "distributionBytes": 239670,
+      "gzipBytes": 49176,
+      "sha256": "8afa1fa2c555e43da290d44ca75c556702cb73653b36c98c01a88581aa5b072b",
+      "rawSha256": "8afa1fa2c555e43da290d44ca75c556702cb73653b36c98c01a88581aa5b072b",
       "typescriptInputs": [],
       "externalImports": [
         "node:child_process",
@@ -456,7 +500,11 @@
         },
         {
           "path": "src/domain.ts",
-          "bytes": 27446
+          "bytes": 28129
+        },
+        {
+          "path": "src/domain-atlas.ts",
+          "bytes": 14047
         },
         {
           "path": "src/repository-runner.ts",
@@ -477,10 +525,6 @@
         {
           "path": "src/semantic-nodes.ts",
           "bytes": 4406
-        },
-        {
-          "path": "src/outcomes.ts",
-          "bytes": 3949
         }
       ],
       "inputs": [
@@ -498,7 +542,7 @@
         },
         {
           "path": "src/projection-registry.ts",
-          "sha256": "9f3b55262576da35e957e0db137e51a310331da97f47d9b46c27f31872e3bd48"
+          "sha256": "ea8005abc5ce3154631f22e40fd4139dac1ca30b7be80d2ffa5460d6cdca535d"
         },
         {
           "path": "node_modules/zod/v3/helpers/util.js",
@@ -582,7 +626,7 @@
         },
         {
           "path": "src/compiler-contract.ts",
-          "sha256": "3757f7f736f5031b3efedc3184de90549f2595ef136f37a44af0e775972c96d1"
+          "sha256": "1103df2c6319fa141e75b4aa53fecf8c4aa947273b3c05f2243bca412dd1daa4"
         },
         {
           "path": "src/program-identity.ts",
@@ -605,8 +649,24 @@
           "sha256": "81617006cefae27a5d40f979abf273867b2c40da8c13833503a7bdf57fc16b5a"
         },
         {
+          "path": "src/authoring-contract.ts",
+          "sha256": "662d5a4248f6933be5bb06f008cc6cc4ba993b92bbe97acb153d5cecaed72162"
+        },
+        {
+          "path": "src/expression-patterns.ts",
+          "sha256": "6d6f98291596f6afe8487e906de524f52117b6e613f98d1304b19345af6a81f3"
+        },
+        {
+          "path": "src/meaning-types.ts",
+          "sha256": "52ddef1e6e4c566d4681c4df15f98d8b3a773e9fa8e007598bc2d861e4d53d7e"
+        },
+        {
+          "path": "src/domain-atlas.ts",
+          "sha256": "ff1756d838a9de906e1aa7b49ba66f61ac0b0a1f3b93f4a878cbe11cd28f63c4"
+        },
+        {
           "path": "src/domain.ts",
-          "sha256": "0994e31bcd9037b74942e99f607fde082ebabc4b1adb5fa4f93c62f50f4052a0"
+          "sha256": "8ee3a8b930cadf4dc43d1c8742eb27aaf889db3ce83db361faf86e1f46562337"
         },
         {
           "path": "src/observations.ts",
@@ -642,7 +702,7 @@
         },
         {
           "path": "src/portable-prepared.ts",
-          "sha256": "dfae4d1db318543e61aa0cecbc222151b95d3714c7460636da57c207cceb86df"
+          "sha256": "917cbc508840138454040dad6ada609148273997b979dcc54bbcd94356340948"
         },
         {
           "path": "src/portable-verification.ts",

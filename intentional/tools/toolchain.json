@@ -2,16 +2,16 @@
   "version": 2,
   "tools": {
     "core": {
-      "version": "core/2",
-      "sha256": "597b466bc3326c63358ff4dfb3dad2b639ded2687b0a1deaa6db4cf91e05887a"
+      "version": "core/4",
+      "sha256": "ba1cbe3e96c3887a6e6878627f071f79abd03278f0b509dee4e44dede672579e"
     },
     "typescript-source": {
-      "version": "typescript-source/2",
-      "sha256": "8feaa0601d5e2b31ba5dbf262777afbbd4506cd375b55751d6f860a4757529eb"
+      "version": "typescript-source/3",
+      "sha256": "25d7c9d3687c18f11687dc5d6dd90de67a26cd5f7894261f431c68be67fa75d7"
     },
     "verification": {
       "version": "0.2.0",
-      "sha256": "d8ee56e7599e148abaaff46100863e542a8d860523d427317978cc98097935e5"
+      "sha256": "8afa1fa2c555e43da290d44ca75c556702cb73653b36c98c01a88581aa5b072b"
     }
   }
 }

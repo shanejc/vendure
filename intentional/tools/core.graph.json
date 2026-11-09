@@ -1,15 +1,5 @@
 {
   "inputs": {
-    "src/generated-map.ts": {
-      "bytes": 1722,
-      "imports": [],
-      "format": "esm"
-    },
-    "src/projection-registry.ts": {
-      "bytes": 2113,
-      "imports": [],
-      "format": "esm"
-    },
     "node_modules/zod/v3/helpers/util.js": {
       "bytes": 4055,
       "imports": [],
@@ -162,19 +152,8 @@
       ],
       "format": "esm"
     },
-    "src/source-origin.ts": {
-      "bytes": 576,
-      "imports": [
-        {
-          "path": "node_modules/zod/index.js",
-          "kind": "import-statement",
-          "original": "zod"
-        }
-      ],
-      "format": "esm"
-    },
-    "src/semantic-nodes.ts": {
-      "bytes": 4241,
+    "src/outcomes.ts": {
+      "bytes": 4096,
       "imports": [],
       "format": "esm"
     },
@@ -187,11 +166,6 @@
           "original": "zod"
         }
       ],
-      "format": "esm"
-    },
-    "src/outcomes.ts": {
-      "bytes": 4096,
-      "imports": [],
       "format": "esm"
     },
     "src/outcome-schema.ts": {
@@ -213,6 +187,53 @@
           "original": "./outcomes.js"
         }
       ],
+      "format": "esm"
+    },
+    "src/execution-observer.ts": {
+      "bytes": 4717,
+      "imports": [
+        {
+          "path": "node_modules/zod/index.js",
+          "kind": "import-statement",
+          "original": "zod"
+        },
+        {
+          "path": "src/outcomes.ts",
+          "kind": "import-statement",
+          "original": "./outcomes.js"
+        },
+        {
+          "path": "src/outcome-schema.ts",
+          "kind": "import-statement",
+          "original": "./outcome-schema.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/generated-map.ts": {
+      "bytes": 1722,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/projection-registry.ts": {
+      "bytes": 2275,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/source-origin.ts": {
+      "bytes": 576,
+      "imports": [
+        {
+          "path": "node_modules/zod/index.js",
+          "kind": "import-statement",
+          "original": "zod"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/semantic-nodes.ts": {
+      "bytes": 4241,
+      "imports": [],
       "format": "esm"
     },
     "src/behavior.ts": {
@@ -341,8 +362,45 @@
       ],
       "format": "esm"
     },
+    "src/authoring-contract.ts": {
+      "bytes": 712,
+      "imports": [
+        {
+          "path": "node_modules/zod/index.js",
+          "kind": "import-statement",
+          "original": "zod"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/expression-patterns.ts": {
+      "bytes": 676,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/meaning-types.ts": {
+      "bytes": 1427,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/domain-atlas.ts": {
+      "bytes": 14110,
+      "imports": [
+        {
+          "path": "src/expression-patterns.ts",
+          "kind": "import-statement",
+          "original": "./expression-patterns.js"
+        },
+        {
+          "path": "src/meaning-types.ts",
+          "kind": "import-statement",
+          "original": "./meaning-types.js"
+        }
+      ],
+      "format": "esm"
+    },
     "src/domain.ts": {
-      "bytes": 31745,
+      "bytes": 33910,
       "imports": [
         {
           "path": "src/generated-map.ts",
@@ -445,9 +503,81 @@
           "original": "zod"
         },
         {
+          "path": "src/authoring-contract.ts",
+          "kind": "import-statement",
+          "original": "./authoring-contract.js"
+        },
+        {
+          "path": "src/domain-atlas.ts",
+          "kind": "import-statement",
+          "original": "./domain-atlas.js"
+        },
+        {
           "path": "node:crypto",
           "kind": "import-statement",
           "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "src/simulation-contract.ts": {
+      "bytes": 1959,
+      "imports": [
+        {
+          "path": "src/execution-observer.ts",
+          "kind": "import-statement",
+          "original": "./execution-observer.js"
+        },
+        {
+          "path": "node_modules/zod/index.js",
+          "kind": "import-statement",
+          "original": "zod"
+        },
+        {
+          "path": "src/revision-contract.ts",
+          "kind": "import-statement",
+          "original": "./revision-contract.js"
+        },
+        {
+          "path": "src/outcome-schema.ts",
+          "kind": "import-statement",
+          "original": "./outcome-schema.js"
+        },
+        {
+          "path": "src/scenario-values.ts",
+          "kind": "import-statement",
+          "original": "./scenario-values.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/simulation.ts": {
+      "bytes": 1438,
+      "imports": [
+        {
+          "path": "src/execution-observer.ts",
+          "kind": "import-statement",
+          "original": "./execution-observer.js"
+        },
+        {
+          "path": "src/domain.ts",
+          "kind": "import-statement",
+          "original": "./domain.js"
+        },
+        {
+          "path": "src/outcomes.ts",
+          "kind": "import-statement",
+          "original": "./outcomes.js"
+        },
+        {
+          "path": "src/scenario-values.ts",
+          "kind": "import-statement",
+          "original": "./scenario-values.js"
+        },
+        {
+          "path": "src/simulation-contract.ts",
+          "kind": "import-statement",
+          "original": "./simulation-contract.js"
         }
       ],
       "format": "esm"
@@ -479,8 +609,18 @@
       "format": "esm"
     },
     "src/core-cli.ts": {
-      "bytes": 2388,
+      "bytes": 2657,
       "imports": [
+        {
+          "path": "src/simulation.ts",
+          "kind": "import-statement",
+          "original": "./simulation.js"
+        },
+        {
+          "path": "src/outcomes.ts",
+          "kind": "import-statement",
+          "original": "./outcomes.js"
+        },
         {
           "path": "node:fs/promises",
           "kind": "import-statement",
@@ -529,17 +669,17 @@
     "core-cli.js": {
       "imports": [
         {
+          "path": "node:crypto",
+          "kind": "require-call",
+          "external": true
+        },
+        {
           "path": "node:fs/promises",
           "kind": "require-call",
           "external": true
         },
         {
           "path": "node:path",
-          "kind": "require-call",
-          "external": true
-        },
-        {
-          "path": "node:crypto",
           "kind": "require-call",
           "external": true
         },
@@ -558,13 +698,7 @@
       "entryPoint": "src/core-cli.ts",
       "inputs": {
         "src/core-cli.ts": {
-          "bytesInOutput": 2454
-        },
-        "src/generated-map.ts": {
-          "bytesInOutput": 1886
-        },
-        "src/projection-registry.ts": {
-          "bytesInOutput": 1462
+          "bytesInOutput": 2656
         },
         "node_modules/zod/v3/external.js": {
           "bytesInOutput": 3282
@@ -588,25 +722,34 @@
           "bytesInOutput": 265
         },
         "node_modules/zod/v3/types.js": {
-          "bytesInOutput": 102742
+          "bytesInOutput": 102748
         },
         "node_modules/zod/index.js": {
           "bytesInOutput": 0
+        },
+        "src/outcomes.ts": {
+          "bytesInOutput": 3949
+        },
+        "src/artifact-data.ts": {
+          "bytesInOutput": 3353
+        },
+        "src/outcome-schema.ts": {
+          "bytesInOutput": 1971
+        },
+        "src/execution-observer.ts": {
+          "bytesInOutput": 4601
+        },
+        "src/generated-map.ts": {
+          "bytesInOutput": 1886
+        },
+        "src/projection-registry.ts": {
+          "bytesInOutput": 1633
         },
         "src/source-origin.ts": {
           "bytesInOutput": 533
         },
         "src/semantic-nodes.ts": {
           "bytesInOutput": 4406
-        },
-        "src/artifact-data.ts": {
-          "bytesInOutput": 3353
-        },
-        "src/outcomes.ts": {
-          "bytesInOutput": 3949
-        },
-        "src/outcome-schema.ts": {
-          "bytesInOutput": 1971
         },
         "src/behavior.ts": {
           "bytesInOutput": 1360
@@ -615,7 +758,7 @@
           "bytesInOutput": 670
         },
         "src/type-validation.ts": {
-          "bytesInOutput": 2060
+          "bytesInOutput": 2063
         },
         "src/provenance-validation.ts": {
           "bytesInOutput": 2095
@@ -641,14 +784,32 @@
         "src/binding-contract.ts": {
           "bytesInOutput": 1673
         },
+        "src/authoring-contract.ts": {
+          "bytesInOutput": 789
+        },
+        "src/expression-patterns.ts": {
+          "bytesInOutput": 567
+        },
+        "src/meaning-types.ts": {
+          "bytesInOutput": 1354
+        },
+        "src/domain-atlas.ts": {
+          "bytesInOutput": 14026
+        },
         "src/domain.ts": {
-          "bytesInOutput": 33539
+          "bytesInOutput": 35794
+        },
+        "src/simulation-contract.ts": {
+          "bytesInOutput": 1412
+        },
+        "src/simulation.ts": {
+          "bytesInOutput": 998
         },
         "src/core-bundle.ts": {
           "bytesInOutput": 1766
         }
       },
-      "bytes": 192682
+      "bytes": 219279
     }
   }
 }

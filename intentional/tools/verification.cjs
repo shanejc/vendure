@@ -194,7 +194,7 @@ function expressionLocations(code, nodes) {
 }
 
 // src/projection-registry.ts
-var projectionRegistry = { table: { targets: ["decision"], edits: ["set_expression", "move_rule"] }, form: { targets: ["function", "decision"], edits: ["set_expression"] }, state: { targets: ["machine"], edits: ["set_expression", "set_transition", "add_state", "add_transition"] } };
+var projectionRegistry = { table: { targets: ["decision"], edits: ["set_expression", "move_rule", "insert_rule", "duplicate_rule", "remove_rule", "compose_condition", "wrap_conditional"] }, form: { targets: ["function", "decision"], edits: ["set_expression", "compose_condition", "wrap_conditional"] }, state: { targets: ["machine"], edits: ["set_expression", "set_transition", "add_state", "add_transition", "compose_condition", "wrap_conditional"] } };
 function projectionTargets(bundle) {
   return [
     ...[...bundle.program.functions, ...bundle.language.operations].map((f) => ({ id: f.id, name: f.name, kind: "function" })),
@@ -4755,18 +4755,242 @@ function validateBindings(b, version, reserved, errors) {
   }
 }
 
+// src/authoring-contract.ts
+var declaration = external_exports.object({ ownerId: external_exports.string(), name: external_exports.string(), kind: external_exports.enum(["input", "local", "item", "accumulator", "field"]) }).strict();
+var vocabularySchema = external_exports.object({ version: external_exports.literal(1), terms: external_exports.array(external_exports.object({ target: external_exports.string().min(1).max(600), label: external_exports.string().trim().min(1).max(160), description: external_exports.string().trim().max(2e3), declaration: declaration.optional() }).strict()).max(500), meanings: external_exports.array(external_exports.object({ target: external_exports.string().min(1).max(600), type: external_exports.string().min(1).max(256), declaration }).strict()).max(500).optional() }).strict();
+
+// src/expression-patterns.ts
+function addsSelectedField(e) {
+  const a = e.args ?? [], next = a[2];
+  return e.op === "fold" && a[1]?.op === "literal" && a[1].value === 0 && next?.op === "add" && next.args?.[0]?.op === "get" && next.args[0].path === e.path && next.args?.[1]?.op === "at" && next.args[1].args?.[0]?.op === "get" && next.args[1].args[0].path === e.name && next.args[1].args?.[1]?.op === "get";
+}
+function sourceHelperLabel(name, sourceId, body) {
+  if (!sourceId) return name;
+  return addsSelectedField(body) ? "Add field values" : name.replace(/^operation_[a-f0-9]{10}_/, "");
+}
+
+// src/meaning-types.ts
+function meaningBase(bundle, input) {
+  let type = input;
+  const seen = /* @__PURE__ */ new Set();
+  for (let i = 0; type && i < 60; i++) {
+    if (type.endsWith("?")) {
+      type = type.slice(0, -1);
+      continue;
+    }
+    if (seen.has(type)) return;
+    seen.add(type);
+    const d = bundle.language.types[type];
+    if (d?.kind === "alias") {
+      type = d.target;
+      continue;
+    }
+    return type;
+  }
+}
+function meaningField(bundle, input, key) {
+  const type = meaningBase(bundle, input), definition = type && bundle.language.types[type];
+  return definition && definition.kind === "record" ? { type: definition.fields?.[key], fieldId: definition.fieldIds?.[key], recordId: definition.id } : void 0;
+}
+function meaningPath(bundle, type, segments) {
+  for (const key of segments) type = meaningField(bundle, type, key)?.type;
+  return type;
+}
+function meaningItem(bundle, type) {
+  const base = meaningBase(bundle, type);
+  return base?.endsWith("[]") ? base.slice(0, -2) : void 0;
+}
+function validMeaning(bundle, type) {
+  let t = type, count = 0;
+  while (t.endsWith("?") || t.endsWith("[]")) {
+    t = t.slice(0, t.endsWith("?") ? -1 : -2);
+    if (++count > 30) return false;
+  }
+  return /^[A-Za-z_$][\w$]*$/.test(t) && (["number", "string", "boolean", "any", "unknown"].includes(t) || Object.hasOwn(bundle.language.types, t));
+}
+
+// src/domain-atlas.ts
+var readableName = (name) => name.replace(/([a-z0-9])([A-Z])/g, "$1 $2").replace(/[_-]+/g, " ").replace(/^./, (s) => s.toUpperCase());
+var resultOf = (e) => !e ? "Incomplete expression" : e.op === "let" ? resultOf(e.args?.[1]) : ["eq", "ne", "lt", "le", "gt", "ge", "not", "isArray", "some", "every", "includes"].includes(e.op) ? "True or false" : ["filter", "map", "array"].includes(e.op) ? "A list" : e.op === "record" ? "A record of named fields" : "A value; no result type is declared";
+function domainAtlas(bundle) {
+  const atlas = { version: 1, concepts: [], bindings: [], references: [], records: [], sharedFields: [], locations: [], calls: [], integrationLinks: [], unresolved: [] }, bindings = /* @__PURE__ */ new Map(), callNames = /* @__PURE__ */ new Map();
+  const terms = new Map(bundle.projection.vocabulary?.terms.map((t) => [t.target, t]) ?? []), meanings = new Map(bundle.projection.vocabulary?.meanings?.map((m) => [m.target, m.type]) ?? []);
+  for (const [name, r] of Object.entries(bundle.language.types)) {
+    if (r.kind !== "record") continue;
+    const id = r.id ?? "type:" + name;
+    atlas.records.push({ id, name, label: terms.get(id)?.label ?? readableName(name), description: terms.get(id)?.description ?? "A declared domain record. Meaning links guide authoring; input runtime checks are shown separately.", fields: Object.entries(r.fields ?? {}).map(([field, type]) => {
+      const fieldId = r.fieldIds?.[field] ?? id + "/" + field;
+      atlas.sharedFields.push({ id: fieldId, recordId: id, name: field, label: terms.get(fieldId)?.label ?? readableName(field), description: terms.get(fieldId)?.description ?? "Shared field meaning from " + name + ".", type, uses: [] });
+      return fieldId;
+    }) });
+  }
+  const addBinding = (binding) => {
+    const term = terms.get(binding.id);
+    if (term) {
+      binding.label = term.label;
+      binding.description = term.description;
+    }
+    binding.meaningType = meanings.get(binding.id) ?? binding.meaningType ?? binding.type;
+    bindings.set(binding.id, binding);
+    atlas.bindings.push(binding);
+    return binding.id;
+  };
+  const scopeIds = (scope) => [...new Set(scope.values())];
+  const concepts = [...bundle.language.operations.map((f) => ({ ...f, kind: "vocabulary-operation" })), ...bundle.program.functions.map((f) => ({ ...f, kind: "calculation" })), ...bundle.program.decisions.map((d) => ({ ...d, name: d.id, kind: bundle.recovery?.bindings.some((b) => b.target === d.id && b.kind === "guard") ? "transition-policy" : "decision" })), ...bundle.program.machines.map((m) => ({ ...m, name: m.id, params: ["from", "to", "context"], kind: m.kind === "graph" ? "graph" : "workflow" }))];
+  for (const f of concepts) {
+    const term = terms.get(f.id), view = bundle.projection.views.find((v) => v.target === f.id), kind = f.kind;
+    callNames.set(f.name, f.id);
+    atlas.concepts.push({ id: f.id, name: f.name, label: term?.label ?? (view && view.title !== f.name ? view.title : readableName(kind === "vocabulary-operation" && "body" in f ? sourceHelperLabel(f.name, f.sourceId, f.body) : f.name)), kind, description: term?.description ?? (kind === "transition-policy" ? "Ordered checks return either a refusal outcome or permission to continue in the original process. Continuing does not bypass other checks." : kind === "decision" ? "Rules are tried in order. The first match returns its outcome; the fallback handles no match." : kind === "graph" ? "Defines available source and destination states. Original process checks still determine whether an available move succeeds." : kind === "workflow" ? "Defines states, available transitions and their modeled conditions." : "Computes a value from its inputs. Calls below show which other modeled definitions it uses."), result: kind === "transition-policy" ? "Continue, or return an explicit outcome" : "body" in f ? "resultType" in f && f.resultType ? f.resultType : resultOf(f.body) : "rules" in f ? "The first matching outcome, or the fallback" : "An available move; additional process checks may apply", sourceId: f.sourceId, calls: [], callers: [], inputs: [], retained: bundle.recovery?.bindings.find((b) => b.target === f.id)?.retained ?? [], views: bundle.projection.views.filter((v) => v.target === f.id).map((v) => v.kind) });
+  }
+  const knownPath = (e, scope) => {
+    if (!e) return;
+    if (e.op === "get") {
+      const [name, ...parts] = (e.path ?? "").split("."), bindingId = scope.get(name);
+      return bindingId ? { bindingId, segments: parts } : void 0;
+    }
+    if (e.op === "at" && e.args?.[1]?.op === "literal" && typeof e.args[1].value === "string") {
+      const receiver = knownPath(e.args[0], scope);
+      return receiver ? { ...receiver, segments: [...receiver.segments, e.args[1].value] } : void 0;
+    }
+  };
+  const absent = (e) => !!e && (e.op === "literal" && (e.value === void 0 || e.value === null || Array.isArray(e.value) && e.value.length === 0) || e.op === "array" && !e.args?.length);
+  function hint(e, scope, depth = 0) {
+    if (!e || depth > 40) return;
+    const path2 = knownPath(e, scope);
+    if (path2) {
+      const b = bindings.get(path2.bindingId);
+      return meaningPath(bundle, b?.meaningType ?? b?.type, path2.segments);
+    }
+    const a = e.args ?? [];
+    if (e.op === "filter") return hint(a[0], scope, depth + 1);
+    if (e.op === "find") return meaningItem(bundle, hint(a[0], scope, depth + 1));
+    if (e.op === "if" || e.op === "coalesce") {
+      const left = a[e.op === "if" ? 1 : 0], right = a[e.op === "if" ? 2 : 1], l = hint(left, scope, depth + 1), r = hint(right, scope, depth + 1);
+      return l === r ? l : l && absent(right) ? l : r && absent(left) ? r : void 0;
+    }
+    if (e.op === "call") return [...bundle.program.functions, ...bundle.language.operations].find((f) => f.name === e.name)?.resultType;
+  }
+  function fieldReference(ownerId, e, nodeId, path2, scope) {
+    const receiver = bindings.get(path2.bindingId), id = "field:" + path2.bindingId + ":" + encodeURIComponent(JSON.stringify(path2.segments)), display = path2.segments.map((s) => /^[A-Za-z_$][\w$]*$/.test(s) ? s : JSON.stringify(s)).join(" \u2192 ");
+    let binding = bindings.get(id);
+    if (!binding) {
+      let type = receiver.type, meaningType = receiver.meaningType ?? type, sharedFieldId;
+      for (const member of path2.segments) {
+        const f = meaningField(bundle, meaningType, member);
+        sharedFieldId = f?.fieldId;
+        type = meaningField(bundle, type, member)?.type;
+        meaningType = f?.type;
+      }
+      const shared2 = atlas.sharedFields.find((f) => f.id === sharedFieldId);
+      addBinding(binding = { id, ownerId, name: path2.segments.join("."), kind: "field", label: receiver.label + " \u2192 " + (shared2 ? [...path2.segments.slice(0, -1), shared2.label].join(" \u2192 ") : display), description: "A field read from " + receiver.label + ". This is distinct from equally named inputs and fields on other values.", type, meaningType, sharedFieldId, uses: [], receiver: path2.bindingId, field: path2.segments.join("."), fieldSegments: path2.segments });
+    }
+    binding.uses.push(nodeId);
+    const shared = atlas.sharedFields.find((f) => f.id === binding.sharedFieldId);
+    if (shared && !shared.uses.includes(nodeId)) shared.uses.push(nodeId);
+    atlas.references.push({ nodeId, ownerId, bindingId: id, kind: "field", path: path2.segments.join("."), ...e.op === "at" ? { fieldKey: path2.segments.at(-1) } : {}, scope: scopeIds(scope), receiver: path2.bindingId });
+  }
+  function walk(e, ownerId, scope, fallback) {
+    if (!e) return;
+    const id = e.id ?? fallback, a = e.args ?? [];
+    atlas.locations.push({ nodeId: id, ownerId, scope: scopeIds(scope) });
+    if (e.op === "get") {
+      const [head, ...members] = (e.path ?? "").split("."), bindingId = scope.get(head);
+      if (!bindingId) {
+        atlas.unresolved.push({ nodeId: id, name: e.path ?? "", ownerId });
+        atlas.references.push({ nodeId: id, ownerId, kind: "value", path: e.path ?? "", scope: scopeIds(scope) });
+      } else if (members.length) fieldReference(ownerId, e, id, { bindingId, segments: members }, scope);
+      else {
+        bindings.get(bindingId).uses.push(id);
+        atlas.references.push({ nodeId: id, ownerId, bindingId, kind: "value", path: e.path, scope: scopeIds(scope), definitionNode: bindings.get(bindingId).definedAt });
+      }
+      return;
+    }
+    if (e.op === "call") {
+      const to = callNames.get(e.name);
+      if (to) atlas.calls.push({ from: ownerId, to, nodeId: id });
+    }
+    if (e.op === "at" && a[1]?.op === "literal" && typeof a[1].value === "string") {
+      const path2 = knownPath(e, scope);
+      if (path2) fieldReference(ownerId, e, a[1].id ?? id + "/field", path2, scope);
+    }
+    if (e.op === "let" || ["filter", "map", "some", "every", "find", "fold"].includes(e.op)) {
+      const fold = e.op === "fold", local = e.op === "let";
+      walk(a[0], ownerId, scope, id + "/0");
+      if (fold) walk(a[1], ownerId, scope, id + "/1");
+      const collection = knownPath(a[0], scope), collectionLabel = collection ? [bindings.get(collection.bindingId)?.name, ...collection.segments].join(".") : "the collection at this step";
+      const nested = new Map(scope), name = e.name ?? "item", bindingId = addBinding({ id: "binding:" + id + ":" + (local ? "local" : "item"), ownerId, name, kind: local ? "local" : "item", label: local ? "Local value: " + name : "Each " + name + " in " + collectionLabel, description: local ? "Defined by this calculation step; available only in its continuation." : "One item in " + collectionLabel + "; available only inside this collection expression.", definedAt: id, meaningType: local ? hint(a[0], scope) : meaningItem(bundle, hint(a[0], scope)), uses: [] });
+      nested.set(name, bindingId);
+      if (fold) {
+        const accumulator = e.path, accId = addBinding({ id: "binding:" + id + ":accumulator", ownerId, name: accumulator, kind: "accumulator", label: "Running total: " + accumulator, description: "The accumulated value for this fold step. It is a separate local declaration.", definedAt: id, meaningType: hint(a[1], scope), uses: [] });
+        nested.set(accumulator, accId);
+      }
+      walk(a[fold ? 2 : 1], ownerId, nested, id + "/" + (fold ? 2 : 1));
+      return;
+    }
+    a.forEach((child, i) => walk(child, ownerId, scope, id + "/" + i));
+  }
+  for (const f of concepts) {
+    const scope = /* @__PURE__ */ new Map(), concept = atlas.concepts.find((c) => c.id === f.id);
+    f.params.forEach((name, i) => {
+      const type = "parameterTypes" in f ? f.parameterTypes?.[name] : void 0, id = addBinding({ id: "input:" + f.id + ":" + i, ownerId: f.id, name, kind: "input", label: "Input: " + name, description: "An input to " + concept.label + ". All uses linked here read this declaration; another definition may have an input with the same spelling.", type, uses: [] });
+      scope.set(name, id);
+      concept.inputs.push(id);
+    });
+    if ("body" in f) walk(f.body, f.id, scope, f.id + "/body");
+    else if ("rules" in f) {
+      f.rules.forEach((r) => {
+        walk(r.when, f.id, scope, r.id + "/when");
+        walk(r.result, f.id, scope, r.id + "/result");
+      });
+      walk(f.otherwise, f.id, scope, f.id + "/otherwise");
+    } else for (const t of f.transitions) if (t.guard) walk(t.guard, f.id, /* @__PURE__ */ new Map([["context", scope.get("context")]]), t.id + "/guard");
+  }
+  for (const c of atlas.concepts) {
+    c.calls = [...new Set(atlas.calls.filter((r) => r.from === c.id).map((r) => r.to))];
+    c.callers = [...new Set(atlas.calls.filter((r) => r.to === c.id).map((r) => r.from))];
+  }
+  const sourceBindings = bundle.recovery?.bindings ?? [];
+  for (let i = 0; i < sourceBindings.length; i++) for (let j = i + 1; j < sourceBindings.length; j++) {
+    const from = sourceBindings[i], to = sourceBindings[j], a = bundle.evidence.find((e) => e.id === from.sourceId), b = bundle.evidence.find((e) => e.id === to.sourceId);
+    if (a && b && a.path === b.path && from.kind !== to.kind) atlas.integrationLinks.push({ from: from.target, to: to.target, path: a.path, kind: "shared-source-file", description: "Integrated in the same original source file. This is source context, not a modeled call or a claim that one check runs for every transition." });
+  }
+  return atlas;
+}
+function validateVocabulary(bundle, errors) {
+  if (!bundle.projection.vocabulary) return;
+  const atlas = domainAtlas(bundle), targets = new Set([...atlas.concepts, ...atlas.bindings, ...atlas.records, ...atlas.sharedFields].map((x) => x.id)), seen = /* @__PURE__ */ new Set();
+  for (const term of bundle.projection.vocabulary.terms) {
+    if (!targets.has(term.target)) errors.push("Vocabulary target no longer exists: " + term.target + "; remove or reassign its authored documentation in the same change");
+    if (term.declaration) {
+      const b = atlas.bindings.find((b2) => b2.id === term.target);
+      if (!b || b.ownerId !== term.declaration.ownerId || b.name !== term.declaration.name || b.kind !== term.declaration.kind) errors.push("Vocabulary declaration changed; review its meaning before reassigning documentation: " + term.target);
+    }
+    if (seen.has(term.target)) errors.push("Duplicate vocabulary target: " + term.target);
+    seen.add(term.target);
+  }
+  const assigned = /* @__PURE__ */ new Set();
+  for (const m of bundle.projection.vocabulary.meanings ?? []) {
+    const b = atlas.bindings.find((b2) => b2.id === m.target);
+    if (!b || b.kind === "field" || b.ownerId !== m.declaration.ownerId || b.name !== m.declaration.name || b.kind !== m.declaration.kind) errors.push("Meaning declaration changed or is missing: " + m.target);
+    if (!validMeaning(bundle, m.type)) errors.push("Unknown or invalid domain meaning: " + m.type);
+    if (b?.type && b.type !== m.type) errors.push("Domain meaning conflicts with the declared runtime type: " + m.target);
+    if (assigned.has(m.target)) errors.push("Duplicate meaning assignment: " + m.target);
+    assigned.add(m.target);
+  }
+}
+
 // src/domain.ts
 var import_node_crypto2 = require("node:crypto");
 var VERSION = DEFAULT_COMPILER;
 var exprSchema = external_exports.lazy(() => external_exports.object({ id: external_exports.string().optional(), origin: sourceOriginSchema.optional(), diagnostic: external_exports.string().max(500).optional(), fields: external_exports.array(external_exports.string()).optional(), mode: external_exports.enum(["iterate", "reduce"]).optional(), op: external_exports.string(), args: external_exports.array(exprSchema).optional(), value: external_exports.unknown().optional(), path: external_exports.string().optional(), name: external_exports.string().optional() }).strict());
 var expressionSchema = guardedArtifactSchema(exprSchema);
 var identifier = external_exports.string().regex(/^[A-Za-z_$][\w$]*$/);
-var functionSchema = guardedArtifactSchema(external_exports.object({ id: identifier, name: identifier, params: external_exports.array(identifier), body: exprSchema, parameterTypes: external_exports.record(external_exports.string()).optional(), resultType: external_exports.string().optional(), sourceId: external_exports.string().optional() }).strict());
+var functionSchema = guardedArtifactSchema(external_exports.object({ id: identifier, name: identifier, params: external_exports.array(identifier), sourceParameters: external_exports.array(identifier).optional(), body: exprSchema, parameterTypes: external_exports.record(external_exports.string()).optional(), resultType: external_exports.string().optional(), sourceId: external_exports.string().optional() }).strict());
 var languageSchema = guardedArtifactSchema(external_exports.object({ version: external_exports.literal(1), name: external_exports.string(), types: external_exports.record(external_exports.object({ id: identifier.optional(), fieldIds: external_exports.record(identifier).optional(), kind: external_exports.enum(["record", "enum", "alias"]), fields: external_exports.record(external_exports.string()).optional(), values: external_exports.array(external_exports.string()).optional(), target: external_exports.string().optional() }).strict()), operations: external_exports.array(functionSchema) }).strict());
-var programSchema = guardedArtifactSchema(external_exports.object({ version: external_exports.literal(1), name: external_exports.string(), functions: external_exports.array(functionSchema), machines: external_exports.array(external_exports.object({ id: identifier, initial: external_exports.string().optional(), kind: external_exports.enum(["workflow", "graph"]).optional(), sourceId: external_exports.string().optional(), stateIds: external_exports.record(identifier).optional(), stateOrigins: external_exports.record(sourceOriginSchema).optional(), states: external_exports.array(external_exports.string()), transitions: external_exports.array(external_exports.object({ id: identifier, from: external_exports.string(), to: external_exports.string(), origin: sourceOriginSchema.optional(), guard: exprSchema.optional(), retained: external_exports.array(external_exports.string()).default([]) }).strict()) }).strict()), decisions: external_exports.array(external_exports.object({ id: identifier, params: external_exports.array(identifier), rules: external_exports.array(external_exports.object({ id: identifier, when: exprSchema, result: exprSchema }).strict()), otherwise: exprSchema, sourceId: external_exports.string().optional() }).strict()) }).strict());
+var programSchema = guardedArtifactSchema(external_exports.object({ version: external_exports.literal(1), name: external_exports.string(), functions: external_exports.array(functionSchema), machines: external_exports.array(external_exports.object({ id: identifier, initial: external_exports.string().optional(), kind: external_exports.enum(["workflow", "graph"]).optional(), sourceId: external_exports.string().optional(), stateIds: external_exports.record(identifier).optional(), stateOrigins: external_exports.record(sourceOriginSchema).optional(), states: external_exports.array(external_exports.string()), transitions: external_exports.array(external_exports.object({ id: identifier, from: external_exports.string(), to: external_exports.string(), origin: sourceOriginSchema.optional(), guard: exprSchema.optional(), retained: external_exports.array(external_exports.string()).default([]) }).strict()) }).strict()), decisions: external_exports.array(external_exports.object({ id: identifier, params: external_exports.array(identifier), sourceParameters: external_exports.array(identifier).optional(), rules: external_exports.array(external_exports.object({ id: identifier, when: exprSchema, result: exprSchema }).strict()), otherwise: exprSchema, sourceId: external_exports.string().optional() }).strict()) }).strict());
 var recoverySchema = external_exports.object({ version: external_exports.literal(1), source: external_exports.object({ commit: external_exports.string().regex(/^[a-f0-9]{40}$/), repository: external_exports.string().optional() }).strict().optional(), bindings: external_exports.array(external_exports.object({ id: external_exports.string(), kind: external_exports.enum(["function", "graph", "guard"]), target: external_exports.string(), sourceId: external_exports.string(), sourceFileHash: external_exports.string(), params: external_exports.array(external_exports.string()), retained: external_exports.array(external_exports.string()) }).strict()), retained: external_exports.array(external_exports.object({ id: external_exports.string(), label: external_exports.string(), path: external_exports.string(), start: external_exports.number().int().positive(), end: external_exports.number().int().positive(), hash: external_exports.string(), position: external_exports.enum(["before", "after", "hook"]), operations: external_exports.array(external_exports.string()), operationIds: external_exports.record(identifier).optional() }).strict()) }).strict();
 var evidenceSchema = external_exports.object({ id: external_exports.string(), path: external_exports.string(), start: external_exports.number().int().positive(), end: external_exports.number().int().positive(), source: external_exports.string(), hash: external_exports.string(), retained: external_exports.array(external_exports.string()) }).strict();
-var projectionSchema = external_exports.object({ version: external_exports.literal(1), views: external_exports.array(external_exports.object({ kind: external_exports.enum(["table", "form", "state"]), target: external_exports.string(), title: external_exports.string(), edits: external_exports.array(external_exports.enum(["set_expression", "set_transition", "move_rule", "add_state", "add_transition"])).optional() }).strict()) }).strict();
+var projectionSchema = external_exports.object({ version: external_exports.literal(1), vocabulary: vocabularySchema.optional(), views: external_exports.array(external_exports.object({ kind: external_exports.enum(["table", "form", "state"]), target: external_exports.string(), title: external_exports.string(), edits: external_exports.array(external_exports.enum(["set_expression", "set_transition", "move_rule", "add_state", "add_transition", "insert_rule", "duplicate_rule", "remove_rule", "compose_condition", "wrap_conditional"])).optional() }).strict()) }).strict();
 var resultSchema = executionResultSchema;
 var scenarioSchema = guardedArtifactSchema(external_exports.object({ version: external_exports.literal(1).optional(), id: external_exports.string().min(1).max(160), kind: external_exports.enum(["compatibility", "approved-change"]), entry: external_exports.string(), args: external_exports.array(external_exports.unknown()).max(1e4).optional(), encodedArgs: encodedArgumentsSchema.optional(), expected: external_exports.unknown().optional(), expectedOutcome: resultSchema.optional(), reason: external_exports.string().max(2e3).optional() }).strict().superRefine((s, ctx) => {
   try {
@@ -4951,12 +5175,14 @@ function validate(b, compiler) {
       const e = b.evidence.find((e2) => e2.id === binding.sourceId);
       const target = binding.kind === "function" ? b.program.functions.find((f) => f.id === binding.target) : binding.kind === "graph" ? b.program.machines.find((m) => m.id === binding.target) : b.program.decisions.find((d) => d.id === binding.target);
       if (!e || !target || target.sourceId !== binding.sourceId) errors.push("Dangling recovery binding: " + binding.id);
-      if (target && "params" in target && JSON.stringify(target.params) !== JSON.stringify(binding.params)) errors.push("Recovery interface parameters changed");
+      if (target && "params" in target && (JSON.stringify(target.sourceParameters ?? target.params) !== JSON.stringify(binding.params) || target.params.length !== binding.params.length)) errors.push("Recovery interface parameters changed");
       if (binding.kind === "guard" && target && "rules" in target && compositionSafe && (!target.rules.every((r) => guardOutcome(r.result)) || !guardOutcome(target.otherwise))) errors.push("Guard must return explicit continue/return outcomes");
       if (binding.retained.some((id) => !retainedIds.has(id))) errors.push("Dangling retained dependency");
     }
   }
+  for (const f of [...all, ...b.program.decisions]) if (f.sourceParameters && !b.recovery?.bindings.some((r) => r.target === f.id && r.kind !== "graph" && JSON.stringify(r.params) === JSON.stringify(f.sourceParameters))) errors.push("Source parameter aliases require their original recovery binding: " + f.id);
   validateProjections(b, errors);
+  validateVocabulary(b, errors);
   return errors;
 }
 function assertValid(b, compiler) {
@@ -5264,7 +5490,7 @@ async function loadPortable(root) {
 var digest5 = external_exports.string().regex(/^[a-f0-9]{64}$/);
 var preparedImplementationSchema = external_exports.discriminatedUnion("status", [
   external_exports.object({ version: external_exports.literal(2), status: external_exports.literal("not-generated"), programHash: digest5 }).strict(),
-  external_exports.object({ version: external_exports.literal(2), status: external_exports.literal("ready"), compiler: external_exports.string(), sourceAdapter: external_exports.enum(["typescript-source/1", "typescript-source/2"]), programHash: digest5, evidenceHash: digest5, recoveryHash: digest5, generatedPath: external_exports.string(), candidateFilesHash: digest5, files: external_exports.record(digest5) }).strict()
+  external_exports.object({ version: external_exports.literal(2), status: external_exports.literal("ready"), compiler: external_exports.string(), sourceAdapter: external_exports.enum(["typescript-source/1", "typescript-source/2", "typescript-source/3"]), programHash: digest5, evidenceHash: digest5, recoveryHash: digest5, generatedPath: external_exports.string(), candidateFilesHash: digest5, files: external_exports.record(digest5) }).strict()
 ]);
 
 // src/portable-verification.ts

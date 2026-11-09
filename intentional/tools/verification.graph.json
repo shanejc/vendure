@@ -37,7 +37,7 @@
       "format": "esm"
     },
     "src/projection-registry.ts": {
-      "bytes": 2113,
+      "bytes": 2275,
       "imports": [],
       "format": "esm"
     },
@@ -372,8 +372,45 @@
       ],
       "format": "esm"
     },
+    "src/authoring-contract.ts": {
+      "bytes": 712,
+      "imports": [
+        {
+          "path": "node_modules/zod/index.js",
+          "kind": "import-statement",
+          "original": "zod"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/expression-patterns.ts": {
+      "bytes": 676,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/meaning-types.ts": {
+      "bytes": 1427,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/domain-atlas.ts": {
+      "bytes": 14110,
+      "imports": [
+        {
+          "path": "src/expression-patterns.ts",
+          "kind": "import-statement",
+          "original": "./expression-patterns.js"
+        },
+        {
+          "path": "src/meaning-types.ts",
+          "kind": "import-statement",
+          "original": "./meaning-types.js"
+        }
+      ],
+      "format": "esm"
+    },
     "src/domain.ts": {
-      "bytes": 31745,
+      "bytes": 33910,
       "imports": [
         {
           "path": "src/generated-map.ts",
@@ -474,6 +511,16 @@
           "path": "node_modules/zod/index.js",
           "kind": "import-statement",
           "original": "zod"
+        },
+        {
+          "path": "src/authoring-contract.ts",
+          "kind": "import-statement",
+          "original": "./authoring-contract.js"
+        },
+        {
+          "path": "src/domain-atlas.ts",
+          "kind": "import-statement",
+          "original": "./domain-atlas.js"
         },
         {
           "path": "node:crypto",
@@ -702,7 +749,7 @@
       "format": "esm"
     },
     "src/portable-prepared.ts": {
-      "bytes": 1869,
+      "bytes": 1913,
       "imports": [
         {
           "path": "node_modules/zod/index.js",
@@ -903,7 +950,7 @@
           "bytesInOutput": 1886
         },
         "src/projection-registry.ts": {
-          "bytesInOutput": 1462
+          "bytesInOutput": 1633
         },
         "node_modules/zod/v3/external.js": {
           "bytesInOutput": 3282
@@ -977,8 +1024,20 @@
         "src/binding-contract.ts": {
           "bytesInOutput": 1673
         },
+        "src/authoring-contract.ts": {
+          "bytesInOutput": 789
+        },
+        "src/expression-patterns.ts": {
+          "bytesInOutput": 567
+        },
+        "src/meaning-types.ts": {
+          "bytesInOutput": 1351
+        },
+        "src/domain-atlas.ts": {
+          "bytesInOutput": 14047
+        },
         "src/domain.ts": {
-          "bytesInOutput": 27446
+          "bytesInOutput": 28129
         },
         "src/observations.ts": {
           "bytesInOutput": 3165
@@ -1005,10 +1064,10 @@
           "bytesInOutput": 8128
         },
         "src/portable-prepared.ts": {
-          "bytesInOutput": 726
+          "bytesInOutput": 749
         }
       },
-      "bytes": 221929
+      "bytes": 239670
     }
   }
 }

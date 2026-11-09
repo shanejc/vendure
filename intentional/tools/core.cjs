@@ -23,86 +23,6 @@ __export(core_cli_exports, {
   readCoreBundle: () => readCoreBundle
 });
 module.exports = __toCommonJS(core_cli_exports);
-var import_promises2 = require("node:fs/promises");
-var import_node_path2 = require("node:path");
-
-// src/generated-map.ts
-function expressionLocations(code, nodes) {
-  const result = {}, starts = /* @__PURE__ */ new Map(), lineStarts = [0];
-  for (let i = 0; i < code.length; i++) if (code[i] === "\n") lineStarts.push(i + 1);
-  function position(offset) {
-    let lo = 0, hi = lineStarts.length;
-    while (lo + 1 < hi) {
-      const mid = lo + hi >> 1;
-      if (lineStarts[mid] <= offset) lo = mid;
-      else hi = mid;
-    }
-    return { line: lo + 1, column: offset - lineStarts[lo] + 1 };
-  }
-  for (let i = 0; i < code.length; ) {
-    const c = code[i];
-    if (c === '"' || c === "'" || c === "`") {
-      const quote = c;
-      i++;
-      while (i < code.length) {
-        if (code[i] === "\\") {
-          i += 2;
-          continue;
-        }
-        if (code[i++] === quote) break;
-      }
-      continue;
-    }
-    if (c === "/" && code[i + 1] === "/") {
-      const end = code.indexOf("\n", i + 2);
-      i = end < 0 ? code.length : end + 1;
-      continue;
-    }
-    if (c === "/" && code[i + 1] === "*") {
-      const end = code.indexOf("*/", i + 2);
-      if (end < 0) throw new Error("Unterminated generated comment");
-      const m = /^\/\*@i:(\d+):(start|end)\*\/$/.exec(code.slice(i, end + 2));
-      if (m) {
-        const n = Number(m[1]);
-        if (m[2] === "start") starts.set(n, end + 2);
-        else {
-          const from = starts.get(n), id = nodes[n];
-          if (from === void 0 || !id) throw new Error("Invalid generated expression markers");
-          const start = position(from), finish = position(i);
-          result[id] = { start: start.line, end: finish.line, column: start.column, endColumn: finish.column, offsetStart: from, offsetEnd: i, precision: "expression" };
-          starts.delete(n);
-        }
-      }
-      i = end + 2;
-      continue;
-    }
-    i++;
-  }
-  if (starts.size) throw new Error("Unclosed generated expression markers");
-  return result;
-}
-
-// src/projection-registry.ts
-var projectionRegistry = { table: { targets: ["decision"], edits: ["set_expression", "move_rule"] }, form: { targets: ["function", "decision"], edits: ["set_expression"] }, state: { targets: ["machine"], edits: ["set_expression", "set_transition", "add_state", "add_transition"] } };
-function projectionTargets(bundle) {
-  return [
-    ...[...bundle.program.functions, ...bundle.language.operations].map((f) => ({ id: f.id, name: f.name, kind: "function" })),
-    ...bundle.program.decisions.map((d) => ({ id: d.id, name: d.id, kind: "decision" })),
-    ...bundle.program.machines.map((m) => ({ id: m.id, name: m.id, kind: "machine" }))
-  ];
-}
-function validateProjections(bundle, errors) {
-  const targets = projectionTargets(bundle), seen = /* @__PURE__ */ new Set();
-  for (const view of bundle.projection.views) {
-    const registry = projectionRegistry[view.kind], kind = targets.find((t) => t.id === view.target)?.kind;
-    if (!registry || !kind || !registry.targets.includes(kind)) errors.push("Projection renderer does not support target: " + view.target);
-    const key = view.kind + ":" + view.target;
-    if (seen.has(key)) errors.push("Duplicate projection: " + key);
-    seen.add(key);
-    if (view.edits?.some((edit) => !registry.edits.includes(edit))) errors.push("Unsupported projection edit: " + view.target);
-    if (view.edits && new Set(view.edits).size !== view.edits.length) errors.push("Duplicate projection edit: " + view.target);
-  }
-}
 
 // node_modules/zod/v3/external.js
 var external_exports = {};
@@ -3753,23 +3673,23 @@ var ZodEffects = class extends ZodType {
     }
     if (effect.type === "transform") {
       if (ctx.common.async === false) {
-        const base = this._def.schema._parseSync({
+        const base2 = this._def.schema._parseSync({
           data: ctx.data,
           path: ctx.path,
           parent: ctx
         });
-        if (!isValid(base))
+        if (!isValid(base2))
           return INVALID;
-        const result = effect.transform(base.value, checkCtx);
+        const result = effect.transform(base2.value, checkCtx);
         if (result instanceof Promise) {
           throw new Error(`Asynchronous transform encountered during synchronous parse operation. Use .parseAsync instead.`);
         }
         return { status: status.value, value: result };
       } else {
-        return this._def.schema._parseAsync({ data: ctx.data, path: ctx.path, parent: ctx }).then((base) => {
-          if (!isValid(base))
+        return this._def.schema._parseAsync({ data: ctx.data, path: ctx.path, parent: ctx }).then((base2) => {
+          if (!isValid(base2))
             return INVALID;
-          return Promise.resolve(effect.transform(base.value, checkCtx)).then((result) => ({
+          return Promise.resolve(effect.transform(base2.value, checkCtx)).then((result) => ({
             status: status.value,
             value: result
           }));
@@ -4145,6 +4065,313 @@ var coerce = {
 };
 var NEVER = INVALID;
 
+// src/outcomes.ts
+function encodeValue(value, seen = /* @__PURE__ */ new Set(), depth = 0) {
+  if (depth > 80) throw new Error("Observable value nesting limit exceeded");
+  if (value === void 0) return { tag: "undefined" };
+  if (value === null) return { tag: "null" };
+  if (typeof value === "number") return { tag: "number", value: Number.isNaN(value) ? "NaN" : value === Infinity ? "+Infinity" : value === -Infinity ? "-Infinity" : Object.is(value, -0) ? "-0" : value };
+  if (typeof value === "string" || typeof value === "boolean") return { tag: typeof value, value };
+  if (typeof value !== "object") throw new Error("Unsupported observable value: " + typeof value);
+  if (seen.has(value)) throw new Error("Cyclic observable value");
+  seen.add(value);
+  try {
+    const list = Array.isArray(value), prototype = Object.getPrototypeOf(value), constructor = prototype && Object.getOwnPropertyDescriptor(prototype, "constructor");
+    if (!constructor || !("value" in constructor) || typeof constructor.value !== "function" || Function.prototype.toString.call(constructor.value) !== Function.prototype.toString.call(list ? Array : Object) || Object.getOwnPropertyDescriptor(constructor.value, "prototype")?.value !== prototype) throw new Error("Unsupported observable object prototype");
+    const descriptors = Object.getOwnPropertyDescriptors(value), keys = Reflect.ownKeys(descriptors);
+    if (keys.some((k) => typeof k !== "string")) throw new Error("Unsupported observable symbol fields");
+    if (list) {
+      const length = descriptors.length.value;
+      if (length > 1e4) throw new Error("Observable list limit exceeded");
+      for (const key of keys) {
+        if (key === "length") continue;
+        if (!/^(0|[1-9]\d*)$/.test(key) || Number(key) >= length) throw new Error("Unsupported observable extra list fields");
+        const d = descriptors[key];
+        if (!("value" in d) || !d.enumerable) throw new Error("Unsupported observable non-data list item");
+      }
+      return { tag: "array", value: Array.from({ length }, (_, i) => Object.hasOwn(descriptors, i) ? encodeValue(descriptors[i].value, seen, depth + 1) : { tag: "missing" }) };
+    }
+    if (keys.length > 1e4) throw new Error("Observable record limit exceeded");
+    for (const key of keys) {
+      const d = descriptors[key];
+      if (!("value" in d) || !d.enumerable) throw new Error("Unsupported observable non-data record field");
+    }
+    return { tag: "object", value: keys.sort().map((k) => [k, encodeValue(descriptors[k].value, seen, depth + 1)]) };
+  } finally {
+    seen.delete(value);
+  }
+}
+function capture(run) {
+  let value;
+  try {
+    value = run();
+  } catch (error) {
+    return { version: 1, kind: "threw", error: { name: String(error?.name ?? "Error"), message: String(error?.message ?? error) } };
+  }
+  return { version: 1, kind: "returned", value: encodeValue(value) };
+}
+function stableJson(value) {
+  return JSON.stringify(value, (_key, item) => item && typeof item === "object" && !Array.isArray(item) ? Object.fromEntries(Object.keys(item).sort().map((key) => [key, item[key]])) : item);
+}
+function sameOutcome(a, b) {
+  return stableJson(a) === stableJson(b);
+}
+function decodeValue(encoded) {
+  switch (encoded.tag) {
+    case "undefined":
+      return void 0;
+    case "null":
+      return null;
+    case "string":
+    case "boolean":
+      return encoded.value;
+    case "number":
+      return encoded.value === "NaN" ? NaN : encoded.value === "+Infinity" ? Infinity : encoded.value === "-Infinity" ? -Infinity : encoded.value === "-0" ? -0 : encoded.value;
+    case "array": {
+      const a = new Array(encoded.value.length);
+      encoded.value.forEach((v, i) => {
+        if (v.tag !== "missing") a[i] = decodeValue(v);
+      });
+      return a;
+    }
+    case "object":
+      return Object.fromEntries(encoded.value.map(([k, v]) => [k, decodeValue(v)]));
+    default:
+      throw new Error("Unsupported encoded value: " + encoded.tag);
+  }
+}
+
+// src/artifact-data.ts
+var MAX_ARTIFACT_DEPTH = 192;
+var MAX_ARTIFACT_NODES = 5e5;
+function inspectArtifactData(input, limits = { maxDepth: MAX_ARTIFACT_DEPTH, maxNodes: MAX_ARTIFACT_NODES }) {
+  const stack = [{ value: input, path: "$", depth: 0 }], active = /* @__PURE__ */ new WeakSet();
+  let nodes = 0, depth = 0;
+  const fail = (message, path) => ({ errors: [message + " at " + path], nodes, depth });
+  while (stack.length) {
+    const step = stack.pop(), value = step.value;
+    if (step.leave) {
+      active.delete(value);
+      continue;
+    }
+    nodes++;
+    depth = Math.max(depth, step.depth);
+    if (nodes > limits.maxNodes) return fail("Artifact node limit exceeded (" + limits.maxNodes + ")", step.path);
+    if (step.depth > limits.maxDepth) return fail("Artifact depth limit exceeded (" + limits.maxDepth + ")", step.path);
+    if (value === null || typeof value !== "object") {
+      if (["function", "symbol", "bigint"].includes(typeof value)) return fail("Unsupported artifact value: " + typeof value, step.path);
+      continue;
+    }
+    if (active.has(value)) return fail("Artifact contains a cycle", step.path);
+    try {
+      const list = Array.isArray(value), prototype = Object.getPrototypeOf(value), ctor = prototype && Object.getOwnPropertyDescriptor(prototype, "constructor");
+      if (!(prototype === null && !list) && (!ctor || !("value" in ctor) || typeof ctor.value !== "function" || Function.prototype.toString.call(ctor.value) !== Function.prototype.toString.call(list ? Array : Object) || Object.getOwnPropertyDescriptor(ctor.value, "prototype")?.value !== prototype)) return fail("Unsupported artifact object prototype", step.path);
+      const descriptors = Object.getOwnPropertyDescriptors(value), keys = Reflect.ownKeys(descriptors);
+      if (keys.some((k) => typeof k !== "string")) return fail("Unsupported artifact symbol field", step.path);
+      const children = keys.filter((k) => !list || k !== "length");
+      if (nodes + children.length > limits.maxNodes) return fail("Artifact node limit exceeded (" + limits.maxNodes + ")", step.path);
+      for (const key of children) {
+        const d = descriptors[key], path = (step.path + (list ? "[" + key + "]" : "." + key.slice(0, 60))).slice(-240);
+        if (!("value" in d) || !d.enumerable) return fail("Unsupported artifact accessor or hidden field", path);
+        if (list && (!/^(0|[1-9]\d*)$/.test(key) || Number(key) >= descriptors.length.value)) return fail("Unsupported artifact extra list field", path);
+      }
+      active.add(value);
+      stack.push({ ...step, leave: true });
+      for (let i = children.length - 1; i >= 0; i--) {
+        const key = children[i];
+        stack.push({ value: descriptors[key].value, path: (step.path + (list ? "[" + key + "]" : "." + key.slice(0, 60))).slice(-240), depth: step.depth + 1 });
+      }
+    } catch {
+      return fail("Artifact data could not be inspected", step.path);
+    }
+  }
+  return { errors: [], nodes, depth };
+}
+function assertArtifactData(input) {
+  const result = inspectArtifactData(input);
+  if (result.errors.length) throw new Error(result.errors.join("\n"));
+}
+function guardedArtifactSchema(schema) {
+  return external_exports.unknown().superRefine((input, ctx) => {
+    for (const message of inspectArtifactData(input).errors) ctx.addIssue({ code: "custom", message });
+  }).pipe(schema);
+}
+
+// src/outcome-schema.ts
+var encodedDataSchema = external_exports.lazy(() => external_exports.union([
+  external_exports.object({ tag: external_exports.literal("undefined") }).strict(),
+  external_exports.object({ tag: external_exports.literal("null") }).strict(),
+  external_exports.object({ tag: external_exports.literal("string"), value: external_exports.string() }).strict(),
+  external_exports.object({ tag: external_exports.literal("boolean"), value: external_exports.boolean() }).strict(),
+  external_exports.object({ tag: external_exports.literal("number"), value: external_exports.union([external_exports.number().finite().refine((n) => !Object.is(n, -0)), external_exports.enum(["NaN", "+Infinity", "-Infinity", "-0"])]) }).strict(),
+  external_exports.object({ tag: external_exports.literal("array"), value: external_exports.array(external_exports.union([encodedDataSchema, external_exports.object({ tag: external_exports.literal("missing") }).strict()])).max(1e4) }).strict(),
+  external_exports.object({ tag: external_exports.literal("object"), value: external_exports.array(external_exports.tuple([external_exports.string(), encodedDataSchema])).max(1e4).refine((pairs) => new Set(pairs.map(([key]) => key)).size === pairs.length, "Duplicate observation fields") }).strict()
+]));
+var encodedValueSchema = guardedArtifactSchema(encodedDataSchema);
+var executionResultSchema = external_exports.discriminatedUnion("kind", [
+  external_exports.object({ version: external_exports.literal(1), kind: external_exports.literal("returned"), value: encodedValueSchema }).strict(),
+  external_exports.object({ version: external_exports.literal(1), kind: external_exports.literal("threw"), error: external_exports.object({ name: external_exports.string(), message: external_exports.string() }).strict() }).strict()
+]);
+function canonicalOutcome(value) {
+  const result = executionResultSchema.parse(value);
+  return result.kind === "threw" ? result : capture(() => decodeValue(result.value));
+}
+
+// src/execution-observer.ts
+var snapshotSchema = external_exports.union([external_exports.object({ value: encodedValueSchema }).strict(), external_exports.object({ unavailable: external_exports.string() }).strict()]);
+var base = { id: external_exports.number().int().nonnegative(), parent: external_exports.number().int().nonnegative().optional(), node: external_exports.string().optional() };
+var executionEventSchema = external_exports.discriminatedUnion("kind", [
+  external_exports.object({ ...base, kind: external_exports.literal("call"), name: external_exports.string(), params: external_exports.array(external_exports.string()), args: snapshotSchema, result: external_exports.union([external_exports.object({ outcome: executionResultSchema }).strict(), external_exports.object({ unavailable: external_exports.string() }).strict()]) }).strict(),
+  external_exports.object({ ...base, kind: external_exports.literal("read"), snapshot: snapshotSchema }).strict(),
+  external_exports.object({ ...base, kind: external_exports.literal("branch"), operator: external_exports.enum(["if", "and", "or", "coalesce"]), choice: external_exports.enum(["then", "otherwise", "left", "right"]), target: external_exports.string().optional(), skipped: external_exports.string().optional(), reason: external_exports.string() }).strict(),
+  external_exports.object({ ...base, kind: external_exports.literal("rule"), choice: external_exports.enum(["matched", "not-matched", "fallback"]) }).strict(),
+  external_exports.object({ ...base, kind: external_exports.literal("transition"), from: snapshotSchema, to: snapshotSchema, choice: external_exports.enum(["allowed", "denied", "retained-required"]) }).strict()
+]);
+var executionExplanationSchema = external_exports.object({ version: external_exports.literal(1), limit: external_exports.number().int().min(1).max(1e3), dropped: external_exports.number().int().nonnegative(), events: external_exports.array(executionEventSchema).max(1e3) }).strict().superRefine((r, ctx) => {
+  const calls = /* @__PURE__ */ new Set();
+  let previous = -1;
+  for (const e of r.events) {
+    if (e.id <= previous || e.parent !== void 0 && !calls.has(e.parent)) ctx.addIssue({ code: "custom", message: "Execution events require ordered identities and earlier call parents" });
+    previous = e.id;
+    if (e.kind === "call") calls.add(e.id);
+  }
+  if (r.events.length > r.limit) ctx.addIssue({ code: "custom", message: "Execution event limit exceeded" });
+});
+function snapshot(value) {
+  try {
+    const encoded = encodeValue(value);
+    return JSON.stringify(encoded).length <= 2e3 ? { value: encoded } : { unavailable: "Value exceeds the explanation snapshot limit" };
+  } catch {
+    return { unavailable: "Value is outside the supported observation format" };
+  }
+}
+function executionRecorder(limit = 500) {
+  if (!Number.isInteger(limit) || limit < 1 || limit > 1e3) throw new Error("Choose an execution explanation limit from 1 to 1000");
+  const report = { version: 1, limit, dropped: 0, events: [] }, stack = [];
+  let next = 0;
+  const append = (event) => {
+    const id = next++;
+    if (report.events.length >= limit) {
+      report.dropped++;
+      return;
+    }
+    const parent = [...stack].reverse().find((id2) => id2 !== void 0);
+    const row = { ...event, id, ...parent !== void 0 ? { parent } : {} };
+    report.events.push(row);
+    return id;
+  };
+  const observer = {
+    begin(node, name, params, args) {
+      const id = append({ kind: "call", node, name, params: [...params], args: snapshot(args), result: { unavailable: "Call has not completed" } });
+      stack.push(id);
+      return id;
+    },
+    end(id, run) {
+      stack.pop();
+      if (id === void 0) return;
+      const row = report.events.find((e) => e.id === id);
+      if (row?.kind !== "call") return;
+      try {
+        const result = capture(run);
+        row.result = JSON.stringify(result).length <= 2200 ? { outcome: result } : { unavailable: "Result exceeds the explanation snapshot limit" };
+      } catch {
+        row.result = { unavailable: "Result is outside the supported observation format" };
+      }
+    },
+    read(node, value) {
+      append({ kind: "read", node, snapshot: snapshot(value) });
+    },
+    branch(node, operator, choice, target, skipped, reason) {
+      append({ kind: "branch", node, operator, choice, target, skipped, reason });
+    },
+    rule(node, choice) {
+      append({ kind: "rule", node, choice });
+    },
+    transition(node, from, to, choice) {
+      append({ kind: "transition", node, from: snapshot(from), to: snapshot(to), choice });
+    }
+  };
+  return { observer, report };
+}
+
+// src/generated-map.ts
+function expressionLocations(code, nodes) {
+  const result = {}, starts = /* @__PURE__ */ new Map(), lineStarts = [0];
+  for (let i = 0; i < code.length; i++) if (code[i] === "\n") lineStarts.push(i + 1);
+  function position(offset) {
+    let lo = 0, hi = lineStarts.length;
+    while (lo + 1 < hi) {
+      const mid = lo + hi >> 1;
+      if (lineStarts[mid] <= offset) lo = mid;
+      else hi = mid;
+    }
+    return { line: lo + 1, column: offset - lineStarts[lo] + 1 };
+  }
+  for (let i = 0; i < code.length; ) {
+    const c = code[i];
+    if (c === '"' || c === "'" || c === "`") {
+      const quote = c;
+      i++;
+      while (i < code.length) {
+        if (code[i] === "\\") {
+          i += 2;
+          continue;
+        }
+        if (code[i++] === quote) break;
+      }
+      continue;
+    }
+    if (c === "/" && code[i + 1] === "/") {
+      const end = code.indexOf("\n", i + 2);
+      i = end < 0 ? code.length : end + 1;
+      continue;
+    }
+    if (c === "/" && code[i + 1] === "*") {
+      const end = code.indexOf("*/", i + 2);
+      if (end < 0) throw new Error("Unterminated generated comment");
+      const m = /^\/\*@i:(\d+):(start|end)\*\/$/.exec(code.slice(i, end + 2));
+      if (m) {
+        const n = Number(m[1]);
+        if (m[2] === "start") starts.set(n, end + 2);
+        else {
+          const from = starts.get(n), id = nodes[n];
+          if (from === void 0 || !id) throw new Error("Invalid generated expression markers");
+          const start = position(from), finish = position(i);
+          result[id] = { start: start.line, end: finish.line, column: start.column, endColumn: finish.column, offsetStart: from, offsetEnd: i, precision: "expression" };
+          starts.delete(n);
+        }
+      }
+      i = end + 2;
+      continue;
+    }
+    i++;
+  }
+  if (starts.size) throw new Error("Unclosed generated expression markers");
+  return result;
+}
+
+// src/projection-registry.ts
+var projectionRegistry = { table: { targets: ["decision"], edits: ["set_expression", "move_rule", "insert_rule", "duplicate_rule", "remove_rule", "compose_condition", "wrap_conditional"] }, form: { targets: ["function", "decision"], edits: ["set_expression", "compose_condition", "wrap_conditional"] }, state: { targets: ["machine"], edits: ["set_expression", "set_transition", "add_state", "add_transition", "compose_condition", "wrap_conditional"] } };
+function projectionTargets(bundle) {
+  return [
+    ...[...bundle.program.functions, ...bundle.language.operations].map((f) => ({ id: f.id, name: f.name, kind: "function" })),
+    ...bundle.program.decisions.map((d) => ({ id: d.id, name: d.id, kind: "decision" })),
+    ...bundle.program.machines.map((m) => ({ id: m.id, name: m.id, kind: "machine" }))
+  ];
+}
+function validateProjections(bundle, errors) {
+  const targets = projectionTargets(bundle), seen = /* @__PURE__ */ new Set();
+  for (const view of bundle.projection.views) {
+    const registry = projectionRegistry[view.kind], kind = targets.find((t) => t.id === view.target)?.kind;
+    if (!registry || !kind || !registry.targets.includes(kind)) errors.push("Projection renderer does not support target: " + view.target);
+    const key = view.kind + ":" + view.target;
+    if (seen.has(key)) errors.push("Duplicate projection: " + key);
+    seen.add(key);
+    if (view.edits?.some((edit) => !registry.edits.includes(edit))) errors.push("Unsupported projection edit: " + view.target);
+    if (view.edits && new Set(view.edits).size !== view.edits.length) errors.push("Duplicate projection edit: " + view.target);
+  }
+}
+
 // src/source-origin.ts
 var sourceOriginSchema = external_exports.object({ sourceId: external_exports.string(), start: external_exports.number().int().nonnegative(), end: external_exports.number().int().positive(), precision: external_exports.enum(["syntax", "lowering", "boundary"]), modelHash: external_exports.string().regex(/^[a-f0-9]{64}$/).optional() }).strict().superRefine((o, ctx) => {
   if (o.precision !== "boundary" && !o.modelHash) ctx.addIssue({ code: "custom", message: "Precise source origins require the recovered node fingerprint" });
@@ -4236,158 +4463,6 @@ function validateIdentities(b, errors) {
   }
 }
 
-// src/artifact-data.ts
-var MAX_ARTIFACT_DEPTH = 192;
-var MAX_ARTIFACT_NODES = 5e5;
-function inspectArtifactData(input, limits = { maxDepth: MAX_ARTIFACT_DEPTH, maxNodes: MAX_ARTIFACT_NODES }) {
-  const stack = [{ value: input, path: "$", depth: 0 }], active = /* @__PURE__ */ new WeakSet();
-  let nodes = 0, depth = 0;
-  const fail = (message, path) => ({ errors: [message + " at " + path], nodes, depth });
-  while (stack.length) {
-    const step = stack.pop(), value = step.value;
-    if (step.leave) {
-      active.delete(value);
-      continue;
-    }
-    nodes++;
-    depth = Math.max(depth, step.depth);
-    if (nodes > limits.maxNodes) return fail("Artifact node limit exceeded (" + limits.maxNodes + ")", step.path);
-    if (step.depth > limits.maxDepth) return fail("Artifact depth limit exceeded (" + limits.maxDepth + ")", step.path);
-    if (value === null || typeof value !== "object") {
-      if (["function", "symbol", "bigint"].includes(typeof value)) return fail("Unsupported artifact value: " + typeof value, step.path);
-      continue;
-    }
-    if (active.has(value)) return fail("Artifact contains a cycle", step.path);
-    try {
-      const list = Array.isArray(value), prototype = Object.getPrototypeOf(value), ctor = prototype && Object.getOwnPropertyDescriptor(prototype, "constructor");
-      if (!(prototype === null && !list) && (!ctor || !("value" in ctor) || typeof ctor.value !== "function" || Function.prototype.toString.call(ctor.value) !== Function.prototype.toString.call(list ? Array : Object) || Object.getOwnPropertyDescriptor(ctor.value, "prototype")?.value !== prototype)) return fail("Unsupported artifact object prototype", step.path);
-      const descriptors = Object.getOwnPropertyDescriptors(value), keys = Reflect.ownKeys(descriptors);
-      if (keys.some((k) => typeof k !== "string")) return fail("Unsupported artifact symbol field", step.path);
-      const children = keys.filter((k) => !list || k !== "length");
-      if (nodes + children.length > limits.maxNodes) return fail("Artifact node limit exceeded (" + limits.maxNodes + ")", step.path);
-      for (const key of children) {
-        const d = descriptors[key], path = (step.path + (list ? "[" + key + "]" : "." + key.slice(0, 60))).slice(-240);
-        if (!("value" in d) || !d.enumerable) return fail("Unsupported artifact accessor or hidden field", path);
-        if (list && (!/^(0|[1-9]\d*)$/.test(key) || Number(key) >= descriptors.length.value)) return fail("Unsupported artifact extra list field", path);
-      }
-      active.add(value);
-      stack.push({ ...step, leave: true });
-      for (let i = children.length - 1; i >= 0; i--) {
-        const key = children[i];
-        stack.push({ value: descriptors[key].value, path: (step.path + (list ? "[" + key + "]" : "." + key.slice(0, 60))).slice(-240), depth: step.depth + 1 });
-      }
-    } catch {
-      return fail("Artifact data could not be inspected", step.path);
-    }
-  }
-  return { errors: [], nodes, depth };
-}
-function assertArtifactData(input) {
-  const result = inspectArtifactData(input);
-  if (result.errors.length) throw new Error(result.errors.join("\n"));
-}
-function guardedArtifactSchema(schema) {
-  return external_exports.unknown().superRefine((input, ctx) => {
-    for (const message of inspectArtifactData(input).errors) ctx.addIssue({ code: "custom", message });
-  }).pipe(schema);
-}
-
-// src/outcomes.ts
-function encodeValue(value, seen = /* @__PURE__ */ new Set(), depth = 0) {
-  if (depth > 80) throw new Error("Observable value nesting limit exceeded");
-  if (value === void 0) return { tag: "undefined" };
-  if (value === null) return { tag: "null" };
-  if (typeof value === "number") return { tag: "number", value: Number.isNaN(value) ? "NaN" : value === Infinity ? "+Infinity" : value === -Infinity ? "-Infinity" : Object.is(value, -0) ? "-0" : value };
-  if (typeof value === "string" || typeof value === "boolean") return { tag: typeof value, value };
-  if (typeof value !== "object") throw new Error("Unsupported observable value: " + typeof value);
-  if (seen.has(value)) throw new Error("Cyclic observable value");
-  seen.add(value);
-  try {
-    const list = Array.isArray(value), prototype = Object.getPrototypeOf(value), constructor = prototype && Object.getOwnPropertyDescriptor(prototype, "constructor");
-    if (!constructor || !("value" in constructor) || typeof constructor.value !== "function" || Function.prototype.toString.call(constructor.value) !== Function.prototype.toString.call(list ? Array : Object) || Object.getOwnPropertyDescriptor(constructor.value, "prototype")?.value !== prototype) throw new Error("Unsupported observable object prototype");
-    const descriptors = Object.getOwnPropertyDescriptors(value), keys = Reflect.ownKeys(descriptors);
-    if (keys.some((k) => typeof k !== "string")) throw new Error("Unsupported observable symbol fields");
-    if (list) {
-      const length = descriptors.length.value;
-      if (length > 1e4) throw new Error("Observable list limit exceeded");
-      for (const key of keys) {
-        if (key === "length") continue;
-        if (!/^(0|[1-9]\d*)$/.test(key) || Number(key) >= length) throw new Error("Unsupported observable extra list fields");
-        const d = descriptors[key];
-        if (!("value" in d) || !d.enumerable) throw new Error("Unsupported observable non-data list item");
-      }
-      return { tag: "array", value: Array.from({ length }, (_, i) => Object.hasOwn(descriptors, i) ? encodeValue(descriptors[i].value, seen, depth + 1) : { tag: "missing" }) };
-    }
-    if (keys.length > 1e4) throw new Error("Observable record limit exceeded");
-    for (const key of keys) {
-      const d = descriptors[key];
-      if (!("value" in d) || !d.enumerable) throw new Error("Unsupported observable non-data record field");
-    }
-    return { tag: "object", value: keys.sort().map((k) => [k, encodeValue(descriptors[k].value, seen, depth + 1)]) };
-  } finally {
-    seen.delete(value);
-  }
-}
-function capture(run) {
-  let value;
-  try {
-    value = run();
-  } catch (error) {
-    return { version: 1, kind: "threw", error: { name: String(error?.name ?? "Error"), message: String(error?.message ?? error) } };
-  }
-  return { version: 1, kind: "returned", value: encodeValue(value) };
-}
-function stableJson(value) {
-  return JSON.stringify(value, (_key, item) => item && typeof item === "object" && !Array.isArray(item) ? Object.fromEntries(Object.keys(item).sort().map((key) => [key, item[key]])) : item);
-}
-function sameOutcome(a, b) {
-  return stableJson(a) === stableJson(b);
-}
-function decodeValue(encoded) {
-  switch (encoded.tag) {
-    case "undefined":
-      return void 0;
-    case "null":
-      return null;
-    case "string":
-    case "boolean":
-      return encoded.value;
-    case "number":
-      return encoded.value === "NaN" ? NaN : encoded.value === "+Infinity" ? Infinity : encoded.value === "-Infinity" ? -Infinity : encoded.value === "-0" ? -0 : encoded.value;
-    case "array": {
-      const a = new Array(encoded.value.length);
-      encoded.value.forEach((v, i) => {
-        if (v.tag !== "missing") a[i] = decodeValue(v);
-      });
-      return a;
-    }
-    case "object":
-      return Object.fromEntries(encoded.value.map(([k, v]) => [k, decodeValue(v)]));
-    default:
-      throw new Error("Unsupported encoded value: " + encoded.tag);
-  }
-}
-
-// src/outcome-schema.ts
-var encodedDataSchema = external_exports.lazy(() => external_exports.union([
-  external_exports.object({ tag: external_exports.literal("undefined") }).strict(),
-  external_exports.object({ tag: external_exports.literal("null") }).strict(),
-  external_exports.object({ tag: external_exports.literal("string"), value: external_exports.string() }).strict(),
-  external_exports.object({ tag: external_exports.literal("boolean"), value: external_exports.boolean() }).strict(),
-  external_exports.object({ tag: external_exports.literal("number"), value: external_exports.union([external_exports.number().finite().refine((n) => !Object.is(n, -0)), external_exports.enum(["NaN", "+Infinity", "-Infinity", "-0"])]) }).strict(),
-  external_exports.object({ tag: external_exports.literal("array"), value: external_exports.array(external_exports.union([encodedDataSchema, external_exports.object({ tag: external_exports.literal("missing") }).strict()])).max(1e4) }).strict(),
-  external_exports.object({ tag: external_exports.literal("object"), value: external_exports.array(external_exports.tuple([external_exports.string(), encodedDataSchema])).max(1e4).refine((pairs) => new Set(pairs.map(([key]) => key)).size === pairs.length, "Duplicate observation fields") }).strict()
-]));
-var encodedValueSchema = guardedArtifactSchema(encodedDataSchema);
-var executionResultSchema = external_exports.discriminatedUnion("kind", [
-  external_exports.object({ version: external_exports.literal(1), kind: external_exports.literal("returned"), value: encodedValueSchema }).strict(),
-  external_exports.object({ version: external_exports.literal(1), kind: external_exports.literal("threw"), error: external_exports.object({ name: external_exports.string(), message: external_exports.string() }).strict() }).strict()
-]);
-function canonicalOutcome(value) {
-  const result = executionResultSchema.parse(value);
-  return result.kind === "threw" ? result : capture(() => decodeValue(result.value));
-}
-
 // src/behavior.ts
 var behaviorApprovalSchema = external_exports.object({ version: external_exports.literal(1), id: external_exports.string(), caseId: external_exports.string(), caseHash: external_exports.string().regex(/^[a-f0-9]{64}$/), sourceCommit: external_exports.string(), adapterId: external_exports.string(), baseline: executionResultSchema, expected: executionResultSchema, domainCaseHash: external_exports.string().optional(), domainExpected: executionResultSchema.optional(), reason: external_exports.string().trim().min(8).max(2e3), actor: external_exports.string(), approvedAt: external_exports.string(), fromJob: external_exports.string() }).strict();
 var behaviorSchema = external_exports.object({ version: external_exports.literal(1), approvals: external_exports.array(behaviorApprovalSchema).max(5e3) }).strict();
@@ -4418,7 +4493,7 @@ function losslessJson(value) {
 function validateTypes(b, errors) {
   const types = b.language.types;
   const primitives = /* @__PURE__ */ new Set(["number", "string", "boolean", "any", "unknown"]);
-  function base(type) {
+  function base2(type) {
     let t = type, depth = 0;
     while (t.endsWith("?") || t.endsWith("[]")) {
       t = t.slice(0, t.endsWith("?") ? -1 : -2);
@@ -4427,7 +4502,7 @@ function validateTypes(b, errors) {
     return /^[A-Za-z_$][\w$]*$/.test(t) ? t : void 0;
   }
   function ref(t) {
-    const n = base(t);
+    const n = base2(t);
     if (!n) errors.push("Invalid or excessively nested type reference: " + t.slice(0, 160));
     else if (!primitives.has(n) && !Object.hasOwn(types, n)) errors.push("Unknown type: " + t);
   }
@@ -4447,7 +4522,7 @@ function validateTypes(b, errors) {
         break;
       }
       seen.add(name);
-      const target = base(types[name].target ?? "");
+      const target = base2(types[name].target ?? "");
       if (!target) break;
       name = target;
     }
@@ -4659,18 +4734,242 @@ function validateBindings(b, version, reserved, errors) {
   }
 }
 
+// src/authoring-contract.ts
+var declaration = external_exports.object({ ownerId: external_exports.string(), name: external_exports.string(), kind: external_exports.enum(["input", "local", "item", "accumulator", "field"]) }).strict();
+var vocabularySchema = external_exports.object({ version: external_exports.literal(1), terms: external_exports.array(external_exports.object({ target: external_exports.string().min(1).max(600), label: external_exports.string().trim().min(1).max(160), description: external_exports.string().trim().max(2e3), declaration: declaration.optional() }).strict()).max(500), meanings: external_exports.array(external_exports.object({ target: external_exports.string().min(1).max(600), type: external_exports.string().min(1).max(256), declaration }).strict()).max(500).optional() }).strict();
+
+// src/expression-patterns.ts
+function addsSelectedField(e) {
+  const a = e.args ?? [], next = a[2];
+  return e.op === "fold" && a[1]?.op === "literal" && a[1].value === 0 && next?.op === "add" && next.args?.[0]?.op === "get" && next.args[0].path === e.path && next.args?.[1]?.op === "at" && next.args[1].args?.[0]?.op === "get" && next.args[1].args[0].path === e.name && next.args[1].args?.[1]?.op === "get";
+}
+function sourceHelperLabel(name, sourceId, body) {
+  if (!sourceId) return name;
+  return addsSelectedField(body) ? "Add field values" : name.replace(/^operation_[a-f0-9]{10}_/, "");
+}
+
+// src/meaning-types.ts
+function meaningBase(bundle, input) {
+  let type = input;
+  const seen = /* @__PURE__ */ new Set();
+  for (let i = 0; type && i < 60; i++) {
+    if (type.endsWith("?")) {
+      type = type.slice(0, -1);
+      continue;
+    }
+    if (seen.has(type)) return;
+    seen.add(type);
+    const d = bundle.language.types[type];
+    if (d?.kind === "alias") {
+      type = d.target;
+      continue;
+    }
+    return type;
+  }
+}
+function meaningField(bundle, input, key) {
+  const type = meaningBase(bundle, input), definition = type && bundle.language.types[type];
+  return definition && definition.kind === "record" ? { type: definition.fields?.[key], fieldId: definition.fieldIds?.[key], recordId: definition.id } : void 0;
+}
+function meaningPath(bundle, type, segments) {
+  for (const key of segments) type = meaningField(bundle, type, key)?.type;
+  return type;
+}
+function meaningItem(bundle, type) {
+  const base2 = meaningBase(bundle, type);
+  return base2?.endsWith("[]") ? base2.slice(0, -2) : void 0;
+}
+function validMeaning(bundle, type) {
+  let t = type, count = 0;
+  while (t.endsWith("?") || t.endsWith("[]")) {
+    t = t.slice(0, t.endsWith("?") ? -1 : -2);
+    if (++count > 30) return false;
+  }
+  return /^[A-Za-z_$][\w$]*$/.test(t) && (["number", "string", "boolean", "any", "unknown"].includes(t) || Object.hasOwn(bundle.language.types, t));
+}
+
+// src/domain-atlas.ts
+var readableName = (name) => name.replace(/([a-z0-9])([A-Z])/g, "$1 $2").replace(/[_-]+/g, " ").replace(/^./, (s) => s.toUpperCase());
+var resultOf = (e) => !e ? "Incomplete expression" : e.op === "let" ? resultOf(e.args?.[1]) : ["eq", "ne", "lt", "le", "gt", "ge", "not", "isArray", "some", "every", "includes"].includes(e.op) ? "True or false" : ["filter", "map", "array"].includes(e.op) ? "A list" : e.op === "record" ? "A record of named fields" : "A value; no result type is declared";
+function domainAtlas(bundle) {
+  const atlas = { version: 1, concepts: [], bindings: [], references: [], records: [], sharedFields: [], locations: [], calls: [], integrationLinks: [], unresolved: [] }, bindings = /* @__PURE__ */ new Map(), callNames = /* @__PURE__ */ new Map();
+  const terms = new Map(bundle.projection.vocabulary?.terms.map((t) => [t.target, t]) ?? []), meanings = new Map(bundle.projection.vocabulary?.meanings?.map((m) => [m.target, m.type]) ?? []);
+  for (const [name, r] of Object.entries(bundle.language.types)) {
+    if (r.kind !== "record") continue;
+    const id = r.id ?? "type:" + name;
+    atlas.records.push({ id, name, label: terms.get(id)?.label ?? readableName(name), description: terms.get(id)?.description ?? "A declared domain record. Meaning links guide authoring; input runtime checks are shown separately.", fields: Object.entries(r.fields ?? {}).map(([field, type]) => {
+      const fieldId = r.fieldIds?.[field] ?? id + "/" + field;
+      atlas.sharedFields.push({ id: fieldId, recordId: id, name: field, label: terms.get(fieldId)?.label ?? readableName(field), description: terms.get(fieldId)?.description ?? "Shared field meaning from " + name + ".", type, uses: [] });
+      return fieldId;
+    }) });
+  }
+  const addBinding = (binding) => {
+    const term = terms.get(binding.id);
+    if (term) {
+      binding.label = term.label;
+      binding.description = term.description;
+    }
+    binding.meaningType = meanings.get(binding.id) ?? binding.meaningType ?? binding.type;
+    bindings.set(binding.id, binding);
+    atlas.bindings.push(binding);
+    return binding.id;
+  };
+  const scopeIds = (scope) => [...new Set(scope.values())];
+  const concepts = [...bundle.language.operations.map((f) => ({ ...f, kind: "vocabulary-operation" })), ...bundle.program.functions.map((f) => ({ ...f, kind: "calculation" })), ...bundle.program.decisions.map((d) => ({ ...d, name: d.id, kind: bundle.recovery?.bindings.some((b) => b.target === d.id && b.kind === "guard") ? "transition-policy" : "decision" })), ...bundle.program.machines.map((m) => ({ ...m, name: m.id, params: ["from", "to", "context"], kind: m.kind === "graph" ? "graph" : "workflow" }))];
+  for (const f of concepts) {
+    const term = terms.get(f.id), view = bundle.projection.views.find((v) => v.target === f.id), kind = f.kind;
+    callNames.set(f.name, f.id);
+    atlas.concepts.push({ id: f.id, name: f.name, label: term?.label ?? (view && view.title !== f.name ? view.title : readableName(kind === "vocabulary-operation" && "body" in f ? sourceHelperLabel(f.name, f.sourceId, f.body) : f.name)), kind, description: term?.description ?? (kind === "transition-policy" ? "Ordered checks return either a refusal outcome or permission to continue in the original process. Continuing does not bypass other checks." : kind === "decision" ? "Rules are tried in order. The first match returns its outcome; the fallback handles no match." : kind === "graph" ? "Defines available source and destination states. Original process checks still determine whether an available move succeeds." : kind === "workflow" ? "Defines states, available transitions and their modeled conditions." : "Computes a value from its inputs. Calls below show which other modeled definitions it uses."), result: kind === "transition-policy" ? "Continue, or return an explicit outcome" : "body" in f ? "resultType" in f && f.resultType ? f.resultType : resultOf(f.body) : "rules" in f ? "The first matching outcome, or the fallback" : "An available move; additional process checks may apply", sourceId: f.sourceId, calls: [], callers: [], inputs: [], retained: bundle.recovery?.bindings.find((b) => b.target === f.id)?.retained ?? [], views: bundle.projection.views.filter((v) => v.target === f.id).map((v) => v.kind) });
+  }
+  const knownPath = (e, scope) => {
+    if (!e) return;
+    if (e.op === "get") {
+      const [name, ...parts] = (e.path ?? "").split("."), bindingId = scope.get(name);
+      return bindingId ? { bindingId, segments: parts } : void 0;
+    }
+    if (e.op === "at" && e.args?.[1]?.op === "literal" && typeof e.args[1].value === "string") {
+      const receiver = knownPath(e.args[0], scope);
+      return receiver ? { ...receiver, segments: [...receiver.segments, e.args[1].value] } : void 0;
+    }
+  };
+  const absent = (e) => !!e && (e.op === "literal" && (e.value === void 0 || e.value === null || Array.isArray(e.value) && e.value.length === 0) || e.op === "array" && !e.args?.length);
+  function hint(e, scope, depth = 0) {
+    if (!e || depth > 40) return;
+    const path = knownPath(e, scope);
+    if (path) {
+      const b = bindings.get(path.bindingId);
+      return meaningPath(bundle, b?.meaningType ?? b?.type, path.segments);
+    }
+    const a = e.args ?? [];
+    if (e.op === "filter") return hint(a[0], scope, depth + 1);
+    if (e.op === "find") return meaningItem(bundle, hint(a[0], scope, depth + 1));
+    if (e.op === "if" || e.op === "coalesce") {
+      const left = a[e.op === "if" ? 1 : 0], right = a[e.op === "if" ? 2 : 1], l = hint(left, scope, depth + 1), r = hint(right, scope, depth + 1);
+      return l === r ? l : l && absent(right) ? l : r && absent(left) ? r : void 0;
+    }
+    if (e.op === "call") return [...bundle.program.functions, ...bundle.language.operations].find((f) => f.name === e.name)?.resultType;
+  }
+  function fieldReference(ownerId, e, nodeId, path, scope) {
+    const receiver = bindings.get(path.bindingId), id = "field:" + path.bindingId + ":" + encodeURIComponent(JSON.stringify(path.segments)), display = path.segments.map((s) => /^[A-Za-z_$][\w$]*$/.test(s) ? s : JSON.stringify(s)).join(" \u2192 ");
+    let binding = bindings.get(id);
+    if (!binding) {
+      let type = receiver.type, meaningType = receiver.meaningType ?? type, sharedFieldId;
+      for (const member of path.segments) {
+        const f = meaningField(bundle, meaningType, member);
+        sharedFieldId = f?.fieldId;
+        type = meaningField(bundle, type, member)?.type;
+        meaningType = f?.type;
+      }
+      const shared2 = atlas.sharedFields.find((f) => f.id === sharedFieldId);
+      addBinding(binding = { id, ownerId, name: path.segments.join("."), kind: "field", label: receiver.label + " \u2192 " + (shared2 ? [...path.segments.slice(0, -1), shared2.label].join(" \u2192 ") : display), description: "A field read from " + receiver.label + ". This is distinct from equally named inputs and fields on other values.", type, meaningType, sharedFieldId, uses: [], receiver: path.bindingId, field: path.segments.join("."), fieldSegments: path.segments });
+    }
+    binding.uses.push(nodeId);
+    const shared = atlas.sharedFields.find((f) => f.id === binding.sharedFieldId);
+    if (shared && !shared.uses.includes(nodeId)) shared.uses.push(nodeId);
+    atlas.references.push({ nodeId, ownerId, bindingId: id, kind: "field", path: path.segments.join("."), ...e.op === "at" ? { fieldKey: path.segments.at(-1) } : {}, scope: scopeIds(scope), receiver: path.bindingId });
+  }
+  function walk(e, ownerId, scope, fallback) {
+    if (!e) return;
+    const id = e.id ?? fallback, a = e.args ?? [];
+    atlas.locations.push({ nodeId: id, ownerId, scope: scopeIds(scope) });
+    if (e.op === "get") {
+      const [head, ...members] = (e.path ?? "").split("."), bindingId = scope.get(head);
+      if (!bindingId) {
+        atlas.unresolved.push({ nodeId: id, name: e.path ?? "", ownerId });
+        atlas.references.push({ nodeId: id, ownerId, kind: "value", path: e.path ?? "", scope: scopeIds(scope) });
+      } else if (members.length) fieldReference(ownerId, e, id, { bindingId, segments: members }, scope);
+      else {
+        bindings.get(bindingId).uses.push(id);
+        atlas.references.push({ nodeId: id, ownerId, bindingId, kind: "value", path: e.path, scope: scopeIds(scope), definitionNode: bindings.get(bindingId).definedAt });
+      }
+      return;
+    }
+    if (e.op === "call") {
+      const to = callNames.get(e.name);
+      if (to) atlas.calls.push({ from: ownerId, to, nodeId: id });
+    }
+    if (e.op === "at" && a[1]?.op === "literal" && typeof a[1].value === "string") {
+      const path = knownPath(e, scope);
+      if (path) fieldReference(ownerId, e, a[1].id ?? id + "/field", path, scope);
+    }
+    if (e.op === "let" || ["filter", "map", "some", "every", "find", "fold"].includes(e.op)) {
+      const fold = e.op === "fold", local = e.op === "let";
+      walk(a[0], ownerId, scope, id + "/0");
+      if (fold) walk(a[1], ownerId, scope, id + "/1");
+      const collection = knownPath(a[0], scope), collectionLabel = collection ? [bindings.get(collection.bindingId)?.name, ...collection.segments].join(".") : "the collection at this step";
+      const nested = new Map(scope), name = e.name ?? "item", bindingId = addBinding({ id: "binding:" + id + ":" + (local ? "local" : "item"), ownerId, name, kind: local ? "local" : "item", label: local ? "Local value: " + name : "Each " + name + " in " + collectionLabel, description: local ? "Defined by this calculation step; available only in its continuation." : "One item in " + collectionLabel + "; available only inside this collection expression.", definedAt: id, meaningType: local ? hint(a[0], scope) : meaningItem(bundle, hint(a[0], scope)), uses: [] });
+      nested.set(name, bindingId);
+      if (fold) {
+        const accumulator = e.path, accId = addBinding({ id: "binding:" + id + ":accumulator", ownerId, name: accumulator, kind: "accumulator", label: "Running total: " + accumulator, description: "The accumulated value for this fold step. It is a separate local declaration.", definedAt: id, meaningType: hint(a[1], scope), uses: [] });
+        nested.set(accumulator, accId);
+      }
+      walk(a[fold ? 2 : 1], ownerId, nested, id + "/" + (fold ? 2 : 1));
+      return;
+    }
+    a.forEach((child, i) => walk(child, ownerId, scope, id + "/" + i));
+  }
+  for (const f of concepts) {
+    const scope = /* @__PURE__ */ new Map(), concept = atlas.concepts.find((c) => c.id === f.id);
+    f.params.forEach((name, i) => {
+      const type = "parameterTypes" in f ? f.parameterTypes?.[name] : void 0, id = addBinding({ id: "input:" + f.id + ":" + i, ownerId: f.id, name, kind: "input", label: "Input: " + name, description: "An input to " + concept.label + ". All uses linked here read this declaration; another definition may have an input with the same spelling.", type, uses: [] });
+      scope.set(name, id);
+      concept.inputs.push(id);
+    });
+    if ("body" in f) walk(f.body, f.id, scope, f.id + "/body");
+    else if ("rules" in f) {
+      f.rules.forEach((r) => {
+        walk(r.when, f.id, scope, r.id + "/when");
+        walk(r.result, f.id, scope, r.id + "/result");
+      });
+      walk(f.otherwise, f.id, scope, f.id + "/otherwise");
+    } else for (const t of f.transitions) if (t.guard) walk(t.guard, f.id, /* @__PURE__ */ new Map([["context", scope.get("context")]]), t.id + "/guard");
+  }
+  for (const c of atlas.concepts) {
+    c.calls = [...new Set(atlas.calls.filter((r) => r.from === c.id).map((r) => r.to))];
+    c.callers = [...new Set(atlas.calls.filter((r) => r.to === c.id).map((r) => r.from))];
+  }
+  const sourceBindings = bundle.recovery?.bindings ?? [];
+  for (let i = 0; i < sourceBindings.length; i++) for (let j = i + 1; j < sourceBindings.length; j++) {
+    const from = sourceBindings[i], to = sourceBindings[j], a = bundle.evidence.find((e) => e.id === from.sourceId), b = bundle.evidence.find((e) => e.id === to.sourceId);
+    if (a && b && a.path === b.path && from.kind !== to.kind) atlas.integrationLinks.push({ from: from.target, to: to.target, path: a.path, kind: "shared-source-file", description: "Integrated in the same original source file. This is source context, not a modeled call or a claim that one check runs for every transition." });
+  }
+  return atlas;
+}
+function validateVocabulary(bundle, errors) {
+  if (!bundle.projection.vocabulary) return;
+  const atlas = domainAtlas(bundle), targets = new Set([...atlas.concepts, ...atlas.bindings, ...atlas.records, ...atlas.sharedFields].map((x) => x.id)), seen = /* @__PURE__ */ new Set();
+  for (const term of bundle.projection.vocabulary.terms) {
+    if (!targets.has(term.target)) errors.push("Vocabulary target no longer exists: " + term.target + "; remove or reassign its authored documentation in the same change");
+    if (term.declaration) {
+      const b = atlas.bindings.find((b2) => b2.id === term.target);
+      if (!b || b.ownerId !== term.declaration.ownerId || b.name !== term.declaration.name || b.kind !== term.declaration.kind) errors.push("Vocabulary declaration changed; review its meaning before reassigning documentation: " + term.target);
+    }
+    if (seen.has(term.target)) errors.push("Duplicate vocabulary target: " + term.target);
+    seen.add(term.target);
+  }
+  const assigned = /* @__PURE__ */ new Set();
+  for (const m of bundle.projection.vocabulary.meanings ?? []) {
+    const b = atlas.bindings.find((b2) => b2.id === m.target);
+    if (!b || b.kind === "field" || b.ownerId !== m.declaration.ownerId || b.name !== m.declaration.name || b.kind !== m.declaration.kind) errors.push("Meaning declaration changed or is missing: " + m.target);
+    if (!validMeaning(bundle, m.type)) errors.push("Unknown or invalid domain meaning: " + m.type);
+    if (b?.type && b.type !== m.type) errors.push("Domain meaning conflicts with the declared runtime type: " + m.target);
+    if (assigned.has(m.target)) errors.push("Duplicate meaning assignment: " + m.target);
+    assigned.add(m.target);
+  }
+}
+
 // src/domain.ts
 var import_node_crypto = require("node:crypto");
 var VERSION = DEFAULT_COMPILER;
 var exprSchema = external_exports.lazy(() => external_exports.object({ id: external_exports.string().optional(), origin: sourceOriginSchema.optional(), diagnostic: external_exports.string().max(500).optional(), fields: external_exports.array(external_exports.string()).optional(), mode: external_exports.enum(["iterate", "reduce"]).optional(), op: external_exports.string(), args: external_exports.array(exprSchema).optional(), value: external_exports.unknown().optional(), path: external_exports.string().optional(), name: external_exports.string().optional() }).strict());
 var expressionSchema = guardedArtifactSchema(exprSchema);
 var identifier = external_exports.string().regex(/^[A-Za-z_$][\w$]*$/);
-var functionSchema = guardedArtifactSchema(external_exports.object({ id: identifier, name: identifier, params: external_exports.array(identifier), body: exprSchema, parameterTypes: external_exports.record(external_exports.string()).optional(), resultType: external_exports.string().optional(), sourceId: external_exports.string().optional() }).strict());
+var functionSchema = guardedArtifactSchema(external_exports.object({ id: identifier, name: identifier, params: external_exports.array(identifier), sourceParameters: external_exports.array(identifier).optional(), body: exprSchema, parameterTypes: external_exports.record(external_exports.string()).optional(), resultType: external_exports.string().optional(), sourceId: external_exports.string().optional() }).strict());
 var languageSchema = guardedArtifactSchema(external_exports.object({ version: external_exports.literal(1), name: external_exports.string(), types: external_exports.record(external_exports.object({ id: identifier.optional(), fieldIds: external_exports.record(identifier).optional(), kind: external_exports.enum(["record", "enum", "alias"]), fields: external_exports.record(external_exports.string()).optional(), values: external_exports.array(external_exports.string()).optional(), target: external_exports.string().optional() }).strict()), operations: external_exports.array(functionSchema) }).strict());
-var programSchema = guardedArtifactSchema(external_exports.object({ version: external_exports.literal(1), name: external_exports.string(), functions: external_exports.array(functionSchema), machines: external_exports.array(external_exports.object({ id: identifier, initial: external_exports.string().optional(), kind: external_exports.enum(["workflow", "graph"]).optional(), sourceId: external_exports.string().optional(), stateIds: external_exports.record(identifier).optional(), stateOrigins: external_exports.record(sourceOriginSchema).optional(), states: external_exports.array(external_exports.string()), transitions: external_exports.array(external_exports.object({ id: identifier, from: external_exports.string(), to: external_exports.string(), origin: sourceOriginSchema.optional(), guard: exprSchema.optional(), retained: external_exports.array(external_exports.string()).default([]) }).strict()) }).strict()), decisions: external_exports.array(external_exports.object({ id: identifier, params: external_exports.array(identifier), rules: external_exports.array(external_exports.object({ id: identifier, when: exprSchema, result: exprSchema }).strict()), otherwise: exprSchema, sourceId: external_exports.string().optional() }).strict()) }).strict());
+var programSchema = guardedArtifactSchema(external_exports.object({ version: external_exports.literal(1), name: external_exports.string(), functions: external_exports.array(functionSchema), machines: external_exports.array(external_exports.object({ id: identifier, initial: external_exports.string().optional(), kind: external_exports.enum(["workflow", "graph"]).optional(), sourceId: external_exports.string().optional(), stateIds: external_exports.record(identifier).optional(), stateOrigins: external_exports.record(sourceOriginSchema).optional(), states: external_exports.array(external_exports.string()), transitions: external_exports.array(external_exports.object({ id: identifier, from: external_exports.string(), to: external_exports.string(), origin: sourceOriginSchema.optional(), guard: exprSchema.optional(), retained: external_exports.array(external_exports.string()).default([]) }).strict()) }).strict()), decisions: external_exports.array(external_exports.object({ id: identifier, params: external_exports.array(identifier), sourceParameters: external_exports.array(identifier).optional(), rules: external_exports.array(external_exports.object({ id: identifier, when: exprSchema, result: exprSchema }).strict()), otherwise: exprSchema, sourceId: external_exports.string().optional() }).strict()) }).strict());
 var recoverySchema = external_exports.object({ version: external_exports.literal(1), source: external_exports.object({ commit: external_exports.string().regex(/^[a-f0-9]{40}$/), repository: external_exports.string().optional() }).strict().optional(), bindings: external_exports.array(external_exports.object({ id: external_exports.string(), kind: external_exports.enum(["function", "graph", "guard"]), target: external_exports.string(), sourceId: external_exports.string(), sourceFileHash: external_exports.string(), params: external_exports.array(external_exports.string()), retained: external_exports.array(external_exports.string()) }).strict()), retained: external_exports.array(external_exports.object({ id: external_exports.string(), label: external_exports.string(), path: external_exports.string(), start: external_exports.number().int().positive(), end: external_exports.number().int().positive(), hash: external_exports.string(), position: external_exports.enum(["before", "after", "hook"]), operations: external_exports.array(external_exports.string()), operationIds: external_exports.record(identifier).optional() }).strict()) }).strict();
 var evidenceSchema = external_exports.object({ id: external_exports.string(), path: external_exports.string(), start: external_exports.number().int().positive(), end: external_exports.number().int().positive(), source: external_exports.string(), hash: external_exports.string(), retained: external_exports.array(external_exports.string()) }).strict();
-var projectionSchema = external_exports.object({ version: external_exports.literal(1), views: external_exports.array(external_exports.object({ kind: external_exports.enum(["table", "form", "state"]), target: external_exports.string(), title: external_exports.string(), edits: external_exports.array(external_exports.enum(["set_expression", "set_transition", "move_rule", "add_state", "add_transition"])).optional() }).strict()) }).strict();
+var projectionSchema = external_exports.object({ version: external_exports.literal(1), vocabulary: vocabularySchema.optional(), views: external_exports.array(external_exports.object({ kind: external_exports.enum(["table", "form", "state"]), target: external_exports.string(), title: external_exports.string(), edits: external_exports.array(external_exports.enum(["set_expression", "set_transition", "move_rule", "add_state", "add_transition", "insert_rule", "duplicate_rule", "remove_rule", "compose_condition", "wrap_conditional"])).optional() }).strict()) }).strict();
 var resultSchema = executionResultSchema;
 var scenarioSchema = guardedArtifactSchema(external_exports.object({ version: external_exports.literal(1).optional(), id: external_exports.string().min(1).max(160), kind: external_exports.enum(["compatibility", "approved-change"]), entry: external_exports.string(), args: external_exports.array(external_exports.unknown()).max(1e4).optional(), encodedArgs: encodedArgumentsSchema.optional(), expected: external_exports.unknown().optional(), expectedOutcome: resultSchema.optional(), reason: external_exports.string().max(2e3).optional() }).strict().superRefine((s, ctx) => {
   try {
@@ -4855,12 +5154,14 @@ function validate(b, compiler) {
       const e = b.evidence.find((e2) => e2.id === binding.sourceId);
       const target = binding.kind === "function" ? b.program.functions.find((f) => f.id === binding.target) : binding.kind === "graph" ? b.program.machines.find((m) => m.id === binding.target) : b.program.decisions.find((d) => d.id === binding.target);
       if (!e || !target || target.sourceId !== binding.sourceId) errors.push("Dangling recovery binding: " + binding.id);
-      if (target && "params" in target && JSON.stringify(target.params) !== JSON.stringify(binding.params)) errors.push("Recovery interface parameters changed");
+      if (target && "params" in target && (JSON.stringify(target.sourceParameters ?? target.params) !== JSON.stringify(binding.params) || target.params.length !== binding.params.length)) errors.push("Recovery interface parameters changed");
       if (binding.kind === "guard" && target && "rules" in target && compositionSafe && (!target.rules.every((r) => guardOutcome(r.result)) || !guardOutcome(target.otherwise))) errors.push("Guard must return explicit continue/return outcomes");
       if (binding.retained.some((id) => !retainedIds.has(id))) errors.push("Dangling retained dependency");
     }
   }
+  for (const f of [...all, ...b.program.decisions]) if (f.sourceParameters && !b.recovery?.bindings.some((r) => r.target === f.id && r.kind !== "graph" && JSON.stringify(r.params) === JSON.stringify(f.sourceParameters))) errors.push("Source parameter aliases require their original recovery binding: " + f.id);
   validateProjections(b, errors);
+  validateVocabulary(b, errors);
   return errors;
 }
 function assertValid(b, compiler) {
@@ -4926,18 +5227,20 @@ function evaluate(e, scope, b, trace = [], fuel = { left: 1e4 }) {
       out = object[key];
       break;
     }
-    case "if":
-      out = v(0) ? v(1) : v(2);
+    case "if": {
+      const condition = v(0), yes = !!condition;
+      fuel.observer?.branch(e.id, "if", yes ? "then" : "otherwise", a[yes ? 1 : 2].id, a[yes ? 2 : 1].id, yes ? "Condition was truthy; the Otherwise branch was not evaluated" : "Condition was falsy; the Then branch was not evaluated");
+      out = v(yes ? 1 : 2);
       break;
+    }
     case "and":
-      out = v(0) && v(1);
-      break;
     case "or":
-      out = v(0) || v(1);
+    case "coalesce": {
+      const left = v(0), right = e.op === "and" ? !!left : e.op === "or" ? !left : left === null || left === void 0;
+      fuel.observer?.branch(e.id, e.op, right ? "right" : "left", a[right ? 1 : 0].id, right ? void 0 : a[1].id, right ? "The right operand was needed and evaluated" : "The left operand determined the result; the right operand was not evaluated");
+      out = right ? v(1) : left;
       break;
-    case "coalesce":
-      out = v(0) ?? v(1);
-      break;
+    }
     case "not":
       out = !v(0);
       break;
@@ -5007,6 +5310,7 @@ function evaluate(e, scope, b, trace = [], fuel = { left: 1e4 }) {
     default:
       throw new Error("Unsupported primitive: " + e.op);
   }
+  if (e.op === "get" || e.op === "at") fuel.observer?.read(e.op === "at" ? a[1]?.id ?? e.id : e.id, out);
   try {
     trace.push({ node: e.id, op: e.op, value: encodeValue(out) });
   } catch {
@@ -5015,41 +5319,63 @@ function evaluate(e, scope, b, trace = [], fuel = { left: 1e4 }) {
   return out;
 }
 function invoke(b, name, args, trace = [], fuel = { left: 1e4 }) {
-  const f = [...b.language.operations, ...b.program.functions].find((f2) => f2.name === name);
-  if (f) {
-    for (const [i, p] of f.params.entries()) {
-      if (f.parameterTypes?.[p]) {
-        const errors = checkValue(args[i], f.parameterTypes[p], b.language);
-        if (errors.length) throw new Error(p + ": " + errors.join(", "));
-      }
-    }
-    const value = evaluate(f.body, Object.fromEntries(f.params.map((p, i) => [p, args[i]])), b, trace, fuel);
-    if (f.resultType) {
-      const errors = checkValue(value, f.resultType, b.language);
-      if (errors.length) throw new Error("Result: " + errors.join(", "));
-    }
+  const f = [...b.language.operations, ...b.program.functions].find((f2) => f2.name === name), d = b.program.decisions.find((d2) => d2.id === name), m = b.program.machines.find((m2) => m2.id === name), definition = f ?? d ?? m;
+  const observer = fuel.observer, call = definition ? observer?.begin(definition.id, name, f?.params ?? d?.params ?? ["from", "to", "context"], args) : void 0;
+  try {
+    const value = run();
+    if (definition) observer?.end(call, () => value);
     return value;
+  } catch (error) {
+    if (definition) observer?.end(call, () => {
+      throw error;
+    });
+    throw error;
   }
-  const d = b.program.decisions.find((d2) => d2.id === name);
-  if (d) {
-    const scope = Object.fromEntries(d.params.map((p, i) => [p, args[i]]));
-    for (const r of d.rules) if (evaluate(r.when, scope, b, trace, fuel)) {
-      trace.push({ node: r.id });
-      return evaluate(r.result, scope, b, trace, fuel);
+  function run() {
+    if (f) {
+      for (const [i, p] of f.params.entries()) {
+        if (f.parameterTypes?.[p]) {
+          const errors = checkValue(args[i], f.parameterTypes[p], b.language);
+          if (errors.length) throw new Error(p + ": " + errors.join(", "));
+        }
+      }
+      const value = evaluate(f.body, Object.fromEntries(f.params.map((p, i) => [p, args[i]])), b, trace, fuel);
+      if (f.resultType) {
+        const errors = checkValue(value, f.resultType, b.language);
+        if (errors.length) throw new Error("Result: " + errors.join(", "));
+      }
+      return value;
     }
-    return evaluate(d.otherwise, scope, b, trace, fuel);
+    if (d) {
+      const scope = Object.fromEntries(d.params.map((p, i) => [p, args[i]]));
+      for (const r of d.rules) {
+        const matches = evaluate(r.when, scope, b, trace, fuel);
+        observer?.rule(r.id, matches ? "matched" : "not-matched");
+        if (matches) {
+          trace.push({ node: r.id });
+          return evaluate(r.result, scope, b, trace, fuel);
+        }
+      }
+      observer?.rule(d.otherwise.id, "fallback");
+      return evaluate(d.otherwise, scope, b, trace, fuel);
+    }
+    if (m) {
+      const [from, to, context] = args, t = m.transitions.find((t2) => t2.from === from && t2.to === to);
+      if (!t) {
+        observer?.transition(m.id, from, to, "denied");
+        return { allowed: false, state: from };
+      }
+      if (t.retained.length) {
+        observer?.transition(t.id, from, to, "retained-required");
+        throw new Error("Retained operations require adapter: " + t.retained.join(", "));
+      }
+      const allowed = !t.guard || !!evaluate(t.guard, { context }, b, trace, fuel);
+      observer?.transition(t.id, from, to, allowed ? "allowed" : "denied");
+      trace.push({ node: t.id });
+      return { allowed, state: allowed ? to : from };
+    }
+    throw new Error("Unknown entry: " + name);
   }
-  const m = b.program.machines.find((m2) => m2.id === name);
-  if (m) {
-    const [from, to, context] = args;
-    const t = m.transitions.find((t2) => t2.from === from && t2.to === to);
-    if (!t) return { allowed: false, state: from };
-    if (t.retained.length) throw new Error("Retained operations require adapter: " + t.retained.join(", "));
-    const allowed = !t.guard || !!evaluate(t.guard, { context }, b, trace, fuel);
-    trace.push({ node: t.id });
-    return { allowed, state: allowed ? to : from };
-  }
-  throw new Error("Unknown entry: " + name);
 }
 function compile(b, requestedCompiler) {
   assertArtifactData(b);
@@ -5169,6 +5495,32 @@ return {allowed:false,state:${from}};
   return { code, map, hash: hash(programIdentity(b, compiler)), compiler };
 }
 
+// src/simulation-contract.ts
+var simulationRequestSchema = external_exports.object({ version: external_exports.literal(1).optional(), entry: external_exports.string().min(1).max(200), expectedRevision: revisionSchema.optional(), args: external_exports.array(external_exports.unknown()).max(1e4).optional(), encodedArgs: encodedArgumentsSchema.optional() }).strict().superRefine((s, ctx) => {
+  try {
+    scenarioArguments(s);
+  } catch (e) {
+    ctx.addIssue({ code: "custom", message: e.message });
+  }
+  if (s.args && !losslessJson(s.args)) ctx.addIssue({ code: "custom", message: "Use encodedArgs for values that ordinary JSON changes" });
+});
+var simulationTraceSchema = external_exports.object({ node: external_exports.string().optional(), op: external_exports.string().optional(), value: encodedValueSchema.optional(), valueUnavailable: external_exports.string().min(1).max(1e3).optional() }).strict().refine((t) => !(t.value !== void 0 && t.valueUnavailable !== void 0), "A trace value cannot also be unavailable");
+var simulationReportSchema = external_exports.object({ version: external_exports.literal(1), entry: external_exports.string(), revision: revisionSchema, compiler: external_exports.enum(["0.5.0", "0.5.1"]), programHash: external_exports.string().regex(/^[a-f0-9]{64}$/), outcome: executionResultSchema, trace: external_exports.array(simulationTraceSchema), execution: executionExplanationSchema.optional() }).strict();
+
+// src/simulation.ts
+function simulateRevision(bundle, revision, input) {
+  const request = simulationRequestSchema.parse(input);
+  if (request.expectedRevision !== void 0 && request.expectedRevision !== revision) throw Object.assign(new Error("Stale revision; refresh before simulation"), { statusCode: 409 });
+  const names = [...bundle.language.operations, ...bundle.program.functions].map((f) => f.name).concat(bundle.program.decisions.map((d) => d.id), bundle.program.machines.map((m) => m.id));
+  if (!names.includes(request.entry)) throw new Error("Unknown domain entry: " + request.entry);
+  const generated = compile(bundle), trace = [], args = scenarioArguments(request), recorder = executionRecorder(), outcome = capture(() => invoke(bundle, request.entry, args, trace, { left: 1e4, observer: recorder.observer }));
+  return simulationReportSchema.parse({ version: 1, entry: request.entry, revision, compiler: generated.compiler, programHash: generated.hash, outcome, trace, execution: recorder.report });
+}
+
+// src/core-cli.ts
+var import_promises2 = require("node:fs/promises");
+var import_node_path2 = require("node:path");
+
 // src/core-bundle.ts
 var import_promises = require("node:fs/promises");
 var import_node_path = require("node:path");
@@ -5201,9 +5553,11 @@ async function main() {
   const bundle = await readCoreBundle(input, override), compiler = override ?? bundle.compilerVersion ?? VERSION;
   if (command === "validate") console.log(JSON.stringify({ version: 1, compiler, status: validate(bundle, compiler).length ? "invalid" : "valid", errors: validate(bundle, compiler), programHash: compile(bundle, compiler).hash }));
   else if (command === "simulate") {
+    const explain = args.includes("--explain");
+    if (explain) args.splice(args.indexOf("--explain"), 1);
     if (args.length !== 2) throw new Error("simulate requires an entry and an argument list or tagged argument record");
     const parsed = JSON.parse(args[1]), values = scenarioArguments(Array.isArray(parsed) ? { args: parsed } : parsed), trace = [];
-    console.log(JSON.stringify({ version: 1, compiler, outcome: capture(() => invoke(bundle, args[0], values, trace)), trace }));
+    console.log(JSON.stringify(explain ? simulateRevision(bundle, 0, { entry: args[0], encodedArgs: encodeValue(values) }) : { version: 1, compiler, outcome: capture(() => invoke(bundle, args[0], values, trace)), trace }));
   } else if (command === "emit") {
     if (args.length !== 1) throw new Error("emit requires a new output directory");
     const generated = compile(bundle, compiler), directory = (0, import_node_path2.resolve)(args[0]);

@@ -6,7 +6,7 @@
       "format": "esm"
     },
     "src/projection-registry.ts": {
-      "bytes": 2113,
+      "bytes": 2275,
       "imports": [],
       "format": "esm"
     },
@@ -341,8 +341,45 @@
       ],
       "format": "esm"
     },
+    "src/authoring-contract.ts": {
+      "bytes": 712,
+      "imports": [
+        {
+          "path": "node_modules/zod/index.js",
+          "kind": "import-statement",
+          "original": "zod"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/expression-patterns.ts": {
+      "bytes": 676,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/meaning-types.ts": {
+      "bytes": 1427,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/domain-atlas.ts": {
+      "bytes": 14110,
+      "imports": [
+        {
+          "path": "src/expression-patterns.ts",
+          "kind": "import-statement",
+          "original": "./expression-patterns.js"
+        },
+        {
+          "path": "src/meaning-types.ts",
+          "kind": "import-statement",
+          "original": "./meaning-types.js"
+        }
+      ],
+      "format": "esm"
+    },
     "src/domain.ts": {
-      "bytes": 31745,
+      "bytes": 33910,
       "imports": [
         {
           "path": "src/generated-map.ts",
@@ -445,6 +482,16 @@
           "original": "zod"
         },
         {
+          "path": "src/authoring-contract.ts",
+          "kind": "import-statement",
+          "original": "./authoring-contract.js"
+        },
+        {
+          "path": "src/domain-atlas.ts",
+          "kind": "import-statement",
+          "original": "./domain-atlas.js"
+        },
+        {
           "path": "node:crypto",
           "kind": "import-statement",
           "external": true
@@ -541,7 +588,7 @@
       "format": "esm"
     },
     "src/integrate-recovered.ts": {
-      "bytes": 4793,
+      "bytes": 4813,
       "imports": [
         {
           "path": "node_modules/typescript/lib/typescript.js",
@@ -649,7 +696,7 @@
       "format": "esm"
     },
     "src/portable-prepared.ts": {
-      "bytes": 1869,
+      "bytes": 1913,
       "imports": [
         {
           "path": "node_modules/zod/index.js",
@@ -805,7 +852,7 @@
       "entryPoint": "src/typescript-source-cli.ts",
       "inputs": {
         "node_modules/typescript/lib/typescript.js": {
-          "bytesInOutput": 9940754
+          "bytesInOutput": 9942721
         },
         "src/portable-generation.ts": {
           "bytesInOutput": 3188
@@ -814,7 +861,7 @@
           "bytesInOutput": 1886
         },
         "src/projection-registry.ts": {
-          "bytesInOutput": 1462
+          "bytesInOutput": 1633
         },
         "node_modules/zod/v3/external.js": {
           "bytesInOutput": 3282
@@ -888,14 +935,26 @@
         "src/binding-contract.ts": {
           "bytesInOutput": 1673
         },
+        "src/authoring-contract.ts": {
+          "bytesInOutput": 789
+        },
+        "src/expression-patterns.ts": {
+          "bytesInOutput": 567
+        },
+        "src/meaning-types.ts": {
+          "bytesInOutput": 1351
+        },
+        "src/domain-atlas.ts": {
+          "bytesInOutput": 14047
+        },
         "src/domain.ts": {
-          "bytesInOutput": 27444
+          "bytesInOutput": 28127
         },
         "src/artifacts.ts": {
           "bytesInOutput": 1929
         },
         "src/integrate-recovered.ts": {
-          "bytesInOutput": 5272
+          "bytesInOutput": 5294
         },
         "src/regions.ts": {
           "bytesInOutput": 1816
@@ -907,13 +966,13 @@
           "bytesInOutput": 32
         },
         "src/portable-prepared.ts": {
-          "bytesInOutput": 1855
+          "bytesInOutput": 1901
         },
         "src/typescript-source-cli.ts": {
           "bytesInOutput": 343
         }
       },
-      "bytes": 10144130
+      "bytes": 10163883
     }
   }
 }
